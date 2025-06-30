@@ -120,7 +120,7 @@ export default function CoreServices() {
           <div 
             key={service.id}
             data-hovered={hoveredCard === service.id ? "true" : "false"}
-            className={`service-card w-full xs:w-[calc(50%-8px)] sm:w-[calc(50%-12px)] md:w-[calc(50%-12px)] lg:w-[calc(50%-12px)] xl:w-[calc(25%-16px)] h-[200px] xs:h-[250px] sm:h-[300px] md:h-[350px] lg:h-[411px] relative cursor-pointer mb-4 sm:mb-0 ${index < 2 && 'row-1'} ${index >= 2 && 'row-2'}
+            className={`service-card w-full xs:w-[calc(50%-8px)] sm:w-[calc(50%-12px)] md:w-[calc(50%-12px)] lg:w-[calc(50%-12px)] xl:w-[calc(25%-16px)] h-[200px] xs:h-[250px] sm:h-[300px] md:h-[350px] lg:h-[411px] relative  mb-4 sm:mb-0 ${index < 2 && 'row-1'} ${index >= 2 && 'row-2'}
                        ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[100px]'}`}
             style={{ 
               transitionDelay: `${index * 0.1}s`,
