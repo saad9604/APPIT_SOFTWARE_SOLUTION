@@ -329,10 +329,10 @@ export default function TransparentHeader() {
               isInitialRender ? "no-transition" : ""
             }`}
           >
-            <button
+            <Link href="/contact"
               className={`group flex ${getButtonSize()} items-center rounded-[32px] bg-[#0066B3] text-white font-semibold leading-[120%] font-jost border-none cursor-pointer transition-all duration-300 hover:bg-[#A50F15]`}
             >
-              <span>Explore Appit Gen AI</span>
+              <span>Get in touch</span>
               <div className="relative flex items-center justify-center w-[30px] h-[30px] lg:w-[34px] lg:h-[34px]">
                 {/* Default state */}
                 <img
@@ -383,7 +383,7 @@ export default function TransparentHeader() {
                   </svg>
                 </div>
               </div>
-            </button>
+            </Link>
           </div>
 
           {/* Mobile menu icon */}

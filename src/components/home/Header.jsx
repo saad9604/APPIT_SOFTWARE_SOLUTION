@@ -222,8 +222,8 @@ export default function Header() {
 
           {/* CTA Button - Only visible above 940px */}
           <div className={`hidden 2xl:flex lg:flex xl:flex custom940:flex items-center ${isInitialRender ? 'no-transition' : ''}`}>
-            <button className={`group flex ${getButtonSize()} items-center rounded-[32px] bg-[#0066B3] text-white font-semibold leading-[120%] font-jost border-none cursor-pointer transition-all duration-300 hover:bg-[#A50F15]`}>
-              <span>Explore Appit Gen AI</span>
+            <Link href='/contact' className={`group flex ${getButtonSize()} items-center rounded-[32px] bg-[#0066B3] text-white font-semibold leading-[120%] font-jost border-none cursor-pointer transition-all duration-300 hover:bg-[#A50F15]`}>
+              <span>Get in touch</span>
               <div className="relative flex items-center justify-center w-[30px] h-[30px] lg:w-[34px] lg:h-[34px]">
                 {/* Default state - original logo */}
                 <img 
@@ -249,7 +249,7 @@ export default function Header() {
                   </svg>
                 </div>
               </div>
-            </button>
+            </Link>
           </div>
 
           {/* Progressive size horizontal menu icon - larger */}
@@ -370,8 +370,8 @@ export default function Header() {
           
           {/* CTA Button at the bottom of mobile menu */}
           <div className="py-6 px-1 flex justify-center w-full">
-            <button className="group w-full flex justify-center p-[12px_24px] items-center gap-[15px] rounded-[32px] bg-[#0066B3] text-white text-[17px] font-semibold leading-[120%] font-jost border-none cursor-pointer transition-all duration-300 hover:bg-[#A50F15]">
-              <span>Explore Appit Gen AI</span>
+            <Link href="/contact" className="group w-full flex justify-center p-[12px_24px] items-center gap-[15px] rounded-[32px] bg-[#0066B3] text-white text-[17px] font-semibold leading-[120%] font-jost border-none cursor-pointer transition-all duration-300 hover:bg-[#A50F15]">
+              <span>Get in touch</span>
               <div className="relative flex items-center justify-center w-[34px] h-[34px]">
                 {/* Default state - original logo */}
                 <img 
@@ -397,7 +397,7 @@ export default function Header() {
                   </svg>
                 </div>
               </div>
-            </button>
+            </Link>
           </div>
         </div>
       </div>

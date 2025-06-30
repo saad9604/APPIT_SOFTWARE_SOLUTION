@@ -1,5 +1,5 @@
 "use client";
-
+import Link from 'next/link'
 import { useState, useEffect, useRef, useCallback } from 'react';
 
 export default function Hero() {
@@ -95,10 +95,10 @@ export default function Hero() {
             </p>
 
             {/* Button with responsive specifications */}
-            <button 
+            <Link href="/contact"
               className="font-jost group flex items-center gap-3 sm:gap-4 md:gap-[15px] lg:gap-[20px] rounded-[32px] bg-[#0066B3] px-4 py-2 sm:px-5 sm:py-3 md:px-4 md:py-2 lg:px-5 lg:py-3 transition-all duration-300 hover:bg-[#A50F15]"
             >
-              <span className="text-white text-sm sm:text-base md:text-base lg:text-[18px] font-medium">Explore Appit Gen AI</span>
+              <span className="text-white text-sm sm:text-base md:text-base lg:text-[18px] font-medium">Get in touch</span>
               <div className="relative flex items-center justify-center w-[28px] h-[28px] sm:w-[32px] sm:h-[32px] md:w-[30px] md:h-[30px] lg:w-[36px] lg:h-[36px]">
                 {/* Default state - original logo */}
                 <svg 
@@ -119,7 +119,7 @@ export default function Hero() {
                   </svg>
                 </div>
               </div>
-            </button>
+            </Link>
           </div>
         </div>
       </div>
