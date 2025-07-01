@@ -14,7 +14,7 @@ import Footer from "@/components/home/Footer";
 import Script from "next/script";
 
 export const metadata = {
-  title: 'BigCommerce Solutions | APPIT Software Solutions Inc',
+  title: 'BigCommerce Solutions',
   description: 'APPIT Software expertise in BigCommerce Solutions to develop robust, adaptable, and scalable eCommerce platforms, ensuring seamless shopping.',
   keywords: [
     'BigCommerce Solutions',

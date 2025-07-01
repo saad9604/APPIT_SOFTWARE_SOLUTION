@@ -30,7 +30,7 @@ const jost = Jost({
 export const metadata = {
   metadataBase: new URL(process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000'),
   title: {
-    default: 'AppitSoftware - Leading Software Development Company',
+    default: 'Leading Software Development Company',
     template: '%s | AppitSoftware'
   },
   description: 'Transform your digital vision with AppitSoftware. We create innovative web applications, mobile apps, and enterprise solutions that drive business growth and deliver exceptional user experiences.',

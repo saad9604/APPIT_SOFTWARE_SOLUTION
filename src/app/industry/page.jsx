@@ -11,7 +11,7 @@ import Footer from '@/components/home/Footer';
 import Script from 'next/script';
 
 export const metadata = {
-  title: 'Industry-Specific IT Solutions | APPIT Software',
+  title: 'Industry-Specific IT Solutions',
   description: 'Explore APPIT Software\'s industry-specific IT solutions designed for Oil & Gas, Healthcare, Finance, Retail, and Manufacturing sectors.',
   keywords: [
     'industry-specific IT solutions',

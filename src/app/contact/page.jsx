@@ -11,7 +11,7 @@ import Footer from "../../components/home/Footer";
 import Script from "next/script";
 
 export const metadata = {
-  title: 'Contact APPIT Software | Global IT Services & Support – 2025',
+  title: 'Global IT Services & Support – 2025',
   description: 'Contact APPIT Software for Global IT Services & Support. Our offices are in India, the USA, Saudi Arabia, and the UAE.',
   keywords: [
     'Contact APPIT Software', 

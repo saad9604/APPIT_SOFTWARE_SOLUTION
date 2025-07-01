@@ -15,7 +15,7 @@ import WhyChooseSection from "@/components/pages/e-commerce/WhyChooseSection";
 import Script from "next/script";
 
 export const metadata = {
-  title: 'ECommerce Services | APPIT Software Solutions Inc.',
+  title: 'ECommerce Services',
   description: 'Explore APPIT Software Solutions Inc. comprehensive eCommerce services, including strategy, design, development, and marketing of online store effectively.',
   keywords: [
     'eCommerce services',

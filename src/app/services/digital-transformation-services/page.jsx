@@ -12,7 +12,7 @@ import Footer from "@/components/home/Footer";
 import Script from "next/script";
 
 export const metadata = {
-  title: 'Appit Digital Transformation Services | Empowering Future-Ready Enterprises 2025',
+  title: 'Digital Transformation Services | Empowering Future-Ready Enterprises 2025',
   description: 'Unlock innovation and efficiency with Appit\'s Digital Transformation Services. We help businesses modernize operations, enhance customer experience, and drive growth with cutting-edge technology solutions.',
   keywords: [
     'Digital transformation services',
@@ -60,19 +60,19 @@ const Page = () => {
     {
       iconSrc: "/images/svgs/benefit_1.svg",
       title: "Technology",
-      para: `asd`,
+      para: `We Assess tech stacks for future readiness and deliver scalable ,cloud-native applications that drive digital transfromations`,
       className: "lg:!w-[382px] lg:!h-[177px]",
     },
     {
       iconSrc: "/images/svgs/benefit_2.svg",
       title: "People",
-      para: `asd`,
+      para: `As digital transfromations leaders we create people-centric connected, and collaborative workplaces`,
       className: "lg:!w-[382px] lg:!h-[177px]",
     },
     {
       iconSrc: "/images/svgs/benefit_3.svg",
       title: "Culture",
-      para: `asd`,
+      para: `Creativity drives digital transfromations Our Consultants guide meaningful cultural change.`,
       className: "lg:!w-[382px] lg:!h-[177px]",
     },
     {

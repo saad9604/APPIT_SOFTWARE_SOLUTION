@@ -13,7 +13,7 @@ import CyberFeaturesSection from "@/components/pages/cybersecurity/CyberFeatures
 import Script from "next/script";
 
 export const metadata = {
-  title: 'Cyber Security GRC Solutions | APPIT Software Solutions Inc',
+  title: 'Cyber Security GRC Solutions',
   description: 'Explore APPIT Software Solutions Inc. Cyber Security GRC Solutions to enhance your organization\'s risk management and compliance strategies.',
   keywords: [
     'Cyber Security GRC Solutions',

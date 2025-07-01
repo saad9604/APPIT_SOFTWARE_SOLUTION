@@ -18,7 +18,7 @@ import Footer from "@/components/home/Footer";
 import Script from "next/script";
 
 export const metadata = {
-  title: 'ServiceNow AI Solutions | APPIT Software Solutions Inc.',
+  title: 'ServiceNow AI Solutions.',
   description: 'APPIT Software Solutions Inc. leverages ServiceNow AI Solutions to transform enterprise operations with intelligent automation and streamlined workflows.',
   keywords: [
     'ServiceNow AI Solutions',
@@ -61,8 +61,8 @@ const Page = () => {
   ];
   const oracleHeroData = {
     title: "ServiceNow AI",
-    videoSrc: "/videos/service_now_hero_video.mp4",
     para: "Boost efficiency and streamline operations with ServiceNow AI. Appit Software Solutions integrates AI-powered tools to automate workflows and support smarter decision-making.",
+    videoSrc: "/videos/service_now_hero_video.mp4",
   };
 
   const sectionsData = [
@@ -175,8 +175,8 @@ As a trusted partner, AppitSoftware provides ongoing support and innovation—tr
       />
       <HideDefaultHeader />
       <TransparentHeader showBorder={true} />
-      <div className="mt-[80px]">
-        <OracleHero heroData={oracleHeroData} />
+     
+        <OracleHero data={oracleHeroData} />
         <ImageWithTextSection
           sectionsData={sectionsData}
           backgroundImages={[
@@ -247,7 +247,7 @@ As a trusted partner, AppitSoftware provides ongoing support and innovation—tr
         <CTA />
         <AboveFooterSection socialMediaLink={false} />
         <Footer />
-      </div>
+      
     </>
   );
 };

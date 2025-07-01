@@ -20,7 +20,7 @@ import React from "react";
 import Script from "next/script";
 
 export const metadata = {
-  title: 'Legal AI Assistance | Smart Legal Solutions Powered By AI - Appit Software',
+  title: 'Legal AI Assistance | Smart Legal Solutions Powered By AI',
   description: 'Empower your Legal AI Assistance with AI-driven assistance. From document review to contract analysis, get faster, smarter, and more.',
   keywords: [
     'Legal AI Assistance',

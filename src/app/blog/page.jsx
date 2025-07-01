@@ -8,7 +8,7 @@ import Footer from '@/components/home/Footer';
 import Script from 'next/script';
 
 export const metadata = {
-  title: 'Blog | APPIT Software Solutions',
+  title: 'Blog',
   description: 'Stay ahead with industry perspectives and insights on emerging tech trends from APPIT Software Solutions.',
   keywords: [
     'APPIT Software blog', 

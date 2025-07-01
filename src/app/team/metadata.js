@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'Our Team | Leadership & Experts at APPIT Software',
+  title: 'Our Team | Leadership & Experts ',
   description: 'Meet the passionate team behind APPIT Software Solutions. Our experts and leaders drive innovation and deliver exceptional technology solutions.',
   keywords: [
     'APPIT Software team',

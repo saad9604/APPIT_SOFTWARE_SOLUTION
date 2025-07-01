@@ -20,7 +20,7 @@ import React from "react";
 import Script from "next/script";
 
 export const metadata = {
-  title: 'Application Tracking System | ATS by APPIT Software',
+  title: 'Application Tracking System',
   description: 'Streamline your recruitment process with APPIT Software\'s advanced Application Tracking System (ATS). Manage candidates, automate screening, and make better hiring decisions.',
   keywords: [
     'Application Tracking System',

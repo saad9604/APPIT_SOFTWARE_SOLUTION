@@ -566,7 +566,7 @@ export default function ServicesCarousel() {
                     lineHeight: "120%",
                   }}
                 >
-                  Read More
+                  res Moreaa
                 </span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

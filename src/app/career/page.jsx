@@ -11,7 +11,7 @@ import ScrollToTopButton from '@/components/home/ScrollToTopButton'
 import Script from 'next/script'
 
 export const metadata = {
-  title: 'Explore Careers At Appit Software | Join Our Innovative Team',
+  title: 'Explore Careers | Join Our Innovative Team',
   description: 'Join Appit Software and be part of a forward-thinking team building AI-powered solutions. Explore exciting career paths in tech.',
   keywords: [
     'Appit Software careers', 

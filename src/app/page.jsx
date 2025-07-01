@@ -15,7 +15,7 @@ import Footer from '@/components/home/Footer'
 import Script from 'next/script'
 
 export const metadata = {
-  title: 'APPIT Software Solutions | AI-Driven IT & Cloud Services',
+  title: 'AI-Driven IT & Cloud Services',
   description: 'APPIT Software Solutions is an IT consulting firm specializing in AI-powered services, cloud computing, and Oracle solutions.',
   keywords: [
     'APPIT Software Solutions', 

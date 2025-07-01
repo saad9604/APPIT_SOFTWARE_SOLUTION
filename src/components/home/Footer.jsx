@@ -22,7 +22,7 @@ const Footer = () => {
             Terms & Conditions
           </Link>
           <span className="mx-1 sm:mx-2 inline">|</span>
-          <Link href="/sitemap" className="whitespace-nowrap hover:text-[#EC1C26] transition-colors duration-300">
+          <Link href="/sitemap.xml" className="whitespace-nowrap hover:text-[#EC1C26] transition-colors duration-300">
             Sitemap
           </Link>
         </div>
