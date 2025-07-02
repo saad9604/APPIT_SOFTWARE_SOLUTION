@@ -8,7 +8,7 @@ const Benefits = ({ data = [], heading }) => {
     return (
         <Section>
             <Container>
-                <div className='flex flex-col items-center justify-center text-center gap-8 sm:gap-12 lg:gap-20'>
+               <div className='flex flex-col items-center justify-center text-center gap-8 sm:gap-12 lg:gap-20'>
                     {heading && (
                         <HeadingPara
                             title={heading.title}

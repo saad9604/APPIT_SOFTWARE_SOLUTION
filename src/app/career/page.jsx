@@ -50,14 +50,14 @@ export default function CareerPage() {
             "@type": "FAQPage",
             "mainEntity": [{
               "@type": "Question",
-              "name": "What types of roles are available at Appit Software?",
+              "name": `1. What types of roles are available at Appit Software?`,
               "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "Appit Software offers a wide range of full-time positions across IT and business solutions, including roles in Gen AI customer experience, Oracle and ServiceNow AI, risk management, outsourced IT support and more."
               }
             },{
               "@type": "Question",
-              "name": "Does Appit Software offer remote or flexible working options?",
+              "name": "3. Does Appit Software offer remote or flexible working options?",
               "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "While the career page may not specify this, many IT companies today offer flexible or remote working options. For details on Appit Software's policy, please check individual job postings or contact the HR team."

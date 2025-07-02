@@ -220,14 +220,11 @@ Our expert team focuses on user experience, automation, and future-ready technol
           {
             src: "/images/utils/lines-right.png",
             alt: "Decorative Lines",
-            className: "absolute top-0 -right-[30%] lg:right-0 z-[-1]",
+            className: "absolute top-[615px] -right-[30%] lg:right-0 z-[-1]",
+
           },
-          {
-            src: "/images/utils/blue-paint-left.png",
-            alt: "Blue Paint",
-            className: "absolute top-0 -left-[55%] lg:left-0 z-[-1]",
-          },
-        ]}
+         
+  ]}
       />
 
       <WhatWeOfferSection />

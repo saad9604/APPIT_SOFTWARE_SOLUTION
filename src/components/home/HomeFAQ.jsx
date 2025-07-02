@@ -11,33 +11,33 @@ const HomeFAQ = () => {
       question: "What services does APPIT Software Solutions offer?",
       answer: [
         "APPIT provides a comprehensive suite of IT and AI-driven services, including:",
-        "Oracle Cloud ERP, HCM, SCM, EPM, and CX solutions",
-        "AI-powered tools like AskGenie AI, SmartChat AI, and SalesBot AI",
-        "Cloud implementation and integration services",
-        "Cybersecurity and GRC solutions",
-        "Mobile app and eCommerce development (Shopify, Magento, BigCommerce)",
-        "Offshore development and managed IT services",
-        "AI-driven talent acquisition and legal document automation"
+        "@Oracle Cloud ERP, HCM, SCM, EPM, and CX solutions",
+        "@AI-powered tools like AskGenie AI, SmartChat AI, and SalesBot AI",
+        "@Cloud implementation and integration services",
+        "@Cybersecurity and GRC solutions",
+        "@Mobile app and eCommerce development (Shopify, Magento, BigCommerce)",
+        "@Offshore development and managed IT services",
+        "@AI-driven talent acquisition and legal document automation"
       ]
     },
     {
       question: "Which industries does APPIT serve?",
       answer: [
         "APPIT caters to a diverse range of industries, including:",
-        "Oil & Gas",
-        "Thermal Power",
-        "Manufacturing and Supply Chain",
-        "Edible Oils",
-        "Construction and Real Estate"
+        "@Oil & Gas",
+        "@Thermal Power",
+        "@Manufacturing and Supply Chain",
+        "@Edible Oils",
+        "@Construction and Real Estate"
       ]
     },
     {
       question: "Where is APPIT Software Solutions located?",
       answer: [
         "APPIT's headquarters are in Hyderabad, India, with additional offices in:",
-        "Lewes, Delaware, USA",
-        "Riyadh, Saudi Arabia",
-        "Dubai, UAE"
+        "@Lewes, Delaware, USA",
+        "@Riyadh, Saudi Arabia",
+        "@Dubai, UAE"
       ]
     },
     {
