@@ -321,7 +321,15 @@ export const faqData = [
   {
     question: "What are the key benefits of using Oracle AI?",
     answer: [
-      "Key benefits include seamless human-computer interactions with advanced language models, transformative data analytics for actionable insights, precise sales and demand predictions, personalized customer experiences, improved logistics and inventory management, streamlined HR processes, enhanced fraud prevention, and automated repetitive tasks and workflows.",
+      "Key benefits include",
+      "@Seamless human-computer interactions with advanced language models",
+      "@Transformative data analytics for actionable insights",
+      "@Precise sales and demand predictions",
+      "@Personalized customer experiences",
+      "@Improved logistics and inventory management",
+      "@Streamlined HR processes",
+      "@Enhanced fraud prevention",
+      "@Automated repetitive tasks and workflows.",
     ],
   },
   {

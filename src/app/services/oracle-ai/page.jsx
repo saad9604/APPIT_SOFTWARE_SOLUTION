@@ -13,7 +13,7 @@ import Footer from "../../../components/home/Footer"
 import Script from "next/script"
 
 export const metadata = {
-  title: 'APPIT Software | Oracle AI Solutions And Business Operations 2025',
+  title: 'Oracle AI Solutions And Business Operations 2025',
   description: 'APPIT Software\'s Oracle AI solutions and business operations are designed to streamline workflows and deliver real-time insights.',
   keywords: [
     'Oracle AI Solutions',

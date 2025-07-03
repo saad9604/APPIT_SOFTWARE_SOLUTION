@@ -11,7 +11,7 @@ import Footer from '@/components/home/Footer';
 import Script from 'next/script';
 
 export const metadata = {
-  title: 'Industry-Specific IT Solutions | APPIT Software',
+  title: 'Industry-Specific IT Solutions',
   description: 'Explore APPIT Software\'s industry-specific IT solutions designed for Oil & Gas, Healthcare, Finance, Retail, and Manufacturing sectors.',
   keywords: [
     'industry-specific IT solutions',
@@ -51,14 +51,14 @@ export default function Industry() {
               "name": "What industries does Appit Software Solutions serve?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Appit Software Solutions serves a diverse range of industries, including Oil & Gas, Thermal Power, Manufacturing and Supply Chain, Edible Oils, Construction, and Real Estate, providing tailored IT solutions for each sector."
+                "text": "@Appit Software Solutions serves a diverse range of industries, including Oil & Gas, Thermal Power, Manufacturing and Supply Chain, Edible Oils, Construction, and Real Estate, providing tailored IT solutions for each sector."
               }
             },{
               "@type": "Question",
               "name": "How does Appit Software Solutions support the Oil and Gas industry?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Appit Software Solutions supports the Oil and Gas industry with Oracle EBS R12 customizations, specialized IT services, digital transformation solutions, and industry-specific applications that address unique operational challenges."
+                "text": "@Appit Software Solutions supports the Oil and Gas industry with Oracle EBS R12 customizations, specialized IT services, digital transformation solutions, and industry-specific applications that address unique operational challenges."
               }
             },{
               "@type": "Question",

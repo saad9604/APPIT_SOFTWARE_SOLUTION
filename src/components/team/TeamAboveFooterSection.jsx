@@ -138,8 +138,8 @@ const TeamAboveFooterSection = () => {
         </div>
         
         {/* Quick Links Container */}
-        <div className="w-full mb-6 sm:mb-8 md:mb-10">
-          <h2 className="text-[#252525] font-jost text-xl sm:text-2xl md:text-3xl font-bold leading-[120%] mb-4 sm:mb-6 md:mb-8">
+        <div className="w-full mb-6 sm:mb-8 md:mb-10 h-[250px]">
+          <h2 className="text-[#252525] font-jost text-xl sm:text-2xl md:text-3xl font-bold leading-[120%] mb-4 sm:mb-6 md:mb-8 h-[70px]">
             Quick links
           </h2>
           
@@ -187,7 +187,7 @@ const TeamAboveFooterSection = () => {
               <div className="w-1 h-[129px] bg-[#0066B3]"></div>
               <div className="flex flex-col pl-3 sm:pl-4">
                 <div className="py-2 sm:py-2.5">
-                  <Link href="#" className="group inline-block text-[#252525] hover:text-[#FF5555] font-jost text-sm sm:text-base font-bold leading-[120%] transition-all duration-300">
+                  <Link href="products/ai-talent-acquisition" className="group inline-block text-[#252525] hover:text-[#FF5555] font-jost text-sm sm:text-base font-bold leading-[120%] transition-all duration-300">
                     <div className="relative pl-0 group-hover:pl-5 sm:group-hover:pl-7 transition-all duration-300 ease-out">
                       <svg className="absolute left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{top: '2px'}} width="12" height="14" viewBox="0 0 12 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0.5 1.5L8 8L0.5 14.5" stroke="#FF5555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -197,7 +197,7 @@ const TeamAboveFooterSection = () => {
                   </Link>
                 </div>
                 <div className="py-2 sm:py-2.5">
-                  <Link href="#" className="group inline-block text-[#252525] hover:text-[#FF5555] font-jost text-sm sm:text-base font-bold leading-[120%] transition-all duration-300">
+                  <Link href="products/ai-talent-acquisition" className="group inline-block text-[#252525] hover:text-[#FF5555] font-jost text-sm sm:text-base font-bold leading-[120%] transition-all duration-300">
                     <div className="relative pl-0 group-hover:pl-5 sm:group-hover:pl-7 transition-all duration-300 ease-out">
                       <svg className="absolute left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{top: '2px'}} width="12" height="14" viewBox="0 0 12 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0.5 1.5L8 8L0.5 14.5" stroke="#FF5555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>

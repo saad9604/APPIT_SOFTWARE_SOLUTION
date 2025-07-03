@@ -15,7 +15,7 @@ import WhyChooseSection from "@/components/pages/e-commerce/WhyChooseSection";
 import Script from "next/script";
 
 export const metadata = {
-  title: 'ECommerce Services | APPIT Software Solutions Inc.',
+  title: 'ECommerce Services',
   description: 'Explore APPIT Software Solutions Inc. comprehensive eCommerce services, including strategy, design, development, and marketing of online store effectively.',
   keywords: [
     'eCommerce services',
@@ -220,14 +220,11 @@ Our expert team focuses on user experience, automation, and future-ready technol
           {
             src: "/images/utils/lines-right.png",
             alt: "Decorative Lines",
-            className: "absolute top-0 -right-[30%] lg:right-0 z-[-1]",
+            className: "absolute top-[615px] -right-[30%] lg:right-0 z-[-1]",
+
           },
-          {
-            src: "/images/utils/blue-paint-left.png",
-            alt: "Blue Paint",
-            className: "absolute top-0 -left-[55%] lg:left-0 z-[-1]",
-          },
-        ]}
+         
+  ]}
       />
 
       <WhatWeOfferSection />

@@ -44,7 +44,7 @@ const BenefitCard = ({ title, iconSrc, para, className, paraClassName, specialLo
         <motion.div
           variants={{
             rest: { y: 0 },
-            hover: { y: -24 },
+            hover: { y: -37 },
           }}
           transition={{ duration: 0.4 }}
           className="flex items-center gap-5 h-full"

@@ -11,7 +11,7 @@ import Footer from "../../components/home/Footer";
 import Script from "next/script";
 
 export const metadata = {
-  title: 'Contact APPIT Software | Global IT Services & Support – 2025',
+  title: 'Global IT Services & Support – 2025',
   description: 'Contact APPIT Software for Global IT Services & Support. Our offices are in India, the USA, Saudi Arabia, and the UAE.',
   keywords: [
     'Contact APPIT Software', 
@@ -58,7 +58,7 @@ const Page = () => {  return (
             "@type": "FAQPage",
             "mainEntity": [{
               "@type": "Question",
-              "name": "How can I get in touch with Appit Software?",
+              "name": "1. How can I get in touch with Appit Software?",
               "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "You can contact Appit Software using the contact form on the website, by email, or by reaching out to one of their global offices."
@@ -68,7 +68,11 @@ const Page = () => {  return (
               "name": "Where are the Appit Software offices located?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Appit Software has offices at:\n•\tUSA: 16192 Coastal Highway, Lewes, DE 19958\n•\tSaudi Arabia: Futuro Tower, King Saud Rd, Office # 703, 7th floor, Riyadh 12624\n•\tUAE: IFZA Business Park, DDPDubai Silicon Oasis, DDP, Building A1, Dubai"
+                "text": "Appit Software has offices at:",
+                "@USA": "16192 Coastal Highway, Lewes, DE 19958",
+                "@Saudi Arabia": "Futuro Tower, King Saud Rd, Office # 703, 7th floor, Riyadh 12624",
+                "@UAE": "IFZA Business Park, DDPDubai Silicon Oasis, DDP, Building A1, Dubai"
+
               }
             },{
               "@type": "Question",

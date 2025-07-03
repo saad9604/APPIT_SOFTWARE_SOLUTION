@@ -4,47 +4,59 @@
 import React, { useEffect, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Link from "next/link";
+import { useRouter } from 'next/router';
+
 
 const contentSections = [
+  
   {
     heading: "Oracle Consultation",
     paragraph:
       "APPIT Software - Oracle consultation services can helps the IT business and cloud services with faster adoption and return.",
     video: "/videos/consultation.mp4",
+    
+    
   },
   {
     heading: "Offshore Development",
     paragraph:
-      "Appit Software - offers reliable and cost-effective offshore development services that help you accelerate project delivery, reduce overheads",
+    "Appit Software - offers reliable and cost-effective offshore development services that help you accelerate project delivery, reduce overheads",
     video: "/videos/off_video.mp4",
+    
   },
   {
     heading: "Cyber Security Solutions",
     paragraph:
-      "APPIT Software offers cutting-edge cybersecurity solutions designed to protect your business from evolving digital threats.",
+    "APPIT Software offers cutting-edge cybersecurity solutions designed to protect your business from evolving digital threats.",
     video: "/videos/cyber_video.mp4",
+   
   },
   {
     heading: "AI Solutions & Integration",
     paragraph:
-      "APPIT Software, we empower businesses with cutting-edge AI-driven IT solutions, cloud services, and Oracle expertise. Our mission is to streamline your operations..",
+    "APPIT Software, we empower businesses with cutting-edge AI-driven IT solutions, cloud services, and Oracle expertise. Our mission is to streamline your operations..",
     video: "/videos/ai_video.mp4",
+    
   },
   {
     heading: "ECommerce Services",
     paragraph:
-      "We help businesses launch, scale, and optimize their online stores with custom-built e-commerce platforms tailored to deliver.",
+    "We help businesses launch, scale, and optimize their online stores with custom-built e-commerce platforms tailored to deliver.",
     video: "/videos/ecommerce_video.mp4",
+    
   },
   {
-    heading: "Mobile App Development",
+    heading: "Digital Transformation",
     paragraph:
-      "APPIT Software Solutions addresses challenging prospects and reach your niche market with the use of our cloud service.",
+    "APPIT Software Solutions addresses challenging prospects and reach your niche market with the use of our cloud service.",
     video: "/videos/mobile_video.mp4",
+    
   },
 ];
 
 export default function Services() {
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   // Reference to track spacer elements
@@ -857,6 +869,8 @@ export default function Services() {
 
   // Render for small screens (below 1000px)
   const renderSmallScreenLayout = () => {
+     const router = useRouter();
+
     return (
       <div className="services-small-screen" style={{ overflow: 'visible', paddingBottom: '60px', display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', margin: '0 auto' }}>
         {contentSections.map((section, index) => (
@@ -923,7 +937,12 @@ export default function Services() {
                   margin: "0 auto", 
                   width: "calc(100% - 50px)"
                 }}>
-                  <button className="hover-button" style={{
+                 
+
+
+                  <Link
+                    href="/services/odc"
+                  className="hover-button" style={{
                     display: "flex", 
                     padding: "0px 10px 0px 15px", 
                     justifyContent: "center", 
@@ -946,13 +965,13 @@ export default function Services() {
                       fontWeight: 400, 
                       lineHeight: "120%"
                     }}>
-                      Read More
+                      Read Morellll
                     </span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 33 32" fill="none" style={{minWidth: "26px", height: "26px"}}>
                       <rect x="31.75" y="31.25" width="30.5" height="30.5" rx="15.25" transform="rotate(180 31.75 31.25)" stroke="#252525" strokeWidth="1.5" />
                       <path d="M6.5 15.9992C6.5 15.6812 6.629 15.3761 6.85863 15.1513C7.08825 14.9264 7.39969 14.8 7.72444 14.8H22.0699L16.7036 10.0976C16.5827 9.99293 16.4841 9.86586 16.4135 9.72371C16.3429 9.58157 16.3017 9.42716 16.2923 9.26937C16.2828 9.11157 16.3053 8.95351 16.3585 8.80426C16.4116 8.65501 16.4944 8.51753 16.602 8.39971C16.7096 8.2819 16.8399 8.18608 16.9854 8.11777C17.131 8.04946 17.2889 8.01 17.4501 8.00167C17.6112 7.99333 17.7725 8.01629 17.9246 8.06921C18.0766 8.12213 18.2165 8.20398 18.3362 8.31004L26.091 15.1054C26.2196 15.2179 26.3226 15.3557 26.3931 15.5099C26.4636 15.6641 26.5 15.8311 26.5 16C26.5 16.1689 26.4636 16.3359 26.3931 16.4901C26.3226 16.6443 26.2196 16.7821 26.091 16.8946L18.3362 23.69C18.2165 23.796 18.0766 23.8779 17.9246 23.9308C17.7725 23.9837 17.6112 24.0067 16.9501 23.9983C16.7889 23.99 16.631 23.9505 16.4854 23.8822C16.3399 23.8139 16.2096 23.7181 16.102 23.6003C15.9944 23.4825 15.9116 23.345 15.8585 23.1957C15.8053 23.0465 15.7828 22.8884 15.7923 22.7306C15.8017 22.5728 15.8429 22.4184 15.9135 22.2763C15.9841 22.1341 16.0827 22.0071 16.7036 21.9024L22.0699 17.1984H7.72444C7.39969 17.1984 7.08825 17.072 6.85863 16.8472C6.629 16.6223 6.5 16.3172 6.5 15.9992Z" fill="#252525" />
                     </svg>
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -1082,60 +1101,64 @@ export default function Services() {
               }}
               className="button-container"
             >
-              <button
-                className="hover-button"
-                style={{
-                  display: "flex",
-                  padding: "0px 10px 0px 20px",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  gap: "20px",
-                  flex: "1 0 0",
-                  alignSelf: "stretch",
-                  borderRadius: "24px",
-                  backgroundColor: "transparent",
-                  border: "1px solid #000",
-                  cursor: "pointer",
-                  height: "100%",
-                  transition: "all 0.3s ease",
-                }}
-              >
-                <span
-                  style={{
-                    color: "#454545",
-                    textAlign: "center",
-                    fontFamily: "Jost",
-                    fontSize: "21px",
-                    fontWeight: 400,
-                    lineHeight: "120%",
-                  }}
-                >
-                  Read More
-                </span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="32"
-                  height="32"
-                  viewBox="0 0 33 32"
-                  fill="none"
-                  style={{ minWidth: "32px", height: "32px" }}
-                >
-                  <rect
-                    x="31.75"
-                    y="31.25"
-                    width="30.5"
-                    height="30.5"
-                    rx="15.25"
-                    transform="rotate(180 31.75 31.25)"
-                    stroke="#252525"
-                    strokeWidth="1.5"
-                  />
-                  <path
-                    d="M6.5 15.9992C6.5 15.6812 6.629 15.3761 6.85863 15.1513C7.08825 14.9264 7.39969 14.8 7.72444 14.8H22.0699L16.7036 10.0976C16.5827 9.99293 16.4841 9.86586 16.4135 9.72371C16.3429 9.58157 16.3017 9.42716 16.2923 9.26937C16.2828 9.11157 16.3053 8.95351 16.3585 8.80426C16.4116 8.65501 16.4944 8.51753 16.602 8.39971C16.7096 8.2819 16.8399 8.18608 16.9854 8.11777C17.131 8.04946 17.2889 8.01 17.4501 8.00167C17.6112 7.99333 17.7725 8.01629 17.9246 8.06921C18.0766 8.12213 18.2165 8.20398 18.3362 8.31004L26.091 15.1054C26.2196 15.2179 26.3226 15.3557 26.3931 15.5099C26.4636 15.6641 26.5 15.8311 26.5 16C26.5 16.1689 26.4636 16.3359 26.3931 16.4901C26.3226 16.6443 26.2196 16.7821 26.091 16.8946L18.3362 23.69C18.2165 23.796 18.0766 23.8779 17.9246 23.9308C17.7725 23.9837 17.6112 24.0067 16.9501 23.9983C16.7889 23.99 16.631 23.9505 16.4854 23.8822C16.3399 23.8139 16.2096 23.7181 16.102 23.6003C15.9944 23.4825 15.9116 23.345 15.8585 23.1957C15.8053 23.0465 15.7828 22.8884 15.7923 22.7306C15.8017 22.5728 15.8429 22.4184 15.9135 22.2763C15.9841 22.1341 16.0827 22.0071 16.7036 21.9024L22.0699 17.1984H7.72444C7.39969 17.1984 7.08825 17.072 6.85863 16.8472C6.629 16.6223 6.5 16.3172 6.5 15.9992Z"
-                    fill="#252525"
-                  />
-                </svg>
-              </button>
+            
+<Link
+  href="/services/odc"
+  className="hover-button"
+  style={{
+    display: "flex",
+    padding: "0px 10px 0px 20px",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: "20px",
+    flex: "1 0 0",
+    alignSelf: "stretch",
+    borderRadius: "24px",
+    backgroundColor: "transparent",
+    border: "1px solid #000",
+    cursor: "pointer",
+    height: "100%",
+    transition: "all 0.3s ease",
+    textDecoration: "none",
+  }}
+>
+  <span
+    style={{
+      color: "#454545",
+      textAlign: "center",
+      fontFamily: "Jost",
+      fontSize: "21px",
+      fontWeight: 400,
+      lineHeight: "120%",
+    }}
+  >
+    Read Moresss
+  </span>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="32"
+    height="32"
+    viewBox="0 0 33 32"
+    fill="none"
+    style={{ minWidth: "32px", height: "32px" }}
+  >
+    <rect
+      x="31.75"
+      y="31.25"
+      width="30.5"
+      height="30.5"
+      rx="15.25"
+      transform="rotate(180 31.75 31.25)"
+      stroke="#252525"
+      strokeWidth="1.5"
+    />
+    <path
+      d="M6.5 15.9992C6.5 15.6812 6.629 15.3761 6.85863 15.1513C7.08825 14.9264 7.39969 14.8 7.72444 14.8H22.0699L16.7036 10.0976C16.5827 9.99293 16.4841 9.86586 16.4135 9.72371C16.3429 9.58157 16.3017 9.42716 16.2923 9.26937C16.2828 9.11157 16.3053 8.95351 16.3585 8.80426C16.4116 8.65501 16.4944 8.51753 16.602 8.39971C16.7096 8.2819 16.8399 8.18608 16.9854 8.11777C17.131 8.04946 17.2889 8.01 17.4501 8.00167C17.6112 7.99333 17.7725 8.01629 17.9246 8.06921C18.0766 8.12213 18.2165 8.20398 18.3362 8.31004L26.091 15.1054C26.2196 15.2179 26.3226 15.3557 26.3931 15.5099C26.4636 15.6641 26.5 15.8311 26.5 16C26.5 16.1689 26.4636 16.3359 26.3931 16.4901C26.3226 16.6443 26.2196 16.7821 26.091 16.8946L18.3362 23.69C18.2165 23.796 18.0766 23.8779 17.9246 23.9308C17.7725 23.9837 17.6112 24.0067 16.9501 23.9983C16.7889 23.99 16.631 23.9505 16.4854 23.8822C16.3399 23.8139 16.2096 23.7181 16.102 23.6003C15.9944 23.4825 15.9116 23.345 15.8585 23.1957C15.8053 23.0465 15.7828 22.8884 15.7923 22.7306C15.8017 22.5728 15.8429 22.4184 15.9135 22.2763C15.9841 22.1341 16.0827 22.0071 16.7036 21.9024L22.0699 17.1984H7.72444C7.39969 17.1984 7.08825 17.072 6.85863 16.8472C6.629 16.6223 6.5 16.3172 6.5 15.9992Z"
+      fill="#252525"
+    />
+  </svg>
+</Link>
+
             </div>
           </div>
 
@@ -1208,7 +1231,9 @@ export default function Services() {
               }}
               className="button-container"
             >
-              <button
+           
+                  <a
+                   href={"/services/odc"}
                 className="hover-button"
                 style={{
                   display: "flex",
@@ -1236,7 +1261,7 @@ export default function Services() {
                     lineHeight: "120%",
                   }}
                 >
-                  Read More
+                  Read Moressasdasd
                 </span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -1261,7 +1286,7 @@ export default function Services() {
                     fill="#252525"
                   />
                 </svg>
-              </button>
+              </a>
             </div>
           </div>
 
@@ -1333,7 +1358,7 @@ export default function Services() {
               }}
               className="button-container"
             >
-              <button
+              <button 
                 className="hover-button"
                 style={{
                   display: "flex",
@@ -1361,7 +1386,7 @@ export default function Services() {
                     lineHeight: "120%",
                   }}
                 >
-                  Read More
+                  Read Mores
                 </span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -1486,7 +1511,7 @@ export default function Services() {
                     lineHeight: "120%",
                   }}
                 >
-                  Read More
+                  Read Moreq
                 </span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -1611,7 +1636,7 @@ export default function Services() {
                     lineHeight: "120%",
                   }}
                 >
-                  Read More
+                  Read Mores
                 </span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -1673,7 +1698,8 @@ export default function Services() {
                   lineHeight: "120%",
                 }}
               >
-              Mobile App Development
+              Digital Transformation
+
               </h3>
             </div>
             <p
@@ -1736,7 +1762,7 @@ export default function Services() {
                     lineHeight: "120%",
                   }}
                 >
-                  Read More
+                  Read Moreas
                 </span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

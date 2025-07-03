@@ -13,7 +13,7 @@ import Footer from "@/components/home/Footer";
 import Script from "next/script";
 
 export const metadata = {
-  title: 'Outsourced IT Support Services | Appit Software – 2025',
+  title: 'Outsourced IT Support Services',
   description: 'Boost your business efficiency with Appit Software\'s expert Outsourced IT Support Services. Reliable, scalable, and tailored solutions to keep your operations running smoothly. Contact us today!',
   keywords: [
     'Outsourced IT Support Services',

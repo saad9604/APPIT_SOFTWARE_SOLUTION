@@ -14,7 +14,7 @@ import AccrelerateSection from "@/components/pages/generative-ai/AccrelerateSect
 import Script from "next/script";
 
 export const metadata = {
-  title: 'GenMind Consulting -Generative AI Advisory By APPIT Software',
+  title: 'GenMind Consulting -Generative AI Advisory ',
   description: 'APPIT Software GenMind Consulting services, we expert guidance in strategizing, and responsible Generative AI solutions to transform your business processes.',
   keywords: [
     'GenMind Consulting',
