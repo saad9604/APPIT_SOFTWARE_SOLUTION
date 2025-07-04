@@ -5,7 +5,6 @@ import React, { useEffect, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
-import { useRouter } from 'next/router';
 
 
 const contentSections = [
@@ -867,81 +866,76 @@ export default function Services() {
     };
   }, []);
 
-  // Render for small screens (below 1000px)
-  const renderSmallScreenLayout = () => {
-     const router = useRouter();
-
-    return (
-      <div className="services-small-screen" style={{ overflow: 'visible', paddingBottom: '60px', display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', margin: '0 auto' }}>
-        {contentSections.map((section, index) => (
-          <div className="service-pair" key={index} id={`service-${index}`}>
-            <div className="text-container" style={{ background: '#F0F7F8', borderRadius: '24px', width: '100%', height: '280px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-              <div className={`small-screen-content content${index+1}`} id={`content-${index}`} style={{
+// Define renderSmallScreenLayout at the top level
+const renderSmallScreenLayout = () => {
+  return (
+    <div className="services-small-screen" style={{ overflow: 'visible', paddingBottom: '60px', display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', margin: '0 auto' }}>
+      {contentSections.map((section, index) => (
+        <div className="service-pair" key={index} id={`service-${index}`}>
+          <div className="text-container" style={{ background: '#F0F7F8', borderRadius: '24px', width: '100%', height: '280px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+            <div className={`small-screen-content content${index+1}`} id={`content-${index}`} style={{
+              width: "100%", 
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              padding: "15px 5px",
+              background: "#F0F7F8",
+              position: "relative",
+              height: "280px",
+              boxSizing: "border-box"
+            }}>
+              <div id={`heading-${index}`} style={{
                 width: "100%", 
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                padding: "15px 5px",
-                background: "#F0F7F8",
-                position: "relative",
-                height: "280px", /* Match video height */
-                boxSizing: "border-box"
+                borderBottom: "1px solid #888", 
+                marginBottom: "10px", 
+                paddingBottom: "8px",
+                marginTop: "0"
               }}>
-                <div id={`heading-${index}`} style={{
+                <h3 style={{
                   width: "100%", 
-                  borderBottom: "1px solid #888", 
-                  marginBottom: "10px", 
-                  paddingBottom: "8px",
-                  marginTop: "0" /* Removed top margin */
-                }}>
-                  <h3 style={{
-                    width: "100%", 
-                    color: "#055087", 
-                    textAlign: "center", 
-                    fontFamily: "Jost", 
-                    fontSize: "24px", 
-                    fontWeight: 600, 
-                    lineHeight: "120%",
-                    margin: 0
-                  }}>
-                    {section.heading}
-                  </h3>
-                </div>
-                <p style={{
-                  width: "95%", 
-                  color: "#252525", 
+                  color: "#055087", 
                   textAlign: "center", 
                   fontFamily: "Jost", 
-                  fontSize: "16px", 
+                  fontSize: "24px", 
                   fontWeight: 600, 
-                  lineHeight: "130%", 
-                  margin: "5px auto 45px", /* Adjusted for vertical centering */
-                  padding: "0 5px"
+                  lineHeight: "120%",
+                  margin: 0
                 }}>
-                  {section.paragraph}
-                </p>
-                <div className="button-container small-screen-button" style={{
-                  display: "flex", 
-                  height: "40px", 
-                  padding: "0px 16px", 
-                  justifyContent: "center", 
-                  alignItems: "center", 
-                  gap: "15px", 
-                  flexShrink: 0, 
-                  alignSelf: "stretch", 
-                  position: "absolute", 
-                  bottom: "10px", /* Adjusted position */
-                  left: 0,
-                  right: 0,
-                  margin: "0 auto", 
-                  width: "calc(100% - 50px)"
-                }}>
-                 
-
-
-                  <Link
-                    href="/services/odc"
+                  {section.heading}
+                </h3>
+              </div>
+              <p style={{
+                width: "95%", 
+                color: "#252525", 
+                textAlign: "center", 
+                fontFamily: "Jost", 
+                fontSize: "16px", 
+                fontWeight: 600, 
+                lineHeight: "130%", 
+                margin: "5px auto 45px",
+                padding: "0 5px"
+              }}>
+                {section.paragraph}
+              </p>
+              <div className="button-container small-screen-button" style={{
+                display: "flex", 
+                height: "40px", 
+                padding: "0px 16px", 
+                justifyContent: "center", 
+                alignItems: "center", 
+                gap: "15px", 
+                flexShrink: 0, 
+                alignSelf: "stretch", 
+                position: "absolute", 
+                bottom: "20px",
+                left: 0,
+                right: 0,
+                margin: "0 auto", 
+                width: "calc(100% - 50px)"
+              }}>
+                <Link
+                  href="/services/odc"
                   className="hover-button" style={{
                     display: "flex", 
                     padding: "0px 10px 0px 15px", 
@@ -957,45 +951,44 @@ export default function Services() {
                     height: "100%", 
                     transition: "all 0.3s ease"
                   }}>
-                    <span style={{
-                      color: "#454545", 
-                      textAlign: "center", 
-                      fontFamily: "Jost", 
-                      fontSize: "16px", 
-                      fontWeight: 400, 
-                      lineHeight: "120%"
-                    }}>
-                      Read Morellll
-                    </span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 33 32" fill="none" style={{minWidth: "26px", height: "26px"}}>
-                      <rect x="31.75" y="31.25" width="30.5" height="30.5" rx="15.25" transform="rotate(180 31.75 31.25)" stroke="#252525" strokeWidth="1.5" />
-                      <path d="M6.5 15.9992C6.5 15.6812 6.629 15.3761 6.85863 15.1513C7.08825 14.9264 7.39969 14.8 7.72444 14.8H22.0699L16.7036 10.0976C16.5827 9.99293 16.4841 9.86586 16.4135 9.72371C16.3429 9.58157 16.3017 9.42716 16.2923 9.26937C16.2828 9.11157 16.3053 8.95351 16.3585 8.80426C16.4116 8.65501 16.4944 8.51753 16.602 8.39971C16.7096 8.2819 16.8399 8.18608 16.9854 8.11777C17.131 8.04946 17.2889 8.01 17.4501 8.00167C17.6112 7.99333 17.7725 8.01629 17.9246 8.06921C18.0766 8.12213 18.2165 8.20398 18.3362 8.31004L26.091 15.1054C26.2196 15.2179 26.3226 15.3557 26.3931 15.5099C26.4636 15.6641 26.5 15.8311 26.5 16C26.5 16.1689 26.4636 16.3359 26.3931 16.4901C26.3226 16.6443 26.2196 16.7821 26.091 16.8946L18.3362 23.69C18.2165 23.796 18.0766 23.8779 17.9246 23.9308C17.7725 23.9837 17.6112 24.0067 16.9501 23.9983C16.7889 23.99 16.631 23.9505 16.4854 23.8822C16.3399 23.8139 16.2096 23.7181 16.102 23.6003C15.9944 23.4825 15.9116 23.345 15.8585 23.1957C15.8053 23.0465 15.7828 22.8884 15.7923 22.7306C15.8017 22.5728 15.8429 22.4184 15.9135 22.2763C15.9841 22.1341 16.0827 22.0071 16.7036 21.9024L22.0699 17.1984H7.72444C7.39969 17.1984 7.08825 17.072 6.85863 16.8472C6.629 16.6223 6.5 16.3172 6.5 15.9992Z" fill="#252525" />
-                    </svg>
-                  </Link>
-                </div>
+                  <span style={{
+                    color: "#454545", 
+                    textAlign: "center", 
+                    fontFamily: "Jost", 
+                    fontSize: "16px", 
+                    fontWeight: 400, 
+                    lineHeight: "120%"
+                  }}>
+                    Read More
+                  </span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 33 32" fill="none" style={{minWidth: "26px", height: "26px"}}>
+                    <rect x="31.75" y="31.25" width="30.5" height="30.5" rx="15.25" transform="rotate(180 31.75 31.25)" stroke="#252525" strokeWidth="1.5" />
+                    <path d="M6.5 15.9992C6.5 15.6812 6.629 15.3761 6.85863 15.1513C7.08825 14.9264 7.39969 14.8 7.72444 14.8H22.0699L16.7036 10.0976C16.5827 9.99293 16.4841 9.86586 16.4135 9.72371C16.3429 9.58157 16.3017 9.42716 16.2923 9.26937C16.2828 9.11157 16.3053 8.95351 16.3585 8.80426C16.4116 8.65501 16.4944 8.51753 16.602 8.39971C16.7096 8.2819 16.8399 8.18608 16.9854 8.11777C17.131 8.04946 17.2889 8.01 17.4501 8.00167C17.6112 7.99333 17.7725 8.01629 17.9246 8.06921C18.0766 8.12213 18.2165 8.20398 18.3362 8.31004L26.091 15.1054C26.2196 15.2179 26.3226 15.3557 26.3931 15.5099C26.4636 15.6641 26.5 15.8311 26.5 16C26.5 16.1689 26.4636 16.3359 26.3931 16.4901C26.3226 16.6443 26.2196 16.7821 26.091 16.8946L18.3362 23.69C18.2165 23.796 18.0766 23.8779 17.9246 23.9308C17.7725 23.9837 17.6112 24.0067 16.9501 23.9983C16.7889 23.99 16.631 23.9505 16.4854 23.8822C16.3399 23.8139 16.2096 23.7181 16.102 23.6003C15.9944 23.4825 15.9116 23.345 15.8585 23.1957C15.8053 23.0465 15.7828 22.8884 15.7923 22.7306C15.8017 22.5728 15.8429 22.4184 15.9135 22.2763C15.9841 22.1341 16.0827 22.0071 16.7036 21.9024L22.0699 17.1984H7.72444C7.39969 17.1984 7.08825 17.072 6.85863 16.8472C6.629 16.6223 6.5 16.3172 6.5 15.9992Z" fill="#252525" />
+                  </svg>
+                </Link>
               </div>
             </div>
-            <div className="video-container small-screen-video" style={{ marginBottom: '40px', width: '100%' }}>
-              <video
-                src={section.video}
-                autoPlay
-                loop
-                muted
-                playsInline
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  borderRadius: "24px",
-                }}
-              />
-            </div>
           </div>
-        ))}
-      </div>
-    );
-  };
-
+          <div className="video-container small-screen-video" style={{ marginBottom: '40px', width: '100%' }}>
+            <video
+              src={section.video}
+              autoPlay
+              loop
+              muted
+              playsInline
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                borderRadius: "24px",
+              }}
+            />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
   // Render normal layout for larger screens
   const renderNormalLayout = () => {
     return (

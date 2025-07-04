@@ -2,18 +2,54 @@
 
 import { useState, useRef, useEffect } from 'react';
 
+const API_BASE_URL = 'http://127.0.0.1:8000'; //chanege this to your actual API base URL
+
+const renderMessageWithLinks = (text) => {
+  const lines = text.split('\n');
+  
+  return lines.map((line, lineIndex) => {
+    if (line.trim() === '') {
+      return <div key={lineIndex} className="h-3"></div>;
+    }
+    
+    const urlRegex = /(https?:\/\/[^\s<>\"]+[^\s<>\",.;:!?)\]\'`])/g;
+    const parts = line.split(urlRegex);
+    
+    return (
+      <div key={lineIndex} className="mb-1 last:mb-0">
+        {parts.map((part, partIndex) => {
+          if (part.match(urlRegex)) {
+            return (
+              <a 
+                key={partIndex} 
+                href={part} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-blue-600 underline hover:text-blue-800"
+              >
+                {part}
+              </a>
+            );
+          }
+          return part;
+        })}
+      </div>
+    );
+  });
+};
+
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState([
-    { text: "Welcome to Appit", sender: 'bot' },
-    { text: "Hi Praveen. How can I help you?", sender: 'bot' },
-  ]);
+  const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [isAnimatingSend, setIsAnimatingSend] = useState(false);
   const messagesEndRef = useRef(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showLoginForm, setShowLoginForm] = useState(false);
+  const [loginEmail, setLoginEmail] = useState('');
+  const [loginError, setLoginError] = useState('');
   
-  // Mobile form states
   const [userName, setUserName] = useState('');
   const [userMobile, setUserMobile] = useState('');
   const [userEmail, setUserEmail] = useState('');
@@ -26,16 +62,256 @@ const Chatbot = () => {
   const [selectedService, setSelectedService] = useState('');
   const [showServiceSelection, setShowServiceSelection] = useState(false);
   const [showContactForm, setShowContactForm] = useState(false);
-  const [formStage, setFormStage] = useState(0); // 0: none, 1: name, 2: mobile, 3: email, 4: complete
-  // FIX: Use state for client detection
+  const [formStage, setFormStage] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const [isClient, setIsClient] = useState(false);
 
-  // Toggle chatbot open/close
+  const [showSupportPrompt, setShowSupportPrompt] = useState(false);
+  const [supportPromptShown, setSupportPromptShown] = useState(false);
+  const [isClearingHistory, setIsClearingHistory] = useState(false);
+  
+  const [isSupportMode, setIsSupportMode] = useState(false);
+  const [supportMessages, setSupportMessages] = useState([]);
+
+  useEffect(() => {
+    const savedUser = localStorage.getItem('chatUser');
+    if (savedUser) {
+      const user = JSON.parse(savedUser);
+      setIsLoggedIn(true);
+      setUserEmail(user.email);
+      fetchChatHistory(user.email);
+    }
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (isOpen && !isLoggedIn) {
+      setShowLoginForm(true);
+    }
+  }, [isOpen, isLoggedIn]);
+
+  useEffect(() => {
+    if (isLoggedIn && !supportPromptShown) {
+      setTimeout(() => {
+        setShowSupportPrompt(true);
+      }, 1000);
+    }
+}, [isLoggedIn]);
+
+  const fetchChatHistory = async (email) => {
+    try {
+      setIsTyping(true);
+      const response = await fetch(`${API_BASE_URL}/api/user/history?email=${encodeURIComponent(email)}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        if (data.length > 0) {
+          const history = data.flatMap(msg => [
+            { text: msg.question, sender: 'user' },
+            { text: msg.answer, sender: 'bot' }
+          ]);
+          
+          setMessages([
+            { text: "Welcome back to Appit", sender: 'bot' },
+            ...history
+          ]);
+        } else {
+          setMessages([
+            { text: "Welcome to Appit", sender: 'bot' },
+            { text: "How can I help you today?", sender: 'bot' },
+          ]);
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching chat history:', error);
+      setMessages([
+        { text: "Welcome to Appit", sender: 'bot' },
+        { text: "How can I help you today?", sender: 'bot' },
+      ]);
+    } finally {
+      setIsTyping(false);
+    }
+  };
+
+  const handleSupportClick = () => {
+    setShowSupportPrompt(true);
+    setSupportPromptShown(true);
+  };
+  
+  const handleSupportSubmit = async (submitQuery) => {
+    if (submitQuery) {
+      setIsSupportMode(true);
+      setSupportMessages([
+        { text: "You are now in support mode. Please describe your issue or question.", sender: 'bot' },
+        { text: "Type 'back to chat' at any time to return to regular chat mode.", sender: 'bot' }
+      ]);
+      setShowSupportPrompt(false);
+      setSupportPromptShown(true);
+    } else {
+      setMessages(prev => [...prev, { 
+        text: "Alright, if you change your mind, you can select 'support' anytime.", 
+        sender: 'bot' 
+      }]);
+      setShowSupportPrompt(false);
+      setSupportPromptShown(true);
+    }
+  };
+
+  const handleSupportMessage = async (message) => {
+    if (message.toLowerCase().includes('back to chat') || message.toLowerCase().includes('exit support')) {
+      setIsSupportMode(false);
+      setSupportMessages([]);
+      setMessages(prev => [...prev, { 
+        text: "You've returned to regular chat mode. How can I help you today?", 
+        sender: 'bot' 
+      }]);
+      return;
+    }
+
+    setIsTyping(true);
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/support`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          email: userEmail,
+          message: message
+        })
+      });
+
+      if (response.ok) {
+        setSupportMessages(prev => [...prev, { 
+          text: "Your support query has been submitted! Our team will contact you shortly.", 
+          sender: 'bot' 
+        }, {
+          text: "You can continue asking support questions or type 'back to chat' to return to regular chat mode.",
+          sender: 'bot'
+        }]);
+      } else {
+        setSupportMessages(prev => [...prev, { 
+          text: "Failed to submit your query. Please try again later.", 
+          sender: 'bot' 
+        }]);
+      }
+    } catch (error) {
+      setSupportMessages(prev => [...prev, { 
+        text: "Network error. Please try again later.", 
+        sender: 'bot' 
+      }]);
+    } finally {
+      setIsTyping(false);
+    }
+  };
+
+  const toggleSupportMode = () => {
+    if (isSupportMode) {
+      setIsSupportMode(false);
+      setSupportMessages([]);
+      setMessages(prev => [...prev, { 
+        text: "You've returned to regular chat mode. How can I help you today?", 
+        sender: 'bot' 
+      }]);
+    } else {
+      setIsSupportMode(true);
+      setSupportMessages([
+        { text: "You are now in support mode. Please describe your issue or question.", sender: 'bot' },
+        { text: "Type 'back to chat' at any time to return to regular chat mode.", sender: 'bot' }
+      ]);
+    }
+  };
+
+  const handleClearHistory = async () => {
+    setIsClearingHistory(true);
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/user/history?email=${encodeURIComponent(userEmail)}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      if (response.ok) {
+        if (isSupportMode) {
+          setSupportMessages([
+            { text: "Your support history has been cleared.", sender: 'bot' },
+            { text: "Please describe your issue or question.", sender: 'bot' }
+          ]);
+        } else {
+          setMessages([
+            { text: "Your chat history has been cleared.", sender: 'bot' },
+            { text: "How can I help you today?", sender: 'bot' }
+          ]);
+        }
+      } else {
+        const errorData = await response.json();
+        const errorMessage = `Failed to clear history: ${errorData.detail || 'Unknown error'}`;
+        if (isSupportMode) {
+          setSupportMessages(prev => [...prev, { text: errorMessage, sender: 'bot' }]);
+        } else {
+          setMessages(prev => [...prev, { text: errorMessage, sender: 'bot' }]);
+        }
+      }
+    } catch (error) {
+      const errorMessage = "Network error. Please try again later.";
+      if (isSupportMode) {
+        setSupportMessages(prev => [...prev, { text: errorMessage, sender: 'bot' }]);
+      } else {
+        setMessages(prev => [...prev, { text: errorMessage, sender: 'bot' }]);
+      }
+    } finally {
+      setIsClearingHistory(false);
+    }
+  };
+
+  const handleLogin = async () => {
+    if (!loginEmail.trim() || !loginEmail.includes('@')) {
+      setLoginError('Please enter a valid email');
+      return;
+    }
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/user/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: loginEmail })
+      });
+
+      if (response.ok) {
+        const userData = { email: loginEmail };
+        localStorage.setItem('chatUser', JSON.stringify(userData));
+        
+        setIsLoggedIn(true);
+        setUserEmail(loginEmail);
+        setShowLoginForm(false);
+        setLoginError('');
+        
+        fetchChatHistory(loginEmail);
+      } else {
+        const errorData = await response.json();
+        setLoginError(errorData.detail || 'Login failed. Please try again.');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      setLoginError('Network error. Please try again.');
+    }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('chatUser');
+    setIsLoggedIn(false);
+    setUserEmail('');
+    setShowLoginForm(true);
+    setMessages([]);
+    setSupportMessages([]);
+    setIsSupportMode(false);
+    setShowSupportPrompt(false);
+    setSupportPromptShown(false);
+  };
+
   const toggleChatbot = () => {
     setIsOpen(!isOpen);
     
-    // Reset form when closing chatbot
     if (isOpen) {
       setShowServiceSelection(false);
       setShowContactForm(false);
@@ -43,63 +319,37 @@ const Chatbot = () => {
     }
   };
 
-  // Scroll to bottom of messages
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+  }, [messages, supportMessages]);
 
-  // Set isClient to true when component mounts (client-side only)
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  const generateResponse = async (userMessage) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/chat`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: userEmail,
+          message: userMessage
+        })
+      });
 
-  // Generate AI response based on user input
-  const generateResponse = (userMessage) => {
-    // Convert to lowercase for easier matching
-    const message = userMessage.toLowerCase();
-    
-    // First message should trigger service selection on mobile
-    if (isMobile && messages.length <= 3) {
-      if (message.includes('service') || message.includes('help') || message.includes('looking')) {
-        setShowServiceSelection(true);
-        return "Select a Service";
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
-    }
-    
-    // Simple pattern matching for common questions
-    if (message.includes('service')) {
-      return "Great! Could you please tell me what kind of service you're interested in? We offer software development, cloud solutions, AI integration, and more.";
-    } else if (message.includes('software') || message.includes('development')) {
-      return "Perfect! We specialize in building scalable, tailor-made software solutions. Would you like to schedule a consultation or get a quote?";
-    } else if (message.includes('quote')) {
-      if (isMobile) {
-        setShowContactForm(true);
-        setFormStage(1);
-        return "Enter your name";
-      } else {
-        return "Got it. Please share a few details about your project—such as its purpose, key features, and timeline—and we'll get back to you with a personalized quote.";
-      }
-    } else if (message.includes('hello') || message.includes('hi') || message.includes('hey')) {
-      return "Hi, I'm looking for a service.";
-    } else {
-      // Default responses for other queries
-      const defaultResponses = [
-        "That's an interesting question. Could you provide more details so I can better assist you?",
-        "Thanks for your message. To better help you, could you elaborate a bit more on what you're looking for?",
-        "I'd be happy to help with that. Could you share more specific information about your requirements?",
-        "I understand you're interested in our services. Could you tell me more about your project or needs?"
-      ];
-      
-      // Return a random default response
-      return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
+
+      const data = await response.json();
+      return data.response || "I'm sorry, I couldn't process your request right now. Please try again.";
+    } catch (error) {
+      console.error('Error calling chat API:', error);
+      return "I'm experiencing some technical difficulties. Please try again in a moment.";
     }
   };
-
-  // Handle service selection
+  
   const handleServiceSelect = (id) => {
     const updatedOptions = serviceOptions.map(option => ({
       ...option,
@@ -111,36 +361,26 @@ const Chatbot = () => {
     setSelectedService(selected ? selected.label : '');
   };
   
-  // Handle form submission for small screens
   const handleFormSubmit = () => {
-    // Trigger animation
     setIsAnimatingSend(true);
-    
-    // Reset animation after delay
-    setTimeout(() => {
-      setIsAnimatingSend(false);
-    }, 500);
+    setTimeout(() => setIsAnimatingSend(false), 500);
     
     if (formStage === 0) {
-      // If user selected a service, move to name input
       if (selectedService) {
         setFormStage(1);
         setMessages(prev => [...prev, { text: selectedService, sender: 'user' }]);
       }
     } else if (formStage === 1) {
-      // Save name and move to mobile input
       if (userName.trim()) {
         setFormStage(2);
         setMessages(prev => [...prev, { text: userName, sender: 'user' }]);
       }
     } else if (formStage === 2) {
-      // Save mobile and move to email input
       if (userMobile.trim()) {
         setFormStage(3);
         setMessages(prev => [...prev, { text: userMobile, sender: 'user' }]);
       }
     } else if (formStage === 3) {
-      // Save email and complete form
       if (userEmail.trim()) {
         setFormStage(4);
         setMessages(prev => [...prev, { text: userEmail, sender: 'user' }]);
@@ -156,104 +396,132 @@ const Chatbot = () => {
     }
   };
 
-  // Handle input change
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
   };
 
-  // Detect screen size - FIX: Only run on client side
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
     };
     
-    // Set initial value
     handleResize();
-    
-    // Add event listener
     window.addEventListener('resize', handleResize);
-    
-    // Clean up
     return () => window.removeEventListener('resize', handleResize);
-  }, [isClient]); // Only run when client is detected
+  }, []);
 
-  // Handle send message
   const handleSendMessage = () => {
     if (inputValue.trim() === '') return;
     
-    // Trigger send animation
     setIsAnimatingSend(true);
-    
-    // Add user message
-    setMessages([...messages, { text: inputValue, sender: 'user' }]);
+    const userMessage = inputValue;
     setInputValue('');
     
-    // Show typing indicator
-    setIsTyping(true);
-    
-    // Reset animation after a short delay
-    setTimeout(() => {
-      setIsAnimatingSend(false);
-    }, 500);
-    
-    // Simulate bot response after delay
-    // Vary the delay based on message length to simulate thinking time
-    const thinkingTime = Math.min(1000 + inputValue.length * 20, 3000);
-    
-    setTimeout(() => {
-      setIsTyping(false);
-      setMessages(prev => [...prev, { 
-        text: generateResponse(inputValue),
-        sender: 'bot' 
-      }]);
-    }, thinkingTime);
-  };
-
-  // Handle key press (Enter to send)
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      handleSendMessage();
+    if (isSupportMode) {
+      setSupportMessages(prev => [...prev, { text: userMessage, sender: 'user' }]);
+      setIsTyping(true);
+      setTimeout(() => setIsAnimatingSend(false), 500);
+      
+      setTimeout(() => {
+        handleSupportMessage(userMessage);
+      }, 1000);
+    } else {
+      setMessages(prev => [...prev, { text: userMessage, sender: 'user' }]);
+      setIsTyping(true);
+      setTimeout(() => setIsAnimatingSend(false), 500);
+      
+      const thinkingTime = Math.min(1000 + userMessage.length * 20, 3000);
+      
+      setTimeout(() => {
+        generateResponse(userMessage)
+          .then(response => {
+            setIsTyping(false);
+            setMessages(prev => [...prev, { text: response, sender: 'bot' }]);
+          })
+          .catch(error => {
+            console.error('Error getting response:', error);
+            setIsTyping(false);
+            setMessages(prev => [...prev, {
+              text: "I'm having trouble connecting. Please try again.",
+              sender: 'bot'
+            }]);
+          });
+      }, thinkingTime);
     }
   };
 
-  // Don't render anything until client-side hydration is complete
-  if (!isClient) {
-    return null;
-  }
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') handleSendMessage();
+  };
 
-  return (
-    <div className="fixed bottom-20 right-4 sm:right-8 md:right-12 z-50">
-      {/* Chatbot toggle button */}
-      <button 
-        onClick={toggleChatbot}
-        className={`p-2 sm:p-3 rounded-full bg-gradient-to-b from-[#8E2DE2] to-[#4A00E0] flex items-center justify-center shadow-lg hover:shadow-xl hover:bg-purple-700 transition-all transform duration-300 ${isOpen ? 'rotate-0' : 'hover:rotate-12'} ring-2 ring-white`}
-        aria-label="Toggle chat"
-      >
-        {isOpen ? (
-          <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        ) : (
-          <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-          </svg>
-        )}
-      </button>
-      
-      {/* Chatbot container */}
-      <div 
-        className={`
-          ${isOpen ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-4 pointer-events-none'} 
-          transform transition-all duration-300 ease-in-out origin-bottom-right
-          absolute bottom-[calc(100%+12px)] sm:bottom-[calc(100%+12px)] right-0 sm:right-0 md:right-0
-          w-[calc(100vw-4rem)] sm:w-[453px] max-w-[90vw] sm:max-w-none h-auto sm:h-[540px] md:h-[540px] max-h-[70vh] sm:max-h-[540px]
-          flex flex-col
-          rounded-[24px] border-[1px] sm:border-2 border-[#0066B3] sm:border-[#4A00E0] bg-white
-          shadow-[0px_0px_4px_2px_rgba(0,0,0,0.25)]
-        `}
-      >
-        <div className="p-3 sm:p-4 border-b border-gray-200 flex justify-between items-center">
-          <h3 className="font-jost font-semibold text-[#4A00E0] text-sm md:text-base">Chat with us</h3>
+  if (!isClient) return null;
+
+  const currentMessages = isSupportMode ? supportMessages : messages;
+
+return (
+  <div className="fixed bottom-20 right-4 sm:right-8 md:right-12 z-50">
+    {/* Chatbot toggle button */}
+    <button 
+      onClick={toggleChatbot}
+      className={`p-2 sm:p-3 rounded-full bg-gradient-to-b from-[#8E2DE2] to-[#4A00E0] flex items-center justify-center shadow-lg hover:shadow-xl hover:bg-purple-700 transition-all transform duration-300 ${isOpen ? 'rotate-0' : 'hover:rotate-12'} ring-2 ring-white`}
+      aria-label="Toggle chat"
+    >
+      {isOpen ? (
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      ) : (
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+        </svg>
+      )}
+    </button>
+    
+    {/* Chatbot container */}
+    <div 
+      className={`
+        ${isOpen ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-4 pointer-events-none'} 
+        transform transition-all duration-300 ease-in-out origin-bottom-right
+        absolute bottom-[calc(100%+12px)] sm:bottom-[calc(100%+12px)] right-0 sm:right-0 md:right-0
+        w-[calc(100vw-4rem)] sm:w-[453px] max-w-[90vw] sm:max-w-none h-auto sm:h-[540px] md:h-[540px] max-h-[70vh] sm:max-h-[540px]
+        flex flex-col
+        rounded-[24px] border-[1px] sm:border-2 border-[#0066B3] sm:border-[#4A00E0] bg-white
+        shadow-[0px_0px_4px_2px_rgba(0,0,0,0.25)]
+      `}
+    >
+      {/* Header */}
+      <div className="p-3 sm:p-4 border-b border-gray-200 flex justify-between items-center">
+        <h3 className="font-jost font-semibold text-[#4A00E0] text-sm md:text-base">
+          {isLoggedIn ? 
+            (isSupportMode ? `Support Mode - ${userEmail}` : `Chatting as ${userEmail}`) : 
+            "Chat with us"
+          }
+        </h3>
+        <div className="flex items-center">
+          {isLoggedIn && (
+            <>
+              <button 
+                onClick={toggleSupportMode}
+                className="mr-2 text-xs text-gray-500 hover:text-gray-700"
+              >
+                {isSupportMode ? 'Back to Chat' : 'Support'}
+              </button>
+              
+              <button 
+                onClick={handleClearHistory}
+                disabled={isClearingHistory}
+                className="mr-2 text-xs text-gray-500 hover:text-gray-700 disabled:opacity-50"
+              >
+                {isClearingHistory ? 'Clearing...' : 'Clear History'}
+              </button>
+              <button 
+                onClick={handleLogout}
+                className="mr-2 text-xs text-gray-500 hover:text-gray-700"
+              >
+                Logout
+              </button>
+            </>
+          )}
           <button 
             onClick={toggleChatbot}
             className="text-gray-500 hover:text-gray-700"
@@ -264,31 +532,76 @@ const Chatbot = () => {
             </svg>
           </button>
         </div>
-        
-        {/* Messages container */}
-        <div className="flex-1 p-4 overflow-y-auto">
+      </div>
+      
+      {/* Messages container */}
+      <div className="flex-1 p-4 overflow-y-auto">
+        {showLoginForm && !isLoggedIn ? (
+          <div className="flex flex-col items-center justify-center h-full">
+            <div className="w-full max-w-xs">
+              <h4 className="text-lg font-jost mb-4 text-center">Login to Chat</h4>
+              <input
+                type="email"
+                placeholder="Enter your email"
+                value={loginEmail}
+                onChange={(e) => setLoginEmail(e.target.value)}
+                className="w-full p-2 mb-2 border rounded font-jost text-black"
+              />
+              {loginError && (
+                <p className="text-red-500 text-sm mb-2 font-jost">{loginError}</p>
+              )}
+              <button 
+                onClick={handleLogin}
+                className="w-full bg-gradient-to-b from-[#8E2DE2] to-[#4A00E0] text-white py-2 rounded font-jost"
+              >
+                Login
+              </button>
+            </div>
+          </div>
+        ) : (
           <div className="flex flex-col gap-4">
-            {messages.map((message, index) => (
+            {currentMessages.map((message, index) => (
               <div 
                 key={index} 
                 className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
               >
+                {/* MESSAGE BUBBLE */}
                 <div 
-                  className={`
-                    max-w-[80%] inline-flex px-[16px] py-[12px] justify-center items-center gap-[10px] rounded-[24px]
-                    ${message.sender === 'user' 
-                      ? 'bg-[#FFE0E1]' 
-                      : 'bg-[#DFF0FF]'}
-                  `}
+                  className={`max-w-[80%] inline-block px-[16px] py-[12px] rounded-[24px] ${
+                    message.sender === 'user' ? 'bg-[#FFE0E1]' : 'bg-[#DFF0FF]'
+                  }`}
                 >
-                  <p className="font-jost text-[14px] font-normal leading-[120%] text-black">
-                    {message.text}
-                  </p>
+                  <div className="font-jost text-[14px] font-normal leading-[120%] text-black">
+                    {renderMessageWithLinks(message.text)}
+                  </div>
                 </div>
               </div>
             ))}
-            
-            {/* Typing indicator */}
+
+            {!isSupportMode && showSupportPrompt && (
+              <div className="flex justify-start">
+                <div className="max-w-[80%] inline-block px-[16px] py-[12px] rounded-[24px] bg-[#DFF0FF]">
+                  <div className="font-jost text-[14px] font-normal leading-[120%] text-black mb-2">
+                    Would you like to submit a support query?
+                  </div>
+                  <div className="flex gap-2">
+                    <button 
+                      onClick={() => handleSupportSubmit(true)}
+                      className="px-3 py-1 bg-gradient-to-b from-[#8E2DE2] to-[#4A00E0] text-white rounded-md"
+                    >
+                      Yes
+                    </button>
+                    <button 
+                      onClick={() => handleSupportSubmit(false)}
+                      className="px-3 py-1 bg-gray-200 text-gray-700 rounded-md"
+                    >
+                      No
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {isTyping && (
               <div className="flex justify-start">
                 <div className="inline-flex justify-center items-center gap-[2px] bg-[#DFF0FF] px-[16px] py-[12px] rounded-[24px]">
@@ -303,9 +616,11 @@ const Chatbot = () => {
             
             <div ref={messagesEndRef} />
           </div>
-        </div>
-        
-        {/* Input container */}
+        )}
+      </div>
+      
+      {/* Input container - only show when logged in */}
+      {isLoggedIn && (
         <div className="p-4 sm:p-6 border-t border-gray-200">
           {isMobile && showServiceSelection ? (
             <div className="flex flex-col gap-3">
@@ -372,6 +687,28 @@ const Chatbot = () => {
                   />
                 </>
               )}
+              {formStage === 2 && (
+                <>
+                  <div className="text-[14px] font-jost font-medium text-left">Enter your Mobile no</div>
+                  <input
+                    type="tel"
+                    value={userMobile}
+                    onChange={(e) => setUserMobile(e.target.value)}
+                    className="w-full p-2 border border-gray-300 rounded-md font-jost text-[14px]"
+                  />
+                </>
+              )}
+              {formStage === 3 && (
+                <>
+                  <div className="text-[14px] font-jost font-medium text-left">Enter your mail id</div>
+                  <input
+                    type="email"
+                    value={userEmail}
+                    onChange={(e) => setUserEmail(e.target.value)}
+                    className="w-full p-2 border border-gray-300 rounded-md font-jost text-[14px]"
+                  />
+                </>
+              )}
               {formStage < 4 && (
                 <button
                   onClick={handleFormSubmit}
@@ -394,52 +731,53 @@ const Chatbot = () => {
           ) : (
             <div className="inline-flex items-center gap-[8px] sm:gap-[10px] w-full justify-center">
               <div className={`flex ${isMobile ? 'w-[85%]' : 'w-[336px]'} h-[48px] ${isMobile ? 'px-[10px]' : 'px-[24px]'} py-[10px] items-center justify-center gap-[10px] rounded-[16px] bg-white shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)]`}>
-                <input 
-                  type="text" 
-                  value={inputValue}
-                  onChange={handleInputChange}
-                  onKeyPress={handleKeyPress}
-                  placeholder={isMobile ? "Enter your text here" : "Ask anything..."}
-                  className={`w-full font-jost text-[14px] font-normal md:font-semibold leading-[120%] text-[#252525] placeholder-[#6D6D6D] focus:outline-none ${isMobile ? 'text-center focus:text-left' : ''}`}
-                />
-              </div>
-              <button 
-                onClick={handleSendMessage}
-                className={`${isMobile ? 'w-[40px] h-[40px]' : 'w-[48px] h-[48px]'} flex items-center justify-center ${isMobile ? 'bg-[#0066B3]' : 'bg-gradient-to-b from-[#8E2DE2] to-[#4A00E0]'} rounded-full ${isMobile ? 'shadow-[4px_2px_4px_rgba(0,0,0,0.25)] border border-white' : 'shadow-md hover:shadow-lg transition-shadow'}`}
-              >
-                {isMobile ? (
-                  <svg xmlns="http://www.w3.org/2000/svg"
-                    className={`w-5 h-5 text-white ${isAnimatingSend ? 'animate-send-message' : ''}`}
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M5 12h14M12 5l7 7-7 7"></path>
-                  </svg>
-                ) : (
-                  <svg xmlns="http://www.w3.org/2000/svg" 
-                    className={`w-5 h-5 sm:w-6 sm:h-6 text-white ${isAnimatingSend ? 'animate-send-message' : ''}`} 
-                    fill="none" 
-                    viewBox="0 0 24 24" 
-                    stroke="white" 
-                    strokeWidth="2" 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round"
-                  >
-                    <line x1="22" y1="2" x2="11" y2="13"></line>
-                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                  </svg>
-                )}
-              </button>
+              <input 
+                type="text" 
+                value={inputValue}
+                onChange={handleInputChange}
+                onKeyPress={handleKeyPress}
+                placeholder={isMobile ? "Enter your text here" : "Ask anything..."}
+                className={`w-full font-jost text-[14px] font-normal md:font-semibold leading-[120%] text-[#252525] placeholder-[#6D6D6D] focus:outline-none ${isMobile ? 'text-center focus:text-left' : ''}`}
+              />
             </div>
+            <button 
+              onClick={handleSendMessage}
+              className={`${isMobile ? 'w-[40px] h-[40px]' : 'w-[48px] h-[48px]'} flex items-center justify-center ${isMobile ? 'bg-[#0066B3]' : 'bg-gradient-to-b from-[#8E2DE2] to-[#4A00E0]'} rounded-full ${isMobile ? 'shadow-[4px_2px_4px_rgba(0,0,0,0.25)] border border-white' : 'shadow-md hover:shadow-lg transition-shadow'}`}
+            >
+              {isMobile ? (
+                <svg xmlns="http://www.w3.org/2000/svg"
+                  className={`w-5 h-5 text-white ${isAnimatingSend ? 'animate-send-message' : ''}`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="white"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" 
+                  className={`w-5 h-5 sm:w-6 sm:h-6 text-white ${isAnimatingSend ? 'animate-send-message' : ''}`} 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="white" 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                >
+                  <line x1="22" y1="2" x2="11" y2="13"></line>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+              )}
+            </button>
+          </div>
           )}
         </div>
-      </div>
+      )}
     </div>
-  );
+  </div>
+);
 };
 
 export default Chatbot;
