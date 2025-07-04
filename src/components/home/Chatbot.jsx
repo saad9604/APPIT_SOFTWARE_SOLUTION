@@ -2,7 +2,8 @@
 
 import { useState, useRef, useEffect } from 'react';
 
-const API_BASE_URL = 'http://127.0.0.1:8000'; //chanege this to your actual API base URL
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 
 const renderMessageWithLinks = (text) => {
   const lines = text.split('\n');
