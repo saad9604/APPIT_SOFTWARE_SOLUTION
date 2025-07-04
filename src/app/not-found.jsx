@@ -12,3 +12,5 @@ export default function NotFound() {
 
   return null; // No text shown
 }
+
+//Fix
