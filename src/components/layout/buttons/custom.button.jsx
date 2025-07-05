@@ -7,7 +7,7 @@ import React from "react";
 // Outline style button
 export const OutlineButton = ({ children, className, href = "/contact" }) => {
   return (
-    <Link href={href} passHref className={cn("group ", className)}>
+    <a href={href} passHref className={cn("group ", className)}>
       <Button variant="outline" size="xl" className="w-full">
         <span className="group-hover:-translate-x-1 um_transition">
           {children}
@@ -17,7 +17,7 @@ export const OutlineButton = ({ children, className, href = "/contact" }) => {
           strokeWidth={1}
         />
       </Button>
-    </Link>
+    </a>
   );
 };
 

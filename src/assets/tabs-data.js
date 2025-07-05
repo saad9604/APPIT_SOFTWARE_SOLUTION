@@ -5,7 +5,7 @@ export const tabData = [
     title: "Global Legal Intelligence",
     image: "/images/tab-1.png",
     description:
-      "AI instantly analyzes vast legal sources online, delivering insights in seconds—saving hours of manual research.",
+      "AI instantly scans global legal databases and web content to deliver fast, accurate legal insights—saving hours of manual effort.",
   },
   {
     id: "ai-lawyer",
@@ -13,7 +13,7 @@ export const tabData = [
     title: "24/7 Legal Consultation",
     image: "/images/tab-2.png",
     description:
-      "AI instantly analyzes vast legal sources online, delivering insights in seconds—saving hours of manual research.",
+      "Your personal AI legal advisor is always available. Get real-time, simplified legal answers and guidance anytime, anywhere.",
   },
   {
     id: "multi-platform",
@@ -21,7 +21,7 @@ export const tabData = [
     title: "Access Anywhere",
     image: "/images/laptop-mobile-banner.png",
     description:
-      "AI instantly analyzes vast legal sources online, delivering insights in seconds—saving hours of manual research.",
+      "Seamlessly access legal tools on desktop, tablet, or mobile. Stay connected with your legal assistant across all your devices.",
   },
   {
     id: "personalized",
@@ -29,7 +29,7 @@ export const tabData = [
     title: "Tailored Legal Solutions",
     image: "/images/tab-4.png",
     description:
-      "AI instantly analyzes vast legal sources online, delivering insights in seconds—saving hours of manual research.",
+      "AI understands your unique legal needs and provides customized insights, making legal research more relevant and efficient.",
   },
   {
     id: "document-handling",
@@ -37,6 +37,6 @@ export const tabData = [
     title: "Smart Document Processing",
     image: "/images/tab-5.png",
     description:
-      "AI instantly analyzes vast legal sources online, delivering insights in seconds—saving hours of manual research.",
+      "Upload legal documents and let AI extract, summarize, and interpret key points—reducing time spent on paperwork.",
   },
-]
+];
