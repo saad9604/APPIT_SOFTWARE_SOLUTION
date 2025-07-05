@@ -49,8 +49,8 @@ const RedLogoScrollButton = () => {
     } else {
       // Scroll to next section
       window.scrollTo({
-        top: window.scrollY + window.innerHeight,
-        behavior: 'smooth'
+       top: document.body.scrollHeight,
+      behavior: 'smooth'
       });
     }
   };

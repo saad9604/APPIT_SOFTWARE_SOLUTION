@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -7,55 +6,48 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
 
 
+
 const contentSections = [
-  
   {
-    heading: "Oracle Consultation",
+    heading: "Oracle AI",
     paragraph:
       "APPIT Software - Oracle consultation services can helps the IT business and cloud services with faster adoption and return.",
     video: "/videos/consultation.mp4",
-    
-    
   },
   {
     heading: "Offshore Development",
     paragraph:
-    "Appit Software - offers reliable and cost-effective offshore development services that help you accelerate project delivery, reduce overheads",
+      "Appit Software - offers reliable and cost-effective offshore development services that help you accelerate project delivery, reduce overheads",
     video: "/videos/off_video.mp4",
-    
   },
   {
     heading: "Cyber Security Solutions",
     paragraph:
-    "APPIT Software offers cutting-edge cybersecurity solutions designed to protect your business from evolving digital threats.",
+      "APPIT Software offers cutting-edge cybersecurity solutions designed to protect your business from evolving digital threats.",
     video: "/videos/cyber_video.mp4",
-   
   },
   {
     heading: "AI Solutions & Integration",
     paragraph:
-    "APPIT Software, we empower businesses with cutting-edge AI-driven IT solutions, cloud services, and Oracle expertise. Our mission is to streamline your operations..",
+      "APPIT Software, we empower businesses with cutting-edge AI-driven IT solutions, cloud services, and Oracle expertise. Our mission is to streamline your operations..",
     video: "/videos/ai_video.mp4",
-    
   },
   {
     heading: "ECommerce Services",
     paragraph:
-    "We help businesses launch, scale, and optimize their online stores with custom-built e-commerce platforms tailored to deliver.",
+      "We help businesses launch, scale, and optimize their online stores with custom-built e-commerce platforms tailored to deliver.",
     video: "/videos/ecommerce_video.mp4",
-    
   },
   {
     heading: "Digital Transformation",
     paragraph:
-    "APPIT Software Solutions addresses challenging prospects and reach your niche market with the use of our cloud service.",
+      "APPIT Software Solutions addresses challenging prospects and reach your niche market with the use of our cloud service.",
     video: "/videos/mobile_video.mp4",
-    
   },
 ];
 
 export default function Services() {
-
+  const [hover, setHover] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   // Reference to track spacer elements
@@ -66,7 +58,7 @@ export default function Services() {
     Math.max(0, currentIndex),
     contentSections.length - 1
   );
-  
+
   // Simple ref to keep track of whether GSAP is already initialized
   const gsapInitialized = React.useRef(false);
 
@@ -75,38 +67,43 @@ export default function Services() {
     const checkScreenSize = () => {
       const isSmall = window.innerWidth < 760;
       setIsSmallScreen(isSmall);
-      
+
       // Reset any unwanted spacers on resize
       if (isSmall) {
         // Get the background-text element and reset its styles directly
-        const bgText = document.querySelector('.background-text');
+        const bgText = document.querySelector(".background-text");
         if (bgText) {
-          bgText.style.minHeight = 'auto';
-          bgText.style.height = 'auto';
+          bgText.style.minHeight = "auto";
+          bgText.style.height = "auto";
         }
-        
+
         // Also look for any ScrollTrigger spacers that might have been created
-        const spacers = document.querySelectorAll('[style*="position: relative"][style*="display: block"][style*="width: 100%"]');
-        spacers.forEach(spacer => {
-          if (spacer.parentNode && spacer.parentNode.classList.contains('background-text')) {
+        const spacers = document.querySelectorAll(
+          '[style*="position: relative"][style*="display: block"][style*="width: 100%"]'
+        );
+        spacers.forEach((spacer) => {
+          if (
+            spacer.parentNode &&
+            spacer.parentNode.classList.contains("background-text")
+          ) {
             spacerRef.current = spacer;
-            spacer.style.height = 'auto';
-            spacer.style.minHeight = '0';
-            spacer.style.maxHeight = 'none';
-            spacer.style.padding = '0';
+            spacer.style.height = "auto";
+            spacer.style.minHeight = "0";
+            spacer.style.maxHeight = "none";
+            spacer.style.padding = "0";
           }
         });
       }
     };
-    
+
     // Initial check
     checkScreenSize();
-    
+
     // Add event listener for resize
-    window.addEventListener('resize', checkScreenSize);
-    
+    window.addEventListener("resize", checkScreenSize);
+
     // Cleanup
-    return () => window.removeEventListener('resize', checkScreenSize);
+    return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
 
   // Reset spacers on component mount for small screens
@@ -116,28 +113,30 @@ export default function Services() {
       // Add a small delay to ensure all DOM elements are available
       setTimeout(() => {
         // Reset the background-text element
-        const bgText = document.querySelector('.background-text');
+        const bgText = document.querySelector(".background-text");
         if (bgText) {
-          bgText.style.height = 'auto';
-          bgText.style.minHeight = 'auto';
+          bgText.style.height = "auto";
+          bgText.style.minHeight = "auto";
         }
-        
+
         // Clean up any GSAP spacers
-        const spacers = document.querySelectorAll('[style*="position: relative"][style*="display: block"][style*="width: 100%"]');
-        spacers.forEach(spacer => {
-          spacer.style.height = 'auto';
-          spacer.style.minHeight = '0';
-          spacer.style.padding = '0';
+        const spacers = document.querySelectorAll(
+          '[style*="position: relative"][style*="display: block"][style*="width: 100%"]'
+        );
+        spacers.forEach((spacer) => {
+          spacer.style.height = "auto";
+          spacer.style.minHeight = "0";
+          spacer.style.padding = "0";
         });
       }, 100);
     }
   }, [isSmallScreen]);
-  
+
   // Add css to head for hover effects
   useEffect(() => {
     // Create a style element
-    const style = document.createElement('style');
-    
+    const style = document.createElement("style");
+
     // Add CSS rules for button hover
     style.innerHTML = `
       .hover-button:hover {
@@ -154,10 +153,10 @@ export default function Services() {
         fill: #FFFFFF !important;
       }
     `;
-    
+
     // Append the style element to the head
     document.head.appendChild(style);
-    
+
     // Clean up the style element when the component unmounts
     return () => {
       document.head.removeChild(style);
@@ -171,17 +170,17 @@ export default function Services() {
 
     // Check if window width is more than 760px for animations (not 1345px anymore)
     const isLargeEnoughForAnimations = window.innerWidth > 760;
-    
+
     gsap.registerPlugin(ScrollTrigger);
-    
+
     // Wait for DOM to be ready
     const timer = setTimeout(() => {
       const INTRO_EL = document.querySelector(".background-text");
       if (!INTRO_EL) return;
-      
+
       // Only apply animations for screens larger than 760px
       if (!isLargeEnoughForAnimations) return;
-      
+
       // Adjust multiplier based on screen size to ensure proper scroll length
       let scrollMultiplier = 4.5; // Default for large screens
       if (window.innerWidth >= 760 && window.innerWidth < 900) {
@@ -189,12 +188,12 @@ export default function Services() {
       } else if (window.innerWidth >= 900 && window.innerWidth < 1200) {
         scrollMultiplier = 5.0; // Slightly adjust for medium screens
       }
-      
+
       const getPos = (el, pos) => {
         const BOUND = el.getBoundingClientRect();
         return BOUND.top + BOUND.height * pos;
       };
-      
+
       // Create master timeline
       const masterTL = gsap.timeline({
         scrollTrigger: {
@@ -209,45 +208,48 @@ export default function Services() {
             if (window.innerWidth <= 760 && self.spacer) {
               self.kill(true);
             }
-          }
+          },
         },
       });
 
       // Animation for content1
-      masterTL.fromTo(".content1", 
-        { opacity: 1,  },
-        { 
-          opacity: 0, 
-         
+      masterTL.fromTo(
+        ".content1",
+        { opacity: 1 },
+        {
+          opacity: 0,
+
           scrollTrigger: {
             scrub: 0.5,
             trigger: ".background-text",
             start: () => getPos(INTRO_EL, 0.3),
             end: () => getPos(INTRO_EL, 0.5),
-          }
+          },
         }
       );
 
       // Animation for content2
-      masterTL.fromTo(".content2", 
-        { opacity: 0,  },
-        { 
-          opacity: 1, 
-         
+      masterTL.fromTo(
+        ".content2",
+        { opacity: 0 },
+        {
+          opacity: 1,
+
           scrollTrigger: {
             scrub: 0.5,
             trigger: ".background-text",
             start: () => getPos(INTRO_EL, 0.6),
             end: () => getPos(INTRO_EL, 1.0),
-          }
+          },
         }
       );
-      
+
       // Animation for video 2
-      masterTL.fromTo(".video2", 
+      masterTL.fromTo(
+        ".video2",
         { opacity: 1, y: 550 },
-        { 
-          opacity: 1, 
+        {
+          opacity: 1,
           y: 0,
           scrollTrigger: {
             scrub: 0.5,
@@ -255,210 +257,221 @@ export default function Services() {
             start: () => getPos(INTRO_EL, 0.3),
             end: () => getPos(INTRO_EL, 1.0),
             //  markers: true,
-          }
+          },
         }
       );
 
       // Animation for content2
-      masterTL.fromTo(".content2",
-        { },
-        { 
-          opacity: 0, 
+      masterTL.fromTo(
+        ".content2",
+        {},
+        {
+          opacity: 0,
           y: 0,
           scrollTrigger: {
             scrub: 0.5,
             trigger: ".background-text",
             start: () => getPos(INTRO_EL, 1.1),
             end: () => getPos(INTRO_EL, 1.3),
-          }
+          },
         }
       );
 
       // Animation for content3
-      masterTL.fromTo(".content3", 
-        { opacity: 0,  },
-        { 
-          opacity: 1, 
-         
+      masterTL.fromTo(
+        ".content3",
+        { opacity: 0 },
+        {
+          opacity: 1,
+
           scrollTrigger: {
             scrub: 0.5,
             trigger: ".background-text",
             start: () => getPos(INTRO_EL, 1.4),
             end: () => getPos(INTRO_EL, 1.8),
-          }
+          },
         }
       );
-      
+
       // Animation for video3
-      masterTL.fromTo(".video3",
+      masterTL.fromTo(
+        ".video3",
         { opacity: 1, y: 550 },
-        { 
-          opacity: 1, 
+        {
+          opacity: 1,
           y: 0,
           scrollTrigger: {
             scrub: 0.5,
             trigger: ".background-text",
             start: () => getPos(INTRO_EL, 1.1),
             end: () => getPos(INTRO_EL, 1.8),
-          }
+          },
         }
       );
 
       // Animation for content3
-      masterTL.fromTo(".content3",
-        { },
-        { 
-          opacity: 0, 
+      masterTL.fromTo(
+        ".content3",
+        {},
+        {
+          opacity: 0,
           y: 0,
           scrollTrigger: {
             scrub: 0.5,
             trigger: ".background-text",
             start: () => getPos(INTRO_EL, 1.9),
             end: () => getPos(INTRO_EL, 2.1),
-          }
+          },
         }
       );
 
       // Animation for content4
-      masterTL.fromTo(".content4", 
-        { opacity: 0,  },
-        { 
-          opacity: 1, 
-         
+      masterTL.fromTo(
+        ".content4",
+        { opacity: 0 },
+        {
+          opacity: 1,
+
           scrollTrigger: {
             scrub: 0.5,
             trigger: ".background-text",
             start: () => getPos(INTRO_EL, 2.2),
             end: () => getPos(INTRO_EL, 2.6),
-          }
+          },
         }
       );
-      
+
       // Animation for video4
-      masterTL.fromTo(".video4",
+      masterTL.fromTo(
+        ".video4",
         { opacity: 1, y: 550 },
-        { 
-          opacity: 1, 
+        {
+          opacity: 1,
           y: 0,
           scrollTrigger: {
             scrub: 0.5,
             trigger: ".background-text",
             start: () => getPos(INTRO_EL, 1.9),
             end: () => getPos(INTRO_EL, 2.6),
-          }
+          },
         }
       );
 
       // Animation for content4
-      masterTL.fromTo(".content4",
-        { },
-        { 
-          opacity: 0, 
+      masterTL.fromTo(
+        ".content4",
+        {},
+        {
+          opacity: 0,
           y: 0,
           scrollTrigger: {
             scrub: 0.5,
             trigger: ".background-text",
             start: () => getPos(INTRO_EL, 2.7),
             end: () => getPos(INTRO_EL, 2.9),
-          }
+          },
         }
       );
 
       // Animation for content5
-      masterTL.fromTo(".content5", 
-        { opacity: 0,  },
-        { 
-          opacity: 1, 
-         
+      masterTL.fromTo(
+        ".content5",
+        { opacity: 0 },
+        {
+          opacity: 1,
+
           scrollTrigger: {
             scrub: 0.5,
             trigger: ".background-text",
             start: () => getPos(INTRO_EL, 3.0),
             end: () => getPos(INTRO_EL, 3.4),
-          }
+          },
         }
       );
-      
+
       // Animation for video5
-      masterTL.fromTo(".video5",
+      masterTL.fromTo(
+        ".video5",
         { opacity: 1, y: 550 },
-        { 
-          opacity: 1, 
+        {
+          opacity: 1,
           y: 0,
           scrollTrigger: {
             scrub: 0.5,
             trigger: ".background-text",
             start: () => getPos(INTRO_EL, 2.7),
             end: () => getPos(INTRO_EL, 3.4),
-          }
+          },
         }
       );
 
       // Animation for content5
-      masterTL.fromTo(".content5",
-        { },
-        { 
-          opacity: 0, 
+      masterTL.fromTo(
+        ".content5",
+        {},
+        {
+          opacity: 0,
           y: 0,
           scrollTrigger: {
             scrub: 0.5,
             trigger: ".background-text",
             start: () => getPos(INTRO_EL, 3.5),
             end: () => getPos(INTRO_EL, 3.7),
-          }
+          },
         }
       );
 
       // Animation for content6
-      masterTL.fromTo(".content6", 
-        { opacity: 0,  },
-        { 
-          opacity: 1, 
-         
+      masterTL.fromTo(
+        ".content6",
+        { opacity: 0 },
+        {
+          opacity: 1,
+
           scrollTrigger: {
             scrub: 0.5,
             trigger: ".background-text",
             start: () => getPos(INTRO_EL, 3.8),
             end: () => getPos(INTRO_EL, 4.2),
-          }
+          },
         }
       );
-      
+
       // Animation for video6
-      masterTL.fromTo(".video6",
+      masterTL.fromTo(
+        ".video6",
         { opacity: 1, y: 550 },
-        { 
-          opacity: 1, 
+        {
+          opacity: 1,
           y: 0,
           scrollTrigger: {
             scrub: 0.5,
             trigger: ".background-text",
             start: () => getPos(INTRO_EL, 3.5),
             end: () => getPos(INTRO_EL, 4.2),
-          }
+          },
         }
       );
-
     }, 100);
 
     return () => {
       clearTimeout(timer);
-      
+
       // Careful cleanup to avoid DOM manipulation conflicts
       try {
         const scrollTriggers = ScrollTrigger.getAll();
-        scrollTriggers.forEach(trigger => {
+        scrollTriggers.forEach((trigger) => {
           trigger.kill(true); // Kill and remove DOM changes
         });
-        
+
         // Reset GSAP init flag on component unmount
         gsapInitialized.current = false;
       } catch (err) {
-        console.error('Error during ScrollTrigger cleanup:', err);
+        console.error("Error during ScrollTrigger cleanup:", err);
       }
     };
   }, []);
-  
+
   // Watch for window resize and kill GSAP if small screen
   useEffect(() => {
     const handleResize = () => {
@@ -466,54 +479,59 @@ export default function Services() {
         // If screen becomes small, kill all ScrollTriggers
         try {
           const scrollTriggers = ScrollTrigger.getAll();
-          scrollTriggers.forEach(trigger => {
+          scrollTriggers.forEach((trigger) => {
             trigger.kill(true); // Kill and remove DOM changes
           });
-          
+
           // Reset any spacer elements
-          const spacers = document.querySelectorAll('[style*="position: relative"][style*="display: block"][style*="width: 100%"]');
-          spacers.forEach(spacer => {
-            if (spacer.parentNode && spacer.parentNode.classList.contains('background-text')) {
+          const spacers = document.querySelectorAll(
+            '[style*="position: relative"][style*="display: block"][style*="width: 100%"]'
+          );
+          spacers.forEach((spacer) => {
+            if (
+              spacer.parentNode &&
+              spacer.parentNode.classList.contains("background-text")
+            ) {
               spacerRef.current = spacer;
-              spacer.style.height = 'auto';
-              spacer.style.minHeight = '0';
-              spacer.style.maxHeight = 'none';
-              spacer.style.padding = '0';
-              spacer.classList.add('gsap-spacer');
+              spacer.style.height = "auto";
+              spacer.style.minHeight = "0";
+              spacer.style.maxHeight = "none";
+              spacer.style.padding = "0";
+              spacer.classList.add("gsap-spacer");
             }
           });
-          
+
           // Also handle the background-text element directly
-          const bgText = document.querySelector('.background-text');
+          const bgText = document.querySelector(".background-text");
           if (bgText) {
-            bgText.style.minHeight = 'auto';
-            bgText.style.height = 'auto';
+            bgText.style.minHeight = "auto";
+            bgText.style.height = "auto";
           }
         } catch (err) {
-          console.error('Error during ScrollTrigger cleanup on resize:', err);
+          console.error("Error during ScrollTrigger cleanup on resize:", err);
         }
       }
     };
-    
-    window.addEventListener('resize', handleResize);
-    
+
+    window.addEventListener("resize", handleResize);
+
     // Initial check
     handleResize();
-    
+
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
-  
+
   // Add responsive styles effect
   useEffect(() => {
     // Create a style element
-    const style = document.createElement('style');
-    
+    const style = document.createElement("style");
+
     // Add a global style for proper scrolling
-    document.body.style.overflowX = 'hidden';
-    document.body.style.overflowY = 'auto';
-    
+    document.body.style.overflowX = "hidden";
+    document.body.style.overflowY = "auto";
+
     // Add responsive CSS rules
     style.innerHTML = `
       /* Medium-sized screens (760px to 1345px) */
@@ -822,47 +840,47 @@ export default function Services() {
         }
       }
     `;
-    
+
     // Append the style element to the head
     document.head.appendChild(style);
-    
+
     // For responsive layouts, we don't need manual scroll handling for medium screens anymore as we're using GSAP
     const handleScroll = () => {
       // Add some navigation enhancements for small screens
       if (window.innerWidth < 760) {
         // Ensure content is visible and scrollable
-        document.querySelectorAll('.service-pair').forEach(pair => {
+        document.querySelectorAll(".service-pair").forEach((pair) => {
           // Make sure each pair is fully visible when scrolled to
-          pair.style.display = 'flex';
-          pair.style.opacity = '1';
+          pair.style.display = "flex";
+          pair.style.opacity = "1";
         });
-        
+
         // Reset any spacers that might still be causing issues
         if (spacerRef.current) {
-          spacerRef.current.style.height = 'auto';
-          spacerRef.current.style.minHeight = '0';
-          spacerRef.current.style.maxHeight = 'none';
-          spacerRef.current.style.padding = '0';
+          spacerRef.current.style.height = "auto";
+          spacerRef.current.style.minHeight = "0";
+          spacerRef.current.style.maxHeight = "none";
+          spacerRef.current.style.padding = "0";
         }
-        
+
         // Fix body scroll issues
-        document.body.style.overflowY = 'auto';
-        document.body.style.overflowX = 'hidden';
-        document.documentElement.style.overflowY = 'auto';
-        document.documentElement.style.overflowX = 'hidden';
+        document.body.style.overflowY = "auto";
+        document.body.style.overflowX = "hidden";
+        document.documentElement.style.overflowY = "auto";
+        document.documentElement.style.overflowX = "hidden";
       }
     };
-    
-    window.addEventListener('scroll', handleScroll);
+
+    window.addEventListener("scroll", handleScroll);
     // Initial call to set correct content on page load
     handleScroll();
-    
+
     // Clean up the style element and event listener when the component unmounts
     return () => {
       document.head.removeChild(style);
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
       // Reset body styles
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     };
   }, []);
 
@@ -1036,6 +1054,9 @@ const renderSmallScreenLayout = () => {
               justifyContent: "center",
               alignItems: "center",
               padding: "30px 10px",
+              position: "absolute",
+              background: "#f0f7f8",
+              marginTop: "1rem",
             }}
             className="content1"
           >
@@ -1058,23 +1079,23 @@ const renderSmallScreenLayout = () => {
                   lineHeight: "120%",
                 }}
               >
-                Oracle Consultation
+                Oracle AI
               </h3>
             </div>
             <p
-            style={{
-            width: "90%",
-            color: "#252525",
-            textAlign: "center",
-            fontFamily: "Jost",
-            fontSize: "21px",
-            fontWeight: 600,
-            lineHeight: "130%",
-            margin: "40px auto 0",
-              padding: "0 10px",
+              style={{
+                width: "90%",
+                color: "#252525",
+                textAlign: "center",
+                fontFamily: "Jost",
+                fontSize: "21px",
+                fontWeight: 600,
+                lineHeight: "130%",
+                margin: "40px auto 0",
               }}
             >
-              APPIT Software - Oracle consultation services can helps the IT business and cloud services with faster adoption and return.
+              APPIT Software - Oracle consultation services can helps the IT
+              business and cloud services with faster adoption and return.
             </p>
 
             {/* Button Container */}
@@ -1094,64 +1115,61 @@ const renderSmallScreenLayout = () => {
               }}
               className="button-container"
             >
-            
-<Link
-  href="/services/odc"
-  className="hover-button"
-  style={{
-    display: "flex",
-    padding: "0px 10px 0px 20px",
-    justifyContent: "center",
-    alignItems: "center",
-    gap: "20px",
-    flex: "1 0 0",
-    alignSelf: "stretch",
-    borderRadius: "24px",
-    backgroundColor: "transparent",
-    border: "1px solid #000",
-    cursor: "pointer",
-    height: "100%",
-    transition: "all 0.3s ease",
-    textDecoration: "none",
-  }}
->
-  <span
-    style={{
-      color: "#454545",
-      textAlign: "center",
-      fontFamily: "Jost",
-      fontSize: "21px",
-      fontWeight: 400,
-      lineHeight: "120%",
-    }}
-  >
-    Read Moresss
-  </span>
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="32"
-    height="32"
-    viewBox="0 0 33 32"
-    fill="none"
-    style={{ minWidth: "32px", height: "32px" }}
-  >
-    <rect
-      x="31.75"
-      y="31.25"
-      width="30.5"
-      height="30.5"
-      rx="15.25"
-      transform="rotate(180 31.75 31.25)"
-      stroke="#252525"
-      strokeWidth="1.5"
-    />
-    <path
-      d="M6.5 15.9992C6.5 15.6812 6.629 15.3761 6.85863 15.1513C7.08825 14.9264 7.39969 14.8 7.72444 14.8H22.0699L16.7036 10.0976C16.5827 9.99293 16.4841 9.86586 16.4135 9.72371C16.3429 9.58157 16.3017 9.42716 16.2923 9.26937C16.2828 9.11157 16.3053 8.95351 16.3585 8.80426C16.4116 8.65501 16.4944 8.51753 16.602 8.39971C16.7096 8.2819 16.8399 8.18608 16.9854 8.11777C17.131 8.04946 17.2889 8.01 17.4501 8.00167C17.6112 7.99333 17.7725 8.01629 17.9246 8.06921C18.0766 8.12213 18.2165 8.20398 18.3362 8.31004L26.091 15.1054C26.2196 15.2179 26.3226 15.3557 26.3931 15.5099C26.4636 15.6641 26.5 15.8311 26.5 16C26.5 16.1689 26.4636 16.3359 26.3931 16.4901C26.3226 16.6443 26.2196 16.7821 26.091 16.8946L18.3362 23.69C18.2165 23.796 18.0766 23.8779 17.9246 23.9308C17.7725 23.9837 17.6112 24.0067 16.9501 23.9983C16.7889 23.99 16.631 23.9505 16.4854 23.8822C16.3399 23.8139 16.2096 23.7181 16.102 23.6003C15.9944 23.4825 15.9116 23.345 15.8585 23.1957C15.8053 23.0465 15.7828 22.8884 15.7923 22.7306C15.8017 22.5728 15.8429 22.4184 15.9135 22.2763C15.9841 22.1341 16.0827 22.0071 16.7036 21.9024L22.0699 17.1984H7.72444C7.39969 17.1984 7.08825 17.072 6.85863 16.8472C6.629 16.6223 6.5 16.3172 6.5 15.9992Z"
-      fill="#252525"
-    />
-  </svg>
-</Link>
-
+             <button
+                onMouseEnter={() => setHover(true)}
+                onMouseLeave={() => setHover(false)}
+                style={{
+                  display: "flex",
+                  padding: "0px 10px 0px 20px",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: "20px",
+                  flex: "1 0 0",
+                  alignSelf: "stretch",
+                  borderRadius: "24px",
+                  backgroundColor: hover ? "#004e8c" : "#0066B3", // Simulated hover color
+                  color: "white",
+                  cursor: "pointer",
+                  height: "100%",
+                  transition: "all 0.3s ease",
+                }}
+              >
+                <span
+                  style={{
+                    color: "white",
+                    textAlign: "center",
+                    fontFamily: "Jost",
+                    fontSize: "21px",
+                    fontWeight: 400,
+                    lineHeight: "120%",
+                  }}
+                >
+                  Read More
+                </span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32"
+                  height="32"
+                  viewBox="0 0 33 32"
+                  fill="none"
+                  style={{ minWidth: "32px", height: "32px" }}
+                >
+                  <rect
+                    x="31.75"
+                    y="31.25"
+                    width="30.5"
+                    height="30.5"
+                    rx="15.25"
+                    transform="rotate(180 31.75 31.25)"
+                    stroke="white"
+                    strokeWidth="1.5"
+                  />
+                  <path
+                    d="M6.5 15.9992C6.5 15.6812 6.629 15.3761 6.85863 15.1513C7.08825 14.9264 7.39969 14.8 7.72444 14.8H22.0699L16.7036 10.0976C16.5827 9.99293 16.4841 9.86586 16.4135 9.72371C16.3429 9.58157 16.3017 9.42716 16.2923 9.26937C16.2828 9.11157 16.3053 8.95351 16.3585 8.80426C16.4116 8.65501 16.4944 8.51753 16.602 8.39971C16.7096 8.2819 16.8399 8.18608 16.9854 8.11777C17.131 8.04946 17.2889 8.01 17.4501 8.00167C17.6112 7.99333 17.7725 8.01629 17.9246 8.06921C18.0766 8.12213 18.2165 8.20398 18.3362 8.31004L26.091 15.1054C26.2196 15.2179 26.3226 15.3557 26.3931 15.5099C26.4636 15.6641 26.5 15.8311 26.5 16C26.5 16.1689 26.4636 16.3359 26.3931 16.4901C26.3226 16.6443 26.2196 16.7821 26.091 16.8946L18.3362 23.69C18.2165 23.796 18.0766 23.8779 17.9246 23.9308C17.7725 23.9837 17.6112 24.0067 16.9501 23.9983C16.7889 23.99 16.631 23.9505 16.4854 23.8822C16.3399 23.8139 16.2096 23.7181 16.102 23.6003C15.9944 23.4825 15.9116 23.345 15.8585 23.1957C15.8053 23.0465 15.7828 22.8884 15.7923 22.7306C15.8017 22.5728 15.8429 22.4184 15.9135 22.2763C15.9841 22.1341 16.0827 22.0071 16.7036 21.9024L22.0699 17.1984H7.72444C7.39969 17.1984 7.08825 17.072 6.85863 16.8472C6.629 16.6223 6.5 16.3172 6.5 15.9992Z"
+                    fill="white"
+                  />
+                </svg>
+              </button>
             </div>
           </div>
 
@@ -1164,9 +1182,8 @@ const renderSmallScreenLayout = () => {
               flexDirection: "column",
               alignItems: "center",
               padding: "30px 10px",
-              position:"absolute",
-              background:"#f0f7f8",
-              
+              position: "absolute",
+              background: "#f0f7f8",
             }}
             className="content2"
           >
@@ -1204,7 +1221,9 @@ const renderSmallScreenLayout = () => {
                 margin: "40px auto 0",
               }}
             >
-              Appit Software - offers reliable and cost-effective offshore development services that help you accelerate project delivery, reduce overheads
+              Appit Software - offers reliable and cost-effective offshore
+              development services that help you accelerate project delivery,
+              reduce overheads
             </p>
 
             {/* Button Container */}
@@ -1224,10 +1243,9 @@ const renderSmallScreenLayout = () => {
               }}
               className="button-container"
             >
-           
-                  <a
-                   href={"/services/odc"}
-                className="hover-button"
+             <button
+                onMouseEnter={() => setHover(true)}
+                onMouseLeave={() => setHover(false)}
                 style={{
                   display: "flex",
                   padding: "0px 10px 0px 20px",
@@ -1237,8 +1255,8 @@ const renderSmallScreenLayout = () => {
                   flex: "1 0 0",
                   alignSelf: "stretch",
                   borderRadius: "24px",
-                  backgroundColor: "transparent",
-                  border: "1px solid #000",
+                  backgroundColor: hover ? "#004e8c" : "#0066B3", // Simulated hover color
+                  color: "white",
                   cursor: "pointer",
                   height: "100%",
                   transition: "all 0.3s ease",
@@ -1246,7 +1264,7 @@ const renderSmallScreenLayout = () => {
               >
                 <span
                   style={{
-                    color: "#454545",
+                    color: "white",
                     textAlign: "center",
                     fontFamily: "Jost",
                     fontSize: "21px",
@@ -1254,7 +1272,7 @@ const renderSmallScreenLayout = () => {
                     lineHeight: "120%",
                   }}
                 >
-                  Read Moressasdasd
+                  Read More
                 </span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -1271,15 +1289,15 @@ const renderSmallScreenLayout = () => {
                     height="30.5"
                     rx="15.25"
                     transform="rotate(180 31.75 31.25)"
-                    stroke="#252525"
+                    stroke="white"
                     strokeWidth="1.5"
                   />
                   <path
                     d="M6.5 15.9992C6.5 15.6812 6.629 15.3761 6.85863 15.1513C7.08825 14.9264 7.39969 14.8 7.72444 14.8H22.0699L16.7036 10.0976C16.5827 9.99293 16.4841 9.86586 16.4135 9.72371C16.3429 9.58157 16.3017 9.42716 16.2923 9.26937C16.2828 9.11157 16.3053 8.95351 16.3585 8.80426C16.4116 8.65501 16.4944 8.51753 16.602 8.39971C16.7096 8.2819 16.8399 8.18608 16.9854 8.11777C17.131 8.04946 17.2889 8.01 17.4501 8.00167C17.6112 7.99333 17.7725 8.01629 17.9246 8.06921C18.0766 8.12213 18.2165 8.20398 18.3362 8.31004L26.091 15.1054C26.2196 15.2179 26.3226 15.3557 26.3931 15.5099C26.4636 15.6641 26.5 15.8311 26.5 16C26.5 16.1689 26.4636 16.3359 26.3931 16.4901C26.3226 16.6443 26.2196 16.7821 26.091 16.8946L18.3362 23.69C18.2165 23.796 18.0766 23.8779 17.9246 23.9308C17.7725 23.9837 17.6112 24.0067 16.9501 23.9983C16.7889 23.99 16.631 23.9505 16.4854 23.8822C16.3399 23.8139 16.2096 23.7181 16.102 23.6003C15.9944 23.4825 15.9116 23.345 15.8585 23.1957C15.8053 23.0465 15.7828 22.8884 15.7923 22.7306C15.8017 22.5728 15.8429 22.4184 15.9135 22.2763C15.9841 22.1341 16.0827 22.0071 16.7036 21.9024L22.0699 17.1984H7.72444C7.39969 17.1984 7.08825 17.072 6.85863 16.8472C6.629 16.6223 6.5 16.3172 6.5 15.9992Z"
-                    fill="#252525"
+                    fill="white"
                   />
                 </svg>
-              </a>
+              </button>
             </div>
           </div>
 
@@ -1292,8 +1310,8 @@ const renderSmallScreenLayout = () => {
               flexDirection: "column",
               alignItems: "center",
               padding: "30px 10px",
-              position:"absolute",
-              background:"#f0f7f8"
+              position: "absolute",
+              background: "#f0f7f8",
             }}
             className="content3"
           >
@@ -1316,7 +1334,7 @@ const renderSmallScreenLayout = () => {
                   lineHeight: "120%",
                 }}
               >
-               Cyber Security Solutions
+                Cyber Security Solutions
               </h3>
             </div>
             <p
@@ -1331,7 +1349,8 @@ const renderSmallScreenLayout = () => {
                 margin: "40px auto 0",
               }}
             >
-              APPIT Software offers cutting-edge cybersecurity solutions designed to protect your business from evolving digital threats.
+              APPIT Software offers cutting-edge cybersecurity solutions
+              designed to protect your business from evolving digital threats.
             </p>
 
             {/* Button Container */}
@@ -1351,8 +1370,9 @@ const renderSmallScreenLayout = () => {
               }}
               className="button-container"
             >
-              <button 
-                className="hover-button"
+              <button
+                onMouseEnter={() => setHover(true)}
+                onMouseLeave={() => setHover(false)}
                 style={{
                   display: "flex",
                   padding: "0px 10px 0px 20px",
@@ -1362,8 +1382,8 @@ const renderSmallScreenLayout = () => {
                   flex: "1 0 0",
                   alignSelf: "stretch",
                   borderRadius: "24px",
-                  backgroundColor: "transparent",
-                  border: "1px solid #000",
+                  backgroundColor: hover ? "#004e8c" : "#0066B3", // Simulated hover color
+                  color: "white",
                   cursor: "pointer",
                   height: "100%",
                   transition: "all 0.3s ease",
@@ -1371,7 +1391,7 @@ const renderSmallScreenLayout = () => {
               >
                 <span
                   style={{
-                    color: "#454545",
+                    color: "white",
                     textAlign: "center",
                     fontFamily: "Jost",
                     fontSize: "21px",
@@ -1379,7 +1399,7 @@ const renderSmallScreenLayout = () => {
                     lineHeight: "120%",
                   }}
                 >
-                  Read Mores
+                  Read More
                 </span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -1396,12 +1416,12 @@ const renderSmallScreenLayout = () => {
                     height="30.5"
                     rx="15.25"
                     transform="rotate(180 31.75 31.25)"
-                    stroke="#252525"
+                    stroke="white"
                     strokeWidth="1.5"
                   />
                   <path
                     d="M6.5 15.9992C6.5 15.6812 6.629 15.3761 6.85863 15.1513C7.08825 14.9264 7.39969 14.8 7.72444 14.8H22.0699L16.7036 10.0976C16.5827 9.99293 16.4841 9.86586 16.4135 9.72371C16.3429 9.58157 16.3017 9.42716 16.2923 9.26937C16.2828 9.11157 16.3053 8.95351 16.3585 8.80426C16.4116 8.65501 16.4944 8.51753 16.602 8.39971C16.7096 8.2819 16.8399 8.18608 16.9854 8.11777C17.131 8.04946 17.2889 8.01 17.4501 8.00167C17.6112 7.99333 17.7725 8.01629 17.9246 8.06921C18.0766 8.12213 18.2165 8.20398 18.3362 8.31004L26.091 15.1054C26.2196 15.2179 26.3226 15.3557 26.3931 15.5099C26.4636 15.6641 26.5 15.8311 26.5 16C26.5 16.1689 26.4636 16.3359 26.3931 16.4901C26.3226 16.6443 26.2196 16.7821 26.091 16.8946L18.3362 23.69C18.2165 23.796 18.0766 23.8779 17.9246 23.9308C17.7725 23.9837 17.6112 24.0067 16.9501 23.9983C16.7889 23.99 16.631 23.9505 16.4854 23.8822C16.3399 23.8139 16.2096 23.7181 16.102 23.6003C15.9944 23.4825 15.9116 23.345 15.8585 23.1957C15.8053 23.0465 15.7828 22.8884 15.7923 22.7306C15.8017 22.5728 15.8429 22.4184 15.9135 22.2763C15.9841 22.1341 16.0827 22.0071 16.7036 21.9024L22.0699 17.1984H7.72444C7.39969 17.1984 7.08825 17.072 6.85863 16.8472C6.629 16.6223 6.5 16.3172 6.5 15.9992Z"
-                    fill="#252525"
+                    fill="white"
                   />
                 </svg>
               </button>
@@ -1417,8 +1437,8 @@ const renderSmallScreenLayout = () => {
               flexDirection: "column",
               alignItems: "center",
               padding: "30px 10px",
-              position:"absolute",
-              background:"#f0f7f8"
+              position: "absolute",
+              background: "#f0f7f8",
             }}
             className="content4"
           >
@@ -1441,7 +1461,7 @@ const renderSmallScreenLayout = () => {
                   lineHeight: "120%",
                 }}
               >
-              AI Solutions & Integration
+                AI Solutions & Integration
               </h3>
             </div>
             <p
@@ -1456,7 +1476,9 @@ const renderSmallScreenLayout = () => {
                 margin: "40px auto 0",
               }}
             >
-              APPIT Software, we empower businesses with cutting-edge AI-driven IT solutions, cloud services, and Oracle expertise. Our mission is to streamline your operations.
+              APPIT Software, we empower businesses with cutting-edge AI-driven
+              IT solutions, cloud services, and Oracle expertise. Our mission is
+              to streamline your operations.
             </p>
 
             {/* Button Container */}
@@ -1477,7 +1499,8 @@ const renderSmallScreenLayout = () => {
               className="button-container"
             >
               <button
-                className="hover-button"
+                onMouseEnter={() => setHover(true)}
+                onMouseLeave={() => setHover(false)}
                 style={{
                   display: "flex",
                   padding: "0px 10px 0px 20px",
@@ -1487,8 +1510,8 @@ const renderSmallScreenLayout = () => {
                   flex: "1 0 0",
                   alignSelf: "stretch",
                   borderRadius: "24px",
-                  backgroundColor: "transparent",
-                  border: "1px solid #000",
+                  backgroundColor: hover ? "#004e8c" : "#0066B3", // Simulated hover color
+                  color: "white",
                   cursor: "pointer",
                   height: "100%",
                   transition: "all 0.3s ease",
@@ -1496,7 +1519,7 @@ const renderSmallScreenLayout = () => {
               >
                 <span
                   style={{
-                    color: "#454545",
+                    color: "white",
                     textAlign: "center",
                     fontFamily: "Jost",
                     fontSize: "21px",
@@ -1504,7 +1527,7 @@ const renderSmallScreenLayout = () => {
                     lineHeight: "120%",
                   }}
                 >
-                  Read Moreq
+                  Read More
                 </span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -1521,12 +1544,12 @@ const renderSmallScreenLayout = () => {
                     height="30.5"
                     rx="15.25"
                     transform="rotate(180 31.75 31.25)"
-                    stroke="#252525"
+                    stroke="white"
                     strokeWidth="1.5"
                   />
                   <path
                     d="M6.5 15.9992C6.5 15.6812 6.629 15.3761 6.85863 15.1513C7.08825 14.9264 7.39969 14.8 7.72444 14.8H22.0699L16.7036 10.0976C16.5827 9.99293 16.4841 9.86586 16.4135 9.72371C16.3429 9.58157 16.3017 9.42716 16.2923 9.26937C16.2828 9.11157 16.3053 8.95351 16.3585 8.80426C16.4116 8.65501 16.4944 8.51753 16.602 8.39971C16.7096 8.2819 16.8399 8.18608 16.9854 8.11777C17.131 8.04946 17.2889 8.01 17.4501 8.00167C17.6112 7.99333 17.7725 8.01629 17.9246 8.06921C18.0766 8.12213 18.2165 8.20398 18.3362 8.31004L26.091 15.1054C26.2196 15.2179 26.3226 15.3557 26.3931 15.5099C26.4636 15.6641 26.5 15.8311 26.5 16C26.5 16.1689 26.4636 16.3359 26.3931 16.4901C26.3226 16.6443 26.2196 16.7821 26.091 16.8946L18.3362 23.69C18.2165 23.796 18.0766 23.8779 17.9246 23.9308C17.7725 23.9837 17.6112 24.0067 16.9501 23.9983C16.7889 23.99 16.631 23.9505 16.4854 23.8822C16.3399 23.8139 16.2096 23.7181 16.102 23.6003C15.9944 23.4825 15.9116 23.345 15.8585 23.1957C15.8053 23.0465 15.7828 22.8884 15.7923 22.7306C15.8017 22.5728 15.8429 22.4184 15.9135 22.2763C15.9841 22.1341 16.0827 22.0071 16.7036 21.9024L22.0699 17.1984H7.72444C7.39969 17.1984 7.08825 17.072 6.85863 16.8472C6.629 16.6223 6.5 16.3172 6.5 15.9992Z"
-                    fill="#252525"
+                    fill="white"
                   />
                 </svg>
               </button>
@@ -1542,8 +1565,8 @@ const renderSmallScreenLayout = () => {
               flexDirection: "column",
               alignItems: "center",
               padding: "30px 10px",
-              position:"absolute",
-              background:"#f0f7f8"
+              position: "absolute",
+              background: "#f0f7f8",
             }}
             className="content5"
           >
@@ -1566,7 +1589,7 @@ const renderSmallScreenLayout = () => {
                   lineHeight: "120%",
                 }}
               >
-              ECommerce Services
+                ECommerce Services
               </h3>
             </div>
             <p
@@ -1581,7 +1604,8 @@ const renderSmallScreenLayout = () => {
                 margin: "40px auto 0",
               }}
             >
-             We help businesses launch, scale, and optimize their online stores with custom-built e-commerce platforms tailored to deliver.
+              We help businesses launch, scale, and optimize their online stores
+              with custom-built e-commerce platforms tailored to deliver.
             </p>
 
             {/* Button Container */}
@@ -1601,8 +1625,9 @@ const renderSmallScreenLayout = () => {
               }}
               className="button-container"
             >
-              <button
-                className="hover-button"
+             <button
+                onMouseEnter={() => setHover(true)}
+                onMouseLeave={() => setHover(false)}
                 style={{
                   display: "flex",
                   padding: "0px 10px 0px 20px",
@@ -1612,8 +1637,8 @@ const renderSmallScreenLayout = () => {
                   flex: "1 0 0",
                   alignSelf: "stretch",
                   borderRadius: "24px",
-                  backgroundColor: "transparent",
-                  border: "1px solid #000",
+                  backgroundColor: hover ? "#004e8c" : "#0066B3", // Simulated hover color
+                  color: "white",
                   cursor: "pointer",
                   height: "100%",
                   transition: "all 0.3s ease",
@@ -1621,7 +1646,7 @@ const renderSmallScreenLayout = () => {
               >
                 <span
                   style={{
-                    color: "#454545",
+                    color: "white",
                     textAlign: "center",
                     fontFamily: "Jost",
                     fontSize: "21px",
@@ -1629,7 +1654,7 @@ const renderSmallScreenLayout = () => {
                     lineHeight: "120%",
                   }}
                 >
-                  Read Mores
+                  Read More
                 </span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -1646,12 +1671,12 @@ const renderSmallScreenLayout = () => {
                     height="30.5"
                     rx="15.25"
                     transform="rotate(180 31.75 31.25)"
-                    stroke="#252525"
+                    stroke="white"
                     strokeWidth="1.5"
                   />
                   <path
                     d="M6.5 15.9992C6.5 15.6812 6.629 15.3761 6.85863 15.1513C7.08825 14.9264 7.39969 14.8 7.72444 14.8H22.0699L16.7036 10.0976C16.5827 9.99293 16.4841 9.86586 16.4135 9.72371C16.3429 9.58157 16.3017 9.42716 16.2923 9.26937C16.2828 9.11157 16.3053 8.95351 16.3585 8.80426C16.4116 8.65501 16.4944 8.51753 16.602 8.39971C16.7096 8.2819 16.8399 8.18608 16.9854 8.11777C17.131 8.04946 17.2889 8.01 17.4501 8.00167C17.6112 7.99333 17.7725 8.01629 17.9246 8.06921C18.0766 8.12213 18.2165 8.20398 18.3362 8.31004L26.091 15.1054C26.2196 15.2179 26.3226 15.3557 26.3931 15.5099C26.4636 15.6641 26.5 15.8311 26.5 16C26.5 16.1689 26.4636 16.3359 26.3931 16.4901C26.3226 16.6443 26.2196 16.7821 26.091 16.8946L18.3362 23.69C18.2165 23.796 18.0766 23.8779 17.9246 23.9308C17.7725 23.9837 17.6112 24.0067 16.9501 23.9983C16.7889 23.99 16.631 23.9505 16.4854 23.8822C16.3399 23.8139 16.2096 23.7181 16.102 23.6003C15.9944 23.4825 15.9116 23.345 15.8585 23.1957C15.8053 23.0465 15.7828 22.8884 15.7923 22.7306C15.8017 22.5728 15.8429 22.4184 15.9135 22.2763C15.9841 22.1341 16.0827 22.0071 16.7036 21.9024L22.0699 17.1984H7.72444C7.39969 17.1984 7.08825 17.072 6.85863 16.8472C6.629 16.6223 6.5 16.3172 6.5 15.9992Z"
-                    fill="#252525"
+                    fill="white"
                   />
                 </svg>
               </button>
@@ -1667,8 +1692,8 @@ const renderSmallScreenLayout = () => {
               flexDirection: "column",
               alignItems: "center",
               padding: "30px 10px",
-              position:"absolute",
-              background:"#f0f7f8"
+              position: "absolute",
+              background: "#f0f7f8",
             }}
             className="content6"
           >
@@ -1691,8 +1716,7 @@ const renderSmallScreenLayout = () => {
                   lineHeight: "120%",
                 }}
               >
-              Digital Transformation
-
+                Digital Transformation
               </h3>
             </div>
             <p
@@ -1707,7 +1731,8 @@ const renderSmallScreenLayout = () => {
                 margin: "40px auto 0",
               }}
             >
-             APPIT Software Solutions addresses challenging prospects and reach your niche market with the use of our cloud service
+              APPIT Software Solutions addresses challenging prospects and reach
+              your niche market with the use of our cloud service
             </p>
 
             {/* Button Container */}
@@ -1728,7 +1753,8 @@ const renderSmallScreenLayout = () => {
               className="button-container"
             >
               <button
-                className="hover-button"
+                onMouseEnter={() => setHover(true)}
+                onMouseLeave={() => setHover(false)}
                 style={{
                   display: "flex",
                   padding: "0px 10px 0px 20px",
@@ -1738,8 +1764,8 @@ const renderSmallScreenLayout = () => {
                   flex: "1 0 0",
                   alignSelf: "stretch",
                   borderRadius: "24px",
-                  backgroundColor: "transparent",
-                  border: "1px solid #000",
+                  backgroundColor: hover ? "#004e8c" : "#0066B3", // Simulated hover color
+                  color: "white",
                   cursor: "pointer",
                   height: "100%",
                   transition: "all 0.3s ease",
@@ -1747,7 +1773,7 @@ const renderSmallScreenLayout = () => {
               >
                 <span
                   style={{
-                    color: "#454545",
+                    color: "white",
                     textAlign: "center",
                     fontFamily: "Jost",
                     fontSize: "21px",
@@ -1755,7 +1781,7 @@ const renderSmallScreenLayout = () => {
                     lineHeight: "120%",
                   }}
                 >
-                  Read Moreas
+                  Read More
                 </span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -1772,12 +1798,12 @@ const renderSmallScreenLayout = () => {
                     height="30.5"
                     rx="15.25"
                     transform="rotate(180 31.75 31.25)"
-                    stroke="#252525"
+                    stroke="white"
                     strokeWidth="1.5"
                   />
                   <path
                     d="M6.5 15.9992C6.5 15.6812 6.629 15.3761 6.85863 15.1513C7.08825 14.9264 7.39969 14.8 7.72444 14.8H22.0699L16.7036 10.0976C16.5827 9.99293 16.4841 9.86586 16.4135 9.72371C16.3429 9.58157 16.3017 9.42716 16.2923 9.26937C16.2828 9.11157 16.3053 8.95351 16.3585 8.80426C16.4116 8.65501 16.4944 8.51753 16.602 8.39971C16.7096 8.2819 16.8399 8.18608 16.9854 8.11777C17.131 8.04946 17.2889 8.01 17.4501 8.00167C17.6112 7.99333 17.7725 8.01629 17.9246 8.06921C18.0766 8.12213 18.2165 8.20398 18.3362 8.31004L26.091 15.1054C26.2196 15.2179 26.3226 15.3557 26.3931 15.5099C26.4636 15.6641 26.5 15.8311 26.5 16C26.5 16.1689 26.4636 16.3359 26.3931 16.4901C26.3226 16.6443 26.2196 16.7821 26.091 16.8946L18.3362 23.69C18.2165 23.796 18.0766 23.8779 17.9246 23.9308C17.7725 23.9837 17.6112 24.0067 16.9501 23.9983C16.7889 23.99 16.631 23.9505 16.4854 23.8822C16.3399 23.8139 16.2096 23.7181 16.102 23.6003C15.9944 23.4825 15.9116 23.345 15.8585 23.1957C15.8053 23.0465 15.7828 22.8884 15.7923 22.7306C15.8017 22.5728 15.8429 22.4184 15.9135 22.2763C15.9841 22.1341 16.0827 22.0071 16.7036 21.9024L22.0699 17.1984H7.72444C7.39969 17.1984 7.08825 17.072 6.85863 16.8472C6.629 16.6223 6.5 16.3172 6.5 15.9992Z"
-                    fill="#252525"
+                    fill="white"
                   />
                 </svg>
               </button>
@@ -1809,7 +1835,6 @@ const renderSmallScreenLayout = () => {
               width: "100%",
               height: "100%",
               zIndex: 1,
-             
             }}
             className="video1"
           >
