@@ -1,5 +1,6 @@
 'use client';
 import { useRef, useEffect } from 'react';
+import Link from 'next/link';
 
 export default function PartnershipHero() {
   const videoRef = useRef(null);
@@ -46,7 +47,7 @@ export default function PartnershipHero() {
           
           {/* Button Container */}
           <div className="mt-1 sm:mt-2 md:mt-3">
-            <button className="group flex items-center gap-3 py-2 xs:py-[10px] px-4 xs:px-5 sm:px-6 md:px-[16px] rounded-[32px] bg-[#0066B3] text-white shadow-[0px_10px_10px_0px_rgba(0,0,0,0.25)] border-2 border-transparent transition-all duration-300 hover:bg-[#A50F15] hover:border-white hover:scale-[1.03]">
+            <Link href="contact" className="group flex items-center gap-3 py-2 xs:py-[10px] px-4 xs:px-5 sm:px-6 md:px-[16px] rounded-[32px] bg-[#0066B3] text-white shadow-[0px_10px_10px_0px_rgba(0,0,0,0.25)] border-2 border-transparent transition-all duration-300 hover:bg-[#A50F15] hover:border-white hover:scale-[1.03]">
               <span className="font-jost text-sm xs:text-base md:text-[16px] font-semibold leading-[120%]">
                 Get Started with Odoo
               </span>
@@ -69,7 +70,7 @@ export default function PartnershipHero() {
                   </svg>
                 </div>
               </div>
-            </button>
+            </Link>
           </div>
         </div>
       </div>

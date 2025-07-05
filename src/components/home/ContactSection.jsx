@@ -121,7 +121,7 @@ export default function ContactSection() {
             </div>
               {/* Email Us Button */}
             <div className="flex">
-              <Link 
+              <a
                 href="mailto:info@appitsoftware.com"
                 className="flex w-[130px] xs:w-[150px] sm:w-[200px] md:w-[260px] lg:w-[379px] h-[36px] xs:h-[40px] sm:h-[50px] md:h-[65px] lg:h-[82px] px-1.5 xs:px-2 sm:px-3 lg:px-5 py-[2px] xs:py-[3px] sm:py-[4px] justify-center items-center gap-1 xs:gap-1.5 sm:gap-2 md:gap-[32px] rounded-[15px] xs:rounded-[20px] sm:rounded-[30px] lg:rounded-[50px] border border-[#4A0508] shadow-sm xs:shadow-md transition-all duration-300 ease-in-out hover:bg-black hover:border-white hover:border group"
               >
@@ -165,11 +165,11 @@ export default function ContactSection() {
                     />
                   </svg>
                 </div>
-              </Link>
+              </a>
             </div>
               {/* Location Button */}
             <div className="flex">
-              <Link 
+              <a
               target="_blank"
                 href="https://www.google.com/maps/place/APPIT+Software+Solutions+Private+Limited/@17.4468931,78.3522052,16z/data=!4m6!3m5!1s0x3bcb93e1cd2b5181:0x6953abcde44fb0fc!8m2!3d17.4469061!4d78.3543102!16s%2Fg%2F11dfgs33hw?entry=ttu&g_ep=EgoyMDI1MDYwMS4wIKXMDSoASAFQAw%3D%3D"
                 className="flex w-[130px] xs:w-[150px] sm:w-[200px] md:w-[260px] lg:w-[379px] h-[36px] xs:h-[40px] sm:h-[50px] md:h-[65px] lg:h-[82px] px-1.5 xs:px-2 sm:px-3 lg:px-5 py-[2px] xs:py-[3px] sm:py-[4px] justify-center items-center gap-1 xs:gap-1.5 sm:gap-2 md:gap-[32px] rounded-[15px] xs:rounded-[20px] sm:rounded-[30px] lg:rounded-[50px] border border-[#4A0508] shadow-sm xs:shadow-md transition-all duration-300 ease-in-out hover:bg-black hover:border-white hover:border group"
@@ -214,7 +214,7 @@ export default function ContactSection() {
                     />
                   </svg>
                 </div>
-              </Link>
+              </a>
             </div>
           </div>
         </div>

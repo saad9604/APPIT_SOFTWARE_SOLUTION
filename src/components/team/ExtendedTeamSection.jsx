@@ -104,7 +104,7 @@ const ExtendedTeamSection = () => {
       linkedin: "https://www.linkedin.com/in/anil-ozil-0307ab215"
     },
     {
-      name: "Saikumar Raj",
+      name: "Sai kiran Raj",
       role: "Sr. Analyst",
       image: "/images/team/kumar.png",
       linkedin: "https://www.linkedin.com/in/saikiran-raj/"
