@@ -1,8 +1,13 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { loadApiBaseUrl } from '../../utils/loadApiUrl';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+let API_BASE_URL = ''; // Declare a placeholder
+
+loadApiBaseUrl().then(url => {
+  API_BASE_URL = url;
+});
 
 
 const renderMessageWithLinks = (text) => {
