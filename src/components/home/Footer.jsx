@@ -18,7 +18,7 @@ const Footer = () => {
             Privacy Policy
           </Link>
           <span className="mx-1 sm:mx-2 inline">|</span>
-          <Link href="/terms" className="whitespace-nowrap hover:text-[#EC1C26] transition-colors duration-300 text-[9px] xs:text-xs sm:text-sm md:text-base">
+          <Link href="/termsconditions" className="whitespace-nowrap hover:text-[#EC1C26] transition-colors duration-300 text-[9px] xs:text-xs sm:text-sm md:text-base">
             Terms & Conditions
           </Link>
           <span className="mx-1 sm:mx-2 inline">|</span>
