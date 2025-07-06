@@ -47,9 +47,7 @@ const Chatbot = () => {
   const [isAnimatingSend, setIsAnimatingSend] = useState(false);
   const messagesEndRef = useRef(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [showLoginForm, setShowLoginForm] = useState(false);
-  const [loginEmail, setLoginEmail] = useState('');
-  const [loginError, setLoginError] = useState('');
+  const [awaitingEmail, setAwaitingEmail] = useState(false);
   
   const [userName, setUserName] = useState('');
   const [userMobile, setUserMobile] = useState('');
@@ -81,15 +79,16 @@ const Chatbot = () => {
       setIsLoggedIn(true);
       setUserEmail(user.email);
       fetchChatHistory(user.email);
+    } else {
+      // Initialize with welcome message when no user is logged in
+      setMessages([
+        { text: "Welcome to Appit", sender: 'bot' },
+        { text: "Please enter your email to get started", sender: 'bot' },
+      ]);
+      setAwaitingEmail(true);
     }
     setIsClient(true);
   }, []);
-
-  useEffect(() => {
-    if (isOpen && !isLoggedIn) {
-      setShowLoginForm(true);
-    }
-  }, [isOpen, isLoggedIn]);
 
   useEffect(() => {
     if (isLoggedIn && !supportPromptShown) {
@@ -97,7 +96,7 @@ const Chatbot = () => {
         setShowSupportPrompt(true);
       }, 1000);
     }
-}, [isLoggedIn]);
+  }, [isLoggedIn]);
 
   const fetchChatHistory = async (email) => {
     try {
@@ -134,6 +133,47 @@ const Chatbot = () => {
       ]);
     } finally {
       setIsTyping(false);
+    }
+  };
+
+  const handleEmailSubmit = async (email) => {
+    if (!email.trim() || !email.includes('@')) {
+      setMessages(prev => [...prev, { 
+        text: "Please enter a valid email address", 
+        sender: 'bot' 
+      }]);
+      return;
+    }
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/user/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email })
+      });
+
+      if (response.ok) {
+        const userData = { email: email };
+        localStorage.setItem('chatUser', JSON.stringify(userData));
+        
+        setIsLoggedIn(true);
+        setUserEmail(email);
+        setAwaitingEmail(false);
+        
+        fetchChatHistory(email);
+      } else {
+        const errorData = await response.json();
+        setMessages(prev => [...prev, { 
+          text: errorData.detail || 'Failed to register email. Please try again.', 
+          sender: 'bot' 
+        }]);
+      }
+    } catch (error) {
+      console.error('Email registration error:', error);
+      setMessages(prev => [...prev, { 
+        text: 'Network error. Please try again.', 
+        sender: 'bot' 
+      }]);
     }
   };
 
@@ -174,7 +214,7 @@ const Chatbot = () => {
 
     setIsTyping(true);
     try {
-      const response = await fetch(`${API_BASE_URL}/api/support`, {
+      const response = await fetch(`${API_BASE_URL}/api/support/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
@@ -265,45 +305,15 @@ const Chatbot = () => {
     }
   };
 
-  const handleLogin = async () => {
-    if (!loginEmail.trim() || !loginEmail.includes('@')) {
-      setLoginError('Please enter a valid email');
-      return;
-    }
-
-    try {
-      const response = await fetch(`${API_BASE_URL}/api/user/`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: loginEmail })
-      });
-
-      if (response.ok) {
-        const userData = { email: loginEmail };
-        localStorage.setItem('chatUser', JSON.stringify(userData));
-        
-        setIsLoggedIn(true);
-        setUserEmail(loginEmail);
-        setShowLoginForm(false);
-        setLoginError('');
-        
-        fetchChatHistory(loginEmail);
-      } else {
-        const errorData = await response.json();
-        setLoginError(errorData.detail || 'Login failed. Please try again.');
-      }
-    } catch (error) {
-      console.error('Login error:', error);
-      setLoginError('Network error. Please try again.');
-    }
-  };
-
   const handleLogout = () => {
     localStorage.removeItem('chatUser');
     setIsLoggedIn(false);
     setUserEmail('');
-    setShowLoginForm(true);
-    setMessages([]);
+    setMessages([
+      { text: "Welcome to Appit", sender: 'bot' },
+      { text: "Please enter your email to get started", sender: 'bot' },
+    ]);
+    setAwaitingEmail(true);
     setSupportMessages([]);
     setIsSupportMode(false);
     setShowSupportPrompt(false);
@@ -329,28 +339,47 @@ const Chatbot = () => {
   }, [messages, supportMessages]);
 
   const generateResponse = async (userMessage) => {
+    console.log("generateResponse called with message:", userMessage);
+    console.log("User email being used:", userEmail);
+
     try {
-      const response = await fetch(`${API_BASE_URL}/api/chat`, {
+      const requestBody = {
+        email: userEmail,
+        message: userMessage
+      };
+
+      console.log("Sending request to:", `${API_BASE_URL}/api/chat/`);
+      console.log("Request body:", requestBody);
+
+      const response = await fetch(`${API_BASE_URL}/api/chat/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: userEmail,
-          message: userMessage
-        })
+        body: JSON.stringify(requestBody)
       });
 
+      console.log("Response status:", response.status);
+
       if (!response.ok) {
+        const errorText = await response.text();
+        console.error("API responded with error status:", response.status);
+        console.error("Error response text:", errorText);
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
       const data = await response.json();
-      return data.response || "I'm sorry, I couldn't process your request right now. Please try again.";
+      console.log("Response JSON:", data);
+
+      const finalResponse = data.response || "I'm sorry, I couldn't process your request right now. Please try again.";
+      console.log("Final response to return:", finalResponse);
+
+      return finalResponse;
+
     } catch (error) {
       console.error('Error calling chat API:', error);
       return "I'm experiencing some technical difficulties. Please try again in a moment.";
     }
   };
-  
+
   const handleServiceSelect = (id) => {
     const updatedOptions = serviceOptions.map(option => ({
       ...option,
@@ -418,6 +447,19 @@ const Chatbot = () => {
     const userMessage = inputValue;
     setInputValue('');
     
+    // If awaiting email, handle email submission
+    if (awaitingEmail) {
+      setMessages(prev => [...prev, { text: userMessage, sender: 'user' }]);
+      setTimeout(() => setIsAnimatingSend(false), 500);
+      setIsTyping(true);
+      
+      setTimeout(() => {
+        setIsTyping(false);
+        handleEmailSubmit(userMessage);
+      }, 1000);
+      return;
+    }
+    
     if (isSupportMode) {
       setSupportMessages(prev => [...prev, { text: userMessage, sender: 'user' }]);
       setIsTyping(true);
@@ -473,7 +515,7 @@ return (
         </svg>
       ) : (
         <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012 2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
         </svg>
       )}
     </button>
@@ -537,207 +579,166 @@ return (
       
       {/* Messages container */}
       <div className="flex-1 p-4 overflow-y-auto">
-        {showLoginForm && !isLoggedIn ? (
-          <div className="flex flex-col items-center justify-center h-full">
-            <div className="w-full max-w-xs">
-              <h4 className="text-lg font-jost mb-4 text-center">Login to Chat</h4>
-              <input
-                type="email"
-                placeholder="Enter your email"
-                value={loginEmail}
-                onChange={(e) => setLoginEmail(e.target.value)}
-                className="w-full p-2 mb-2 border rounded font-jost text-black"
-              />
-              {loginError && (
-                <p className="text-red-500 text-sm mb-2 font-jost">{loginError}</p>
-              )}
-              <button 
-                onClick={handleLogin}
-                className="w-full bg-gradient-to-b from-[#8E2DE2] to-[#4A00E0] text-white py-2 rounded font-jost"
-              >
-                Login
-              </button>
-            </div>
-          </div>
-        ) : (
-          <div className="flex flex-col gap-4">
-            {currentMessages.map((message, index) => (
+        <div className="flex flex-col gap-4">
+          {currentMessages.map((message, index) => (
+            <div 
+              key={index} 
+              className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+            >
+              {/* MESSAGE BUBBLE */}
               <div 
-                key={index} 
-                className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+                className={`max-w-[80%] inline-block px-[16px] py-[12px] rounded-[24px] ${
+                  message.sender === 'user' ? 'bg-[#FFE0E1]' : 'bg-[#DFF0FF]'
+                }`}
               >
-                {/* MESSAGE BUBBLE */}
-                <div 
-                  className={`max-w-[80%] inline-block px-[16px] py-[12px] rounded-[24px] ${
-                    message.sender === 'user' ? 'bg-[#FFE0E1]' : 'bg-[#DFF0FF]'
-                  }`}
-                >
-                  <div className="font-jost text-[14px] font-normal leading-[120%] text-black">
-                    {renderMessageWithLinks(message.text)}
-                  </div>
+                <div className="font-jost text-[14px] font-normal leading-[120%] text-black">
+                  {renderMessageWithLinks(message.text)}
                 </div>
               </div>
-            ))}
+            </div>
+          ))}
 
-            {!isSupportMode && showSupportPrompt && (
-              <div className="flex justify-start">
-                <div className="max-w-[80%] inline-block px-[16px] py-[12px] rounded-[24px] bg-[#DFF0FF]">
-                  <div className="font-jost text-[14px] font-normal leading-[120%] text-black mb-2">
-                    Would you like to submit a support query?
-                  </div>
-                  <div className="flex gap-2">
-                    <button 
-                      onClick={() => handleSupportSubmit(true)}
-                      className="px-3 py-1 bg-gradient-to-b from-[#8E2DE2] to-[#4A00E0] text-white rounded-md"
-                    >
-                      Yes
-                    </button>
-                    <button 
-                      onClick={() => handleSupportSubmit(false)}
-                      className="px-3 py-1 bg-gray-200 text-gray-700 rounded-md"
-                    >
-                      No
-                    </button>
-                  </div>
+          {!isSupportMode && showSupportPrompt && isLoggedIn && (
+            <div className="flex justify-start">
+              <div className="max-w-[80%] inline-block px-[16px] py-[12px] rounded-[24px] bg-[#DFF0FF]">
+                <div className="font-jost text-[14px] font-normal leading-[120%] text-black mb-2">
+                  Would you like to submit a support query?
+                </div>
+                <div className="flex gap-2">
+                  <button 
+                    onClick={() => handleSupportSubmit(true)}
+                    className="px-3 py-1 bg-gradient-to-b from-[#8E2DE2] to-[#4A00E0] text-white rounded-md"
+                  >
+                    Yes
+                  </button>
+                  <button 
+                    onClick={() => handleSupportSubmit(false)}
+                    className="px-3 py-1 bg-gray-200 text-gray-700 rounded-md"
+                  >
+                    No
+                  </button>
                 </div>
               </div>
-            )}
+            </div>
+          )}
 
-            {isTyping && (
-              <div className="flex justify-start">
-                <div className="inline-flex justify-center items-center gap-[2px] bg-[#DFF0FF] px-[16px] py-[12px] rounded-[24px]">
-                  <div className="flex gap-[5px] items-end h-[12px]">
-                    <div className="w-[6px] h-[6px] bg-gradient-to-b from-[#8E2DE2] to-[#4A00E0] rounded-full animate-bounce" style={{ animationDelay: '0ms', animationDuration: '0.8s' }}></div>
-                    <div className="w-[6px] h-[6px] bg-gradient-to-b from-[#8E2DE2] to-[#4A00E0] rounded-full animate-bounce" style={{ animationDelay: '200ms', animationDuration: '0.8s' }}></div>
-                    <div className="w-[6px] h-[6px] bg-gradient-to-b from-[#8E2DE2] to-[#4A00E0] rounded-full animate-bounce" style={{ animationDelay: '400ms', animationDuration: '0.8s' }}></div>
-                  </div>
+          {isTyping && (
+            <div className="flex justify-start">
+              <div className="inline-flex justify-center items-center gap-[2px] bg-[#DFF0FF] px-[16px] py-[12px] rounded-[24px]">
+                <div className="flex gap-[5px] items-end h-[12px]">
+                  <div className="w-[6px] h-[6px] bg-gradient-to-b from-[#8E2DE2] to-[#4A00E0] rounded-full animate-bounce" style={{ animationDelay: '0ms', animationDuration: '0.8s' }}></div>
+                  <div className="w-[6px] h-[6px] bg-gradient-to-b from-[#8E2DE2] to-[#4A00E0] rounded-full animate-bounce" style={{ animationDelay: '200ms', animationDuration: '0.8s' }}></div>
+                  <div className="w-[6px] h-[6px] bg-gradient-to-b from-[#8E2DE2] to-[#4A00E0] rounded-full animate-bounce" style={{ animationDelay: '400ms', animationDuration: '0.8s' }}></div>
                 </div>
               </div>
-            )}
-            
-            <div ref={messagesEndRef} />
-          </div>
-        )}
+            </div>
+          )}
+          
+          <div ref={messagesEndRef} />
+        </div>
       </div>
       
-      {/* Input container - only show when logged in */}
-      {isLoggedIn && (
-        <div className="p-4 sm:p-6 border-t border-gray-200">
-          {isMobile && showServiceSelection ? (
-            <div className="flex flex-col gap-3">
-              <div className="text-[14px] font-jost font-medium text-left">Select a Service</div>
-              {serviceOptions.map((option) => (
-                <div key={option.id} className="flex items-center gap-2" onClick={() => handleServiceSelect(option.id)}>
-                  <div className={`w-4 h-4 rounded-full border ${option.checked ? 'border-[#0066B3] bg-[#0066B3]' : 'border-gray-300'}`}>
-                    {option.checked && (
-                      <div className="w-2 h-2 mx-auto mt-[3px] bg-white rounded-full"></div>
-                    )}
-                  </div>
-                  <span className="text-[14px] font-jost">{option.label}</span>
+      {/* Input container - Always show input for email or chat */}
+      <div className="p-4 sm:p-6 border-t border-gray-200">
+        {isMobile && showServiceSelection ? (
+          <div className="flex flex-col gap-3">
+            <div className="text-[14px] font-jost font-medium text-left">Select a Service</div>
+            {serviceOptions.map((option) => (
+              <div key={option.id} className="flex items-center gap-2" onClick={() => handleServiceSelect(option.id)}>
+                <div className={`w-4 h-4 rounded-full border ${option.checked ? 'border-[#0066B3] bg-[#0066B3]' : 'border-gray-300'}`}>
+                  {option.checked && (
+                    <div className="w-2 h-2 mx-auto mt-[3px] bg-white rounded-full"></div>
+                  )}
                 </div>
-              ))}
+                <span className="text-[14px] font-jost">{option.label}</span>
+              </div>
+            ))}
+            <button
+              onClick={handleFormSubmit}
+              className="mt-2 self-end w-9 h-9 rounded-full bg-[#0066B3] flex items-center justify-center"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg"
+              className={`w-5 h-5 text-white ${isAnimatingSend ? 'animate-send-message' : ''}`}
+                fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="white"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+            </button>
+          </div>
+        ) : isMobile && showContactForm ? (
+          <div className="flex flex-col gap-3">
+            {formStage === 1 && (
+              <>
+                <div className="text-[14px] font-jost font-medium text-left">Enter your name</div>
+                <input
+                  type="text"
+                  value={userName}
+                  onChange={(e) => setUserName(e.target.value)}
+                  className="w-full p-2 border border-gray-300 rounded-md font-jost text-[14px]"
+                />
+              </>
+            )}
+            {formStage === 2 && (
+              <>
+                <div className="text-[14px] font-jost font-medium text-left">Enter your Mobile no</div>
+                <input
+                  type="tel"
+                  value={userMobile}
+                  onChange={(e) => setUserMobile(e.target.value)}
+                  className="w-full p-2 border border-gray-300 rounded-md font-jost text-[14px]"
+                />
+              </>
+            )}
+            {formStage === 3 && (
+              <>
+                <div className="text-[14px] font-jost font-medium text-left">Enter your mail id</div>
+                <input
+                  type="email"
+                  value={userEmail}
+                  onChange={(e) => setUserEmail(e.target.value)}
+                  className="w-full p-2 border border-gray-300 rounded-md font-jost text-[14px]"
+                />
+              </>
+            )}
+            {formStage < 4 && (
               <button
                 onClick={handleFormSubmit}
                 className="mt-2 self-end w-9 h-9 rounded-full bg-[#0066B3] flex items-center justify-center"
               >
-                <svg xmlns="http://www.w3.org/2000/svg"
-                className={`w-5 h-5 text-white ${isAnimatingSend ? 'animate-send-message' : ''}`}
-                  fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M5 12h14M12 5l7 7-7 7"></path>
-                  </svg>
-              </button>
-            </div>
-          ) : isMobile && showContactForm ? (
-            <div className="flex flex-col gap-3">
-              {formStage === 1 && (
-                <>
-                  <div className="text-[14px] font-jost font-medium text-left">Enter your name</div>
-                  <input
-                    type="text"
-                    value={userName}
-                    onChange={(e) => setUserName(e.target.value)}
-                    className="w-full p-2 border border-gray-300 rounded-md font-jost text-[14px]"
-                  />
-                </>
-              )}
-              {formStage === 2 && (
-                <>
-                  <div className="text-[14px] font-jost font-medium text-left">Enter your Mobile no</div>
-                  <input
-                    type="tel"
-                    value={userMobile}
-                    onChange={(e) => setUserMobile(e.target.value)}
-                    className="w-full p-2 border border-gray-300 rounded-md font-jost text-[14px]"
-                  />
-                </>
-              )}
-              {formStage === 3 && (
-                <>
-                  <div className="text-[14px] font-jost font-medium text-left">Enter your mail id</div>
-                  <input
-                    type="email"
-                    value={userEmail}
-                    onChange={(e) => setUserEmail(e.target.value)}
-                    className="w-full p-2 border border-gray-300 rounded-md font-jost text-[14px]"
-                  />
-                </>
-              )}
-              {formStage === 2 && (
-                <>
-                  <div className="text-[14px] font-jost font-medium text-left">Enter your Mobile no</div>
-                  <input
-                    type="tel"
-                    value={userMobile}
-                    onChange={(e) => setUserMobile(e.target.value)}
-                    className="w-full p-2 border border-gray-300 rounded-md font-jost text-[14px]"
-                  />
-                </>
-              )}
-              {formStage === 3 && (
-                <>
-                  <div className="text-[14px] font-jost font-medium text-left">Enter your mail id</div>
-                  <input
-                    type="email"
-                    value={userEmail}
-                    onChange={(e) => setUserEmail(e.target.value)}
-                    className="w-full p-2 border border-gray-300 rounded-md font-jost text-[14px]"
-                  />
-                </>
-              )}
-              {formStage < 4 && (
-                <button
-                  onClick={handleFormSubmit}
-                  className="mt-2 self-end w-9 h-9 rounded-full bg-[#0066B3] flex items-center justify-center"
+                <svg xmlns="http://www.w3.org/2000/svg" 
+                  className={`w-5 h-5 sm:w-6 sm:h-6 text-white ${isAnimatingSend ? 'animate-send-message' : ''}`} 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="white" 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" 
-                    className={`w-5 h-5 sm:w-6 sm:h-6 text-white ${isAnimatingSend ? 'animate-send-message' : ''}`} 
-                    fill="none" 
-                    viewBox="0 0 24 24" 
-                    stroke="white" 
-                    strokeWidth="2" 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round"
-                  >
-                    <path d="M5 12h14M12 5l7 7-7 7"></path>
-                  </svg>
-                </button>
-              )}
-            </div>
-          ) : (
-            <div className="inline-flex items-center gap-[8px] sm:gap-[10px] w-full justify-center">
-              <div className={`flex ${isMobile ? 'w-[85%]' : 'w-[336px]'} h-[48px] ${isMobile ? 'px-[10px]' : 'px-[24px]'} py-[10px] items-center justify-center gap-[10px] rounded-[16px] bg-white shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)]`}>
+                  <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+              </button>
+            )}
+          </div>
+        ) : (
+          <div className="inline-flex items-center gap-[8px] sm:gap-[10px] w-full justify-center">
+            <div className={`flex ${isMobile ? 'w-[85%]' : 'w-[336px]'} h-[48px] ${isMobile ? 'px-[10px]' : 'px-[24px]'} py-[10px] items-center justify-center gap-[10px] rounded-[16px] bg-white shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)]`}>
               <input 
                 type="text" 
                 value={inputValue}
                 onChange={handleInputChange}
                 onKeyPress={handleKeyPress}
-                placeholder={isMobile ? "Enter your text here" : "Ask anything..."}
+                placeholder={
+                  awaitingEmail 
+                    ? "Please enter your email address" 
+                    : isMobile 
+                      ? "Enter your text here" 
+                      : "Ask anything..."
+                }
                 className={`w-full font-jost text-[14px] font-normal md:font-semibold leading-[120%] text-[#252525] placeholder-[#6D6D6D] focus:outline-none ${isMobile ? 'text-center focus:text-left' : ''}`}
               />
             </div>
@@ -773,9 +774,8 @@ return (
               )}
             </button>
           </div>
-          )}
-        </div>
-      )}
+        )}
+      </div>
     </div>
   </div>
 );
