@@ -10,6 +10,7 @@ loadApiBaseUrl().then(url => {
 });
 
 
+
 const renderMessageWithLinks = (text) => {
   const lines = text.split('\n');
   

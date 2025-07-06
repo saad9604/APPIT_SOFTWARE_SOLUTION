@@ -75,7 +75,7 @@ export const BenefitData = [
   },
   {
     iconSrc: "/images/svgs/benefit_4.svg",
-    title: "Personalized customer Experiance",
+    title: "Personalized customer Experience",
     para: "Deliver personalized experiences with AI-driven customer insights",
   },
   {
@@ -604,7 +604,7 @@ export const faqAILawyerData = [
   {
     id: 1,
     question: "What is AI Lawyer?",
-    answer: "AI Lawyer is a cutting-edge platform that transforms law market using artificial intelligence. It automates research, simplifies complex terms, and handles documents efficiently. Ideal for individuals seeking affordable consultation and for professionals and students aiming to streamline their work. It offers personalized customization, multi-platform access, and prioritizes privacy, making it a valuable tool in LegalTech market."
+    answer: "AI Lawyer is a cutting-edge platform that transforms law market using artificial intelligence. It automates research, simplifies complex terms, and handles documents efficiently. Ideal for individuals seeking affordable consultation and for professionals and students aiming to streamline their work. It offers personalized customization, multi-platform access, and prioritizes privacy, making it a valuable tool in Legal Tech market."
   },
   {
     id: 2,
@@ -727,21 +727,21 @@ export const KeyfeaturesAILawyerData = [
   {
     imageSrc: "/images/ai_feature-1.png",
     title: "AI for Legal Consumers",
-    para: "Simplifies legal jargon and clarifies your rights. Get answers, draft documents, and feel legally confident.",
+    para: "Simplifies legal jargon, explains your rights, and helps you draft basic legal documents with ease.",
   },
   {
     imageSrc: "/images/ai_feature-2.png",
-    title: "AI for Legal Consumers",
-    para: "Simplifies legal jargon and clarifies your rights. Get answers, draft documents, and feel legally confident.",
+    title: "Virtual Legal Assistant",
+    para: "Ask legal questions anytime and get AI-powered answers—no waiting, no appointments required.",
   },
   {
     imageSrc: "/images/ai_feature-3.png",
-    title: "AI for Legal Consumers",
-    para: "Simplifies legal jargon and clarifies your rights. Get answers, draft documents, and feel legally confident.",
+    title: "Instant Document Drafting",
+    para: "Generate contracts, agreements, and notices in minutes using AI-driven legal templates and automation.",
   },
   {
     imageSrc: "/images/ai_feature-4.png",
-    title: "AI for Legal Consumers",
-    para: "Simplifies legal jargon and clarifies your rights. Get answers, draft documents, and feel legally confident.",
+    title: "Legal Confidence for All",
+    para: "Bridge the gap between law and everyday users—gain legal clarity, stay informed, and act with confidence.",
   },
 ];

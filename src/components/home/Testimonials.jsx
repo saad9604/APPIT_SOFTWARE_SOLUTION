@@ -20,7 +20,7 @@ const testimonials = [
   },
   {
     id: 3,
-    quote: "APPIT Software understood our needs and gave us the right and required solution. It is very important to choose the right partner who understands the rite requirements of our business.",
+    quote: "APPIT Software understood our needs and gave us the right and required solution. It is very important to choose the right partner who understands the requirements of our business.",
     name: "Nagarjuna",
     position: "Co-Director, Hyderabad IT Solutions",
     image: "/images/test3.png"
@@ -123,7 +123,7 @@ export default function Testimonials() {
       } transition-all duration-1000 ease-out delay-300`}>
         {/* Heading */}
         <h2 className="text-white text-center text-3xl md:text-4xl lg:text-[50px] font-semibold leading-[120%]">
-          What <span className="text-[#EC1C26]">Client</span> Say Aboutt Us 
+          What <span className="text-[#EC1C26]">Client</span> Say About Us 
         </h2>
         
         {/* Subheading */}

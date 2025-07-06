@@ -53,7 +53,7 @@ Our expert team focuses on user experience, automation, and future-ready technol
       image: "/images/ecImage3.png",
     },
     {
-      title: `Empowering Businesses with Open Source E-commerce Platform Servicessd`,
+      title: `Empowering Businesses with Open Source E-commerce Platform Services`,
       para: `At AppitSoftware, we offer end-to-end eCommerce software development services tailored to B2B, B2C, and marketplace models. From intuitive UI design to secure payment integration, our solutions are built for performance and seamless user experiences. Using the latest technologies and AI, we create fast, mobile-optimized platforms with intelligent automation and real-time analytics. Whether you're launching or upgrading, our custom solutions enhance engagement, retention, and operational efficiency—empowering your digital growth.`,
       image: "/images/ecImage4.png",
       reverse: true,
