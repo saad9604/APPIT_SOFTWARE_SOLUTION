@@ -15,7 +15,7 @@ import FormWithImage from "@/components/pages/magento-open-source/FormWithImage"
 import Script from "next/script";
 
 export const metadata = {
-  title: 'Magento Open Source Solutions',
+  title: 'Magento Open Source Solutions | APPIT Software Solutions',
   description: 'APPIT Software expertise in Magento Open Source Solutions to develop flexible and scalable eCommerce platforms, and thrive in the digital marketplace.',
   keywords: [
     'Magento Open Source Solutions',

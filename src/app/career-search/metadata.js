@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'Search Careers and Find Your Perfect Role',
+  title: 'Search Careers at APPIT Software | Find Your Perfect Role',
   description: 'Search and explore available career opportunities at APPIT Software. Find the perfect role that matches your skills and aspirations.',
   keywords: [
     'APPIT Software job search',

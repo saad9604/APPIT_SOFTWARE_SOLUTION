@@ -12,7 +12,7 @@ import Script from "next/script";
 import ScrollToTopButton from '@/components/home/ScrollToTopButton'
 
 export const metadata = {
-  title: 'Global IT Services & Support – 2025',
+  title: 'Contact APPIT Software | Global IT Services & Support – 2025',
   description: 'Contact APPIT Software for Global IT Services & Support. Our offices are in India, the USA, Saudi Arabia, and the UAE.',
   keywords: [
     'Contact APPIT Software', 

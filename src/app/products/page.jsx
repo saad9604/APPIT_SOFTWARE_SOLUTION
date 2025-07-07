@@ -2,7 +2,7 @@ import { redirect } from "next/navigation"
 
 
 export const metadata = {
-  title: 'AI-Powered Products',
+  title: 'Legal AI Assistance | Smart Legal Solutions Powered By AI - Appit Software',
   description: 'Explore APPIT Software\'s suite of innovative AI-powered products designed to transform business operations, legal services, recruitment, and productivity.',
   keywords: [
     'AI-powered products',
