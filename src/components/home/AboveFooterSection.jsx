@@ -96,8 +96,15 @@ const AboveFooterSection = ({socialMediaLink=true}) => {
                   </p>
                 </div>
               </a>
-              
-              {/* YouTube Container */}
+             
+              {/* YouTube Container */}  
+               <a
+                href="https://www.youtube.com/@appitsoftwaresolutions346/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 sm:gap-4"
+                aria-label="YouTube"
+              >
               <div className="flex items-center gap-3 sm:gap-4">
                 <div className="w-8 h-8 sm:w-10 sm:h-10 aspect-square">
                   <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 41 40" fill="none">
@@ -113,6 +120,7 @@ const AboveFooterSection = ({socialMediaLink=true}) => {
                   </p>
                 </div>
               </div>
+              </a>
               
               {/* Instagram Container */}
               <a
@@ -310,7 +318,7 @@ const AboveFooterSection = ({socialMediaLink=true}) => {
         </div>
         
         {/* Countries Container */}
-        <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 w-full">
+<div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-4 xs:gap-6 sm:gap-8 md:gap-12 w-full px-0 sm:px-4 md:px-[60px] lg:px-[120px] mb-4 mt-0">
           {/* India Container */}
           <div className="flex items-start sm:items-center gap-3 sm:gap-4">
             <div className="w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0">

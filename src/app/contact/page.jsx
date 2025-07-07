@@ -9,6 +9,7 @@ import MapComponent from "../../components/pages/contact/map-component";
 import AboveFooterSection from "../../components/home/AboveFooterSection";
 import Footer from "../../components/home/Footer";
 import Script from "next/script";
+import ScrollToTopButton from '@/components/home/ScrollToTopButton'
 
 export const metadata = {
   title: 'Global IT Services & Support – 2025',
@@ -105,6 +106,7 @@ const Page = () => {  return (
       <Locations />
       <MapComponent />
       <ContactFAQ />
+      <ScrollToTopButton /> 
       
       {/* Spacer div for adding margin between MapComponent and AboveFooterSection */}
       <div className="my-16 md:my-24"></div>

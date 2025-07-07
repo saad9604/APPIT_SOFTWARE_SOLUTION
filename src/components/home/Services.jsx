@@ -7,7 +7,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
 import { useRouter } from 'next/router';
 
-
 const contentSections = [
   
   {
@@ -869,7 +868,7 @@ export default function Services() {
 
   // Render for small screens (below 1000px)
   const renderSmallScreenLayout = () => {
-     const router = useRouter();
+  
 
     return (
       <div className="services-small-screen" style={{ overflow: 'visible', paddingBottom: '60px', display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', margin: '0 auto' }}>
@@ -965,7 +964,7 @@ export default function Services() {
                       fontWeight: 400, 
                       lineHeight: "120%"
                     }}>
-                      Read Morellll
+                      Read More
                     </span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 33 32" fill="none" style={{minWidth: "26px", height: "26px"}}>
                       <rect x="31.75" y="31.25" width="30.5" height="30.5" rx="15.25" transform="rotate(180 31.75 31.25)" stroke="#252525" strokeWidth="1.5" />
@@ -1132,7 +1131,7 @@ export default function Services() {
       lineHeight: "120%",
     }}
   >
-    Read Moresss
+    Read More
   </span>
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -1261,7 +1260,7 @@ export default function Services() {
                     lineHeight: "120%",
                   }}
                 >
-                  Read Moressasdasd
+                  Read More
                 </span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -1386,7 +1385,7 @@ export default function Services() {
                     lineHeight: "120%",
                   }}
                 >
-                  Read Mores
+                  Read More
                 </span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -1511,7 +1510,7 @@ export default function Services() {
                     lineHeight: "120%",
                   }}
                 >
-                  Read Moreq
+                  Read More
                 </span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -1636,7 +1635,7 @@ export default function Services() {
                     lineHeight: "120%",
                   }}
                 >
-                  Read Mores
+                  Read More
                 </span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -1762,7 +1761,7 @@ export default function Services() {
                     lineHeight: "120%",
                   }}
                 >
-                  Read Moreas
+                  Read More
                 </span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

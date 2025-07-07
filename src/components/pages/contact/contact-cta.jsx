@@ -18,7 +18,7 @@ const ContactCTA = () => {
                         <OutlineButton className='w-full sm:w-1/2'>
                             Contact Us
                         </OutlineButton>
-                        <OutlineButton className='w-full sm:w-1/2'>
+                        <OutlineButton className='w-full sm:w-1/2' href='mailto:info@appitsoftware.com'>
                             Email
                         </OutlineButton>
                     </div>
