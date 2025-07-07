@@ -9,30 +9,31 @@ loadApiBaseUrl().then(url => {
   API_BASE_URL = url;
 });
 
-
+// const API_BASE_URL="http://127.0.0.1:8000"
 
 const renderMessageWithLinks = (text) => {
   const lines = text.split('\n');
-  
+  const email = localStorage.getItem('chatUser') ? JSON.parse(localStorage.getItem('chatUser')).email : '';
+
   return lines.map((line, lineIndex) => {
-    if (line.trim() === '') {
-      return <div key={lineIndex} className="h-3"></div>;
-    }
-    
+    if (line.trim() === '') return <div key={lineIndex} className="h-3"></div>;
+
     const urlRegex = /(https?:\/\/[^\s<>\"]+[^\s<>\",.;:!?)\]\'`])/g;
     const parts = line.split(urlRegex);
-    
+
     return (
       <div key={lineIndex} className="mb-1 last:mb-0">
         {parts.map((part, partIndex) => {
           if (part.match(urlRegex)) {
+            const url = new URL(part);
+            if (email) url.searchParams.set('email', email);
             return (
-              <a 
-                key={partIndex} 
-                href={part} 
-                target="_blank" 
+              <a
+                key={partIndex}
+                href={url.toString()}
+                target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-600 underline hover:text-blue-800"
+                className="text-blue-600 underline hover:text-blue-800 break-words max-w-full"
               >
                 {part}
               </a>
@@ -78,6 +79,13 @@ const Chatbot = () => {
   const [isSupportMode, setIsSupportMode] = useState(false);
   const [supportMessages, setSupportMessages] = useState([]);
 
+  const [supportFormStage, setSupportFormStage] = useState(0); // 0: name, 1: phone, 2: email, 3: query
+  const [supportUserName, setSupportUserName] = useState('');
+  const [supportUserPhone, setSupportUserPhone] = useState('');
+  const [supportUserEmail, setSupportUserEmail] = useState('');
+  const [supportQuery, setSupportQuery] = useState('');
+  const [awaitingEmailConfirmation, setAwaitingEmailConfirmation] = useState(false);
+
   useEffect(() => {
     const savedUser = localStorage.getItem('chatUser');
     if (savedUser) {
@@ -103,6 +111,40 @@ const Chatbot = () => {
       }, 1000);
     }
   }, [isLoggedIn]);
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const emailFromUrl = urlParams.get('email');
+    const savedUser = localStorage.getItem('chatUser');
+
+    let finalEmail = '';
+
+    if (emailFromUrl) {
+      localStorage.setItem('chatUser', JSON.stringify({ email: emailFromUrl }));
+      finalEmail = emailFromUrl;
+    } else if (savedUser) {
+      finalEmail = JSON.parse(savedUser).email;
+    }
+
+    if (finalEmail) {
+      setIsLoggedIn(true);
+      setUserEmail(finalEmail);
+    } else {
+      setMessages([
+        { text: "Welcome to Appit", sender: 'bot' },
+        { text: "Please enter your email to get started", sender: 'bot' },
+      ]);
+      setAwaitingEmail(true);
+    }
+
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (API_BASE_URL && userEmail && isLoggedIn) {
+      fetchChatHistory(userEmail);
+    }
+  }, [API_BASE_URL, userEmail, isLoggedIn]);
 
   const fetchChatHistory = async (email) => {
     try {
@@ -188,12 +230,34 @@ const Chatbot = () => {
     setSupportPromptShown(true);
   };
   
+  // const handleSupportSubmit = async (submitQuery) => {
+  //   if (submitQuery) {
+  //     setIsSupportMode(true);
+  //     setSupportMessages([
+  //       { text: "Click 'back to chat' at any time to return to regular chat mode.", sender: 'bot' },
+  //       { text: "You are now in support mode. Please describe your issue or question.", sender: 'bot' }
+
+  //     ]);
+  //     setShowSupportPrompt(false);
+  //     setSupportPromptShown(true);
+  //   } else {
+  //     setMessages(prev => [...prev, { 
+  //       text: "Alright, if you change your mind, you can select 'support' anytime.", 
+  //       sender: 'bot' 
+  //     }]);
+  //     setShowSupportPrompt(false);
+  //     setSupportPromptShown(true);
+  //   }
+  // };
+
   const handleSupportSubmit = async (submitQuery) => {
     if (submitQuery) {
       setIsSupportMode(true);
+      setSupportFormStage(0); // Start with name collection
       setSupportMessages([
-        { text: "You are now in support mode. Please describe your issue or question.", sender: 'bot' },
-        { text: "Type 'back to chat' at any time to return to regular chat mode.", sender: 'bot' }
+          { text: "Click 'back to chat' at any time to return to regular chat mode.", sender: 'bot' },
+          { text: "You are now in support mode. Please describe your issue or question.", sender: 'bot' },
+          { text: "Please enter your name:", sender: 'bot' }
       ]);
       setShowSupportPrompt(false);
       setSupportPromptShown(true);
@@ -207,8 +271,63 @@ const Chatbot = () => {
     }
   };
 
+
+  // const handleSupportMessage = async (message) => {
+  //   if (message.toLowerCase().includes('back to chat') || message.toLowerCase().includes('exit support')) {
+  //     setIsSupportMode(false);
+  //     setSupportMessages([]);
+  //     setMessages(prev => [...prev, { 
+  //       text: "You've returned to regular chat mode. How can I help you today?", 
+  //       sender: 'bot' 
+  //     }]);
+  //     return;
+  //   }
+
+  //   setIsTyping(true);
+  //   try {
+  //     const response = await fetch(`${API_BASE_URL}/api/support/`, {
+  //       method: 'POST',
+  //       headers: { 'Content-Type': 'application/json' },
+  //       body: JSON.stringify({ 
+  //         email: userEmail,
+  //         message: message
+  //       })
+  //     });
+
+  //     if (response.ok) {
+  //       setSupportMessages(prev => [...prev, { 
+  //         text: "Your support query has been submitted! Our team will contact you shortly.", 
+  //         sender: 'bot' 
+  //       }, {
+  //         text: "You can continue asking support questions or type 'back to chat' to return to regular chat mode.",
+  //         sender: 'bot'
+  //       }]);
+  //     } else {
+  //       setSupportMessages(prev => [...prev, { 
+  //         text: "Failed to submit your query. Please try again later.", 
+  //         sender: 'bot' 
+  //       }]);
+  //     }
+  //   } catch (error) {
+  //     setSupportMessages(prev => [...prev, { 
+  //       text: "Network error. Please try again later.", 
+  //       sender: 'bot' 
+  //     }]);
+  //   } finally {
+  //     setIsTyping(false);
+  //   }
+  // };
+
+
   const handleSupportMessage = async (message) => {
     if (message.toLowerCase().includes('back to chat') || message.toLowerCase().includes('exit support')) {
+      // Clear support session states
+      setSupportFormStage(0);
+      setSupportUserName('');
+      setSupportUserPhone('');
+      setSupportUserEmail('');
+      setSupportQuery('');
+      setAwaitingEmailConfirmation(false);
       setIsSupportMode(false);
       setSupportMessages([]);
       setMessages(prev => [...prev, { 
@@ -219,24 +338,104 @@ const Chatbot = () => {
     }
 
     setIsTyping(true);
+    
+    setTimeout(() => {
+      setIsTyping(false);
+      
+      if (supportFormStage === 0) {
+        // Collect name
+        setSupportUserName(message);
+        setSupportFormStage(1);
+        setSupportMessages(prev => [...prev, { 
+          text: "Please enter your phone number:", 
+          sender: 'bot' 
+        }]);
+      } else if (supportFormStage === 1) {
+        // Collect phone
+        setSupportUserPhone(message);
+        setSupportFormStage(2);
+        setAwaitingEmailConfirmation(true);
+        setSupportMessages(prev => [...prev, { 
+          text: `Your current email is: ${userEmail}\n\nWould you like to use this email for your support query?`, 
+          sender: 'bot' 
+        }]);
+      } else if (supportFormStage === 2) {
+        // Handle email change if user provided new email
+        if (!awaitingEmailConfirmation) {
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(message)) {
+            setSupportMessages(prev => [...prev, { 
+              text: "Please enter a valid email address:", 
+              sender: 'bot' 
+            }]);
+            return;
+          }
+          setSupportUserEmail(message);
+          setSupportFormStage(3);
+          setSupportMessages(prev => [...prev, { 
+            text: "Please describe your issue or question:", 
+            sender: 'bot' 
+          }]);
+        }
+      } else if (supportFormStage === 3) {
+        // Submit query
+        setSupportQuery(message);
+        submitSupportQuery(message);
+      }
+    }, 1000);
+  };
+
+  const handleEmailConfirmation = (useExistingEmail) => {
+    setAwaitingEmailConfirmation(false);
+    
+    if (useExistingEmail) {
+      setSupportUserEmail(userEmail);
+      setSupportFormStage(3);
+      setSupportMessages(prev => [...prev, { 
+        text: "Please describe your issue or question:", 
+        sender: 'bot' 
+      }]);
+    } else {
+      setSupportMessages(prev => [...prev, { 
+        text: "Please enter your new email address:", 
+        sender: 'bot' 
+      }]);
+    }
+  };
+
+  const submitSupportQuery = async (query) => {
     try {
       const response = await fetch(`${API_BASE_URL}/api/support/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
-          email: userEmail,
-          message: message
+          name: supportUserName,
+          phone: supportUserPhone,
+          email: supportUserEmail,
+          query: query
         })
       });
 
       if (response.ok) {
         setSupportMessages(prev => [...prev, { 
-          text: "Your support query has been submitted! Our team will contact you shortly.", 
+          text: "Your support query has been submitted successfully! Our team will contact you shortly.", 
           sender: 'bot' 
-        }, {
-          text: "You can continue asking support questions or type 'back to chat' to return to regular chat mode.",
-          sender: 'bot'
         }]);
+        
+        // Clear support session states and return to normal mode
+        setTimeout(() => {
+          setSupportFormStage(0);
+          setSupportUserName('');
+          setSupportUserPhone('');
+          setSupportUserEmail('');
+          setSupportQuery('');
+          setIsSupportMode(false);
+          setSupportMessages([]);
+          setMessages(prev => [...prev, { 
+            text: "You've returned to regular chat mode. How can I help you today?", 
+            sender: 'bot' 
+          }]);
+        }, 2000);
       } else {
         setSupportMessages(prev => [...prev, { 
           text: "Failed to submit your query. Please try again later.", 
@@ -248,13 +447,34 @@ const Chatbot = () => {
         text: "Network error. Please try again later.", 
         sender: 'bot' 
       }]);
-    } finally {
-      setIsTyping(false);
     }
   };
+  // const toggleSupportMode = () => {
+  //   if (isSupportMode) {
+  //     setIsSupportMode(false);
+  //     setSupportMessages([]);
+  //     setMessages(prev => [...prev, { 
+  //       text: "You've returned to regular chat mode. How can I help you today?", 
+  //       sender: 'bot' 
+  //     }]);
+  //   } else {
+  //     setIsSupportMode(true);
+  //     setSupportMessages([
+  //       { text: "You are now in support mode. Please describe your issue or question.", sender: 'bot' },
+  //       { text: "Type 'back to chat' at any time to return to regular chat mode.", sender: 'bot' }
+  //     ]);
+  //   }
+  // };
 
   const toggleSupportMode = () => {
     if (isSupportMode) {
+      // Clear support session states when returning to chat mode
+      setSupportFormStage(0);
+      setSupportUserName('');
+      setSupportUserPhone('');
+      setSupportUserEmail('');
+      setSupportQuery('');
+      setAwaitingEmailConfirmation(false); // Add this line
       setIsSupportMode(false);
       setSupportMessages([]);
       setMessages(prev => [...prev, { 
@@ -263,9 +483,11 @@ const Chatbot = () => {
       }]);
     } else {
       setIsSupportMode(true);
+      setSupportFormStage(0); // Start fresh
       setSupportMessages([
+        { text: "Click 'back to chat' at any time to return to regular chat mode.", sender: 'bot' },
         { text: "You are now in support mode. Please describe your issue or question.", sender: 'bot' },
-        { text: "Type 'back to chat' at any time to return to regular chat mode.", sender: 'bot' }
+        { text: "Please enter your name:", sender: 'bot' }
       ]);
     }
   };
@@ -447,7 +669,7 @@ const Chatbot = () => {
   }, []);
 
   const handleSendMessage = () => {
-    if (inputValue.trim() === '') return;
+    if (inputValue.trim() === '' || (isSupportMode && awaitingEmailConfirmation)) return;
     
     setIsAnimatingSend(true);
     const userMessage = inputValue;
@@ -500,7 +722,9 @@ const Chatbot = () => {
   };
 
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter') handleSendMessage();
+    if (e.key === 'Enter' && !(isSupportMode && awaitingEmailConfirmation)) {
+      handleSendMessage();
+    }
   };
 
   if (!isClient) return null;
@@ -597,12 +821,13 @@ return (
                   message.sender === 'user' ? 'bg-[#FFE0E1]' : 'bg-[#DFF0FF]'
                 }`}
               >
-                <div className="font-jost text-[14px] font-normal leading-[120%] text-black">
+                <div className="font-jost text-[14px] font-normal leading-[120%] text-black break-words">
                   {renderMessageWithLinks(message.text)}
                 </div>
               </div>
             </div>
           ))}
+
 
           {!isSupportMode && showSupportPrompt && isLoggedIn && (
             <div className="flex justify-start">
@@ -622,6 +847,27 @@ return (
                     className="px-3 py-1 bg-gray-200 text-gray-700 rounded-md"
                   >
                     No
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {isSupportMode && awaitingEmailConfirmation && (
+            <div className="flex justify-start">
+              <div className="max-w-[80%] inline-block px-[16px] py-[12px] rounded-[24px] bg-[#DFF0FF]">
+                <div className="flex gap-2 mt-2">
+                  <button 
+                    onClick={() => handleEmailConfirmation(true)}
+                    className="px-3 py-1 bg-gradient-to-b from-[#8E2DE2] to-[#4A00E0] text-white rounded-md text-sm"
+                  >
+                    Yes, use this email
+                  </button>
+                  <button 
+                    onClick={() => handleEmailConfirmation(false)}
+                    className="px-3 py-1 bg-gray-200 text-gray-700 rounded-md text-sm"
+                  >
+                    No, change email
                   </button>
                 </div>
               </div>
@@ -733,25 +979,31 @@ return (
         ) : (
           <div className="inline-flex items-center gap-[8px] sm:gap-[10px] w-full justify-center">
             <div className={`flex ${isMobile ? 'w-[85%]' : 'w-[336px]'} h-[48px] ${isMobile ? 'px-[10px]' : 'px-[24px]'} py-[10px] items-center justify-center gap-[10px] rounded-[16px] bg-white shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)]`}>
-              <input 
-                type="text" 
-                value={inputValue}
-                onChange={handleInputChange}
-                onKeyPress={handleKeyPress}
-                placeholder={
-                  awaitingEmail 
+          
+            <input 
+              type="text" 
+              value={inputValue}
+              onChange={handleInputChange}
+              onKeyPress={handleKeyPress}
+              disabled={isSupportMode && awaitingEmailConfirmation}
+              placeholder={
+                (isSupportMode && awaitingEmailConfirmation)
+                  ? "Please use the buttons above to confirm your email"
+                  : awaitingEmail 
                     ? "Please enter your email address" 
                     : isMobile 
                       ? "Enter your text here" 
                       : "Ask anything..."
-                }
-                className={`w-full font-jost text-[14px] font-normal md:font-semibold leading-[120%] text-[#252525] placeholder-[#6D6D6D] focus:outline-none ${isMobile ? 'text-center focus:text-left' : ''}`}
-              />
+              }
+              className={`w-full font-jost text-[14px] font-normal md:font-semibold leading-[120%] text-[#252525] placeholder-[#6D6D6D] focus:outline-none ${isMobile ? 'text-center focus:text-left' : ''} ${isSupportMode && awaitingEmailConfirmation ? 'cursor-not-allowed opacity-50' : ''}`}
+            />
+
             </div>
-            <button 
-              onClick={handleSendMessage}
-              className={`${isMobile ? 'w-[40px] h-[40px]' : 'w-[48px] h-[48px]'} flex items-center justify-center ${isMobile ? 'bg-[#0066B3]' : 'bg-gradient-to-b from-[#8E2DE2] to-[#4A00E0]'} rounded-full ${isMobile ? 'shadow-[4px_2px_4px_rgba(0,0,0,0.25)] border border-white' : 'shadow-md hover:shadow-lg transition-shadow'}`}
-            >
+              <button 
+                onClick={handleSendMessage}
+                disabled={isSupportMode && awaitingEmailConfirmation}
+                className={`${isMobile ? 'w-[40px] h-[40px]' : 'w-[48px] h-[48px]'} flex items-center justify-center ${isMobile ? 'bg-[#0066B3]' : 'bg-gradient-to-b from-[#8E2DE2] to-[#4A00E0]'} rounded-full ${isMobile ? 'shadow-[4px_2px_4px_rgba(0,0,0,0.25)] border border-white' : 'shadow-md hover:shadow-lg transition-shadow'} ${isSupportMode && awaitingEmailConfirmation ? 'opacity-50 cursor-not-allowed' : ''}`}
+              >
               {isMobile ? (
                 <svg xmlns="http://www.w3.org/2000/svg"
                   className={`w-5 h-5 text-white ${isAnimatingSend ? 'animate-send-message' : ''}`}
