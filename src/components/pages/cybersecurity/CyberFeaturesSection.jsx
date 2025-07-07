@@ -28,7 +28,7 @@ export default function CyberFeaturesSection({ heading }) {
       video: "/videos/cyberVideo5.mp4",
     },
     {
-      title: "Third-Party Risk Managemnet",
+      title: "Third-Party Risk Management",
       description:
         "Whether you're launching or improving a Third-Party Risk Management (TPRM) program, our experts ensure every phase is seamlessly integrated to strengthen your risk posture.Our scalable TPRM services provide clear visibility into vendor activities and align with your business and compliance needs—helping you manage third-party risks with confidence.",
       video: "/videos/cyberVideo6.mp4",

@@ -59,7 +59,7 @@ const Page = () => {  return (
             "@type": "FAQPage",
             "mainEntity": [{
               "@type": "Question",
-              "name": "1. How can I get in touch with Appit Software?",
+              "name": "How can I get in touch with Appit Software?",
               "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "You can contact Appit Software using the contact form on the website, by email, or by reaching out to one of their global offices."

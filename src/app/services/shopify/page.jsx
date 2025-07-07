@@ -37,7 +37,7 @@ const Page = () => {
   const sectionsData = [
     {
       title: `Shopify Solutions Store Setup & Configuration`,
-      para: `In today's rapidly evolving digital landscape, establishing a robust, secure and scalable onlinepresence is crucial for the success of your business. At Appit, we provide a comprehensive rangeof eCommerce services aimed at assisting you in creating, managing, and expanding your onlinestore. Whether you are launching a new venture or seeking to enhance an existing platform, ourteam of specialists is dedicated to delivering customized solutions that yield tangible results.`,
+      para: `In today's rapidly evolving digital landscape, establishing a robust, secure and scalable onlinepresence is crucial for the success of your business. At Appit, we provide a comprehensive rangeof eCommerce services aimed at assisting you in creating, managing, and expanding your onlinestore. Whether you are launching a new venture or seeking to enhance an existing platform, our team of specialists is dedicated to delivering customized solutions that yield tangible results.`,
       video: "/videos/shopifyV2.mp4",
       reverse: true,
     },

@@ -18,13 +18,13 @@ const Footer = () => {
             Privacy Policy
           </Link>
           <span className="mx-1 sm:mx-2 inline">|</span>
-          <Link href="/terms" className="whitespace-nowrap hover:text-[#EC1C26] transition-colors duration-300 text-[9px] xs:text-xs sm:text-sm md:text-base">
+          <Link href="/termsconditions" className="whitespace-nowrap hover:text-[#EC1C26] transition-colors duration-300 text-[9px] xs:text-xs sm:text-sm md:text-base">
             Terms & Conditions
           </Link>
           <span className="mx-1 sm:mx-2 inline">|</span>
-          <Link href="/sitemap.xml" className="whitespace-nowrap hover:text-[#EC1C26] transition-colors duration-300">
+          <a href="https://www.google.com/maps/place/APPIT+Software+Solutions+Private+Limited/@17.4468931,78.3522052,16z/data=!4m6!3m5!1s0x3bcb93e1cd2b5181:0x6953abcde44fb0fc!8m2!3d17.4469061!4d78.3543102!16s%2Fg%2F11dfgs33hw?entry=ttu&g_ep=EgoyMDI1MDYzMC4wIKXMDSoASAFQAw%3D%3D" target='_blank' className="whitespace-nowrap hover:text-[#EC1C26] transition-colors duration-300">
             Sitemap
-          </Link>
+          </a>
         </div>
       </div>
       

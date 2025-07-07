@@ -1,4 +1,4 @@
-import { OutlineButton } from '../../../components/layout/buttons/custom.button'
+git import { OutlineButton } from '../../../components/layout/buttons/custom.button'
 import Container from '../../../components/layout/container'
 import Section from '../../../components/layout/section-box'
 import React from 'react'

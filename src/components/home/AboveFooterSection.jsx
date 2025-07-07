@@ -178,7 +178,7 @@ const AboveFooterSection = ({socialMediaLink=true}) => {
           </h2>
           
           {/* Actual Links Container */}
-          <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-4 xs:gap-6 sm:gap-8 md:gap-12 w-full px-0 sm:px-4 md:px-[60px] lg:px-[120px] mb-4">
+          <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-4 xs:gap-6 sm:gap-8 md:gap-12 w-full px-0 sm:px-4 md:px-[50px] lg:px-[0px] mb-4">
             {/* Container 1 */}
             <div className="flex">
               <div className="w-1 h-[129px] bg-[#0066B3]"></div>

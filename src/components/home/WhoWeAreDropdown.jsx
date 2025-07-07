@@ -201,7 +201,7 @@ export default function WhoWeAreDropdown({ isOpen, onClose, isMobile = false }) 
           gridColumn: '2 / span 1' 
         }}
       >
-        <p className="w-full md:w-[636px] font-['Jost'] text-[16px] leading-[120%] text-black">
+        <p className="w-full font-['Jost'] text-[16px] leading-[120%] text-black">
           APPIT Software aims to deliver IT Services & Business Solutions that exceed the client's expectations. It is possible only when we update ourselves to agile and innovative IT solutions that can serve value to the business.
         </p>
         <div>
