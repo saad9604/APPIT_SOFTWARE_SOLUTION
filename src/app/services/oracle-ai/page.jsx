@@ -7,6 +7,7 @@ import OracleHero from "../../../components/pages/oralce-ai/oracle-hero";
 import TransparentHeader from "../../../components/layout/transparent-header/transparent-header";
 import HideDefaultHeader from "../../../components/layout/transparent-header/hide-default-header";
 import ImageWithTextSection from "../../../components/layout/image-text-section";
+
 import {
   BenefitData,
   faqData,
@@ -147,6 +148,7 @@ const Page = () => {
       />
       <TransparentHeader />
       <HideDefaultHeader />
+     
       <OracleHero data={oracleHeroData} className="md:ml-[51px] mr-auto" />
 
       <ImageWithTextSection

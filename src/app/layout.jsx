@@ -1,6 +1,8 @@
 import { Inter, Poppins, Jost } from 'next/font/google'
 import './globals.css'
 import '@/styles/animations.css'
+import 'react-phone-input-2/lib/style.css';
+
 // import EmailJSInitializer from '@/components/email/EmailJSInitializer'
 import ChatbotWithPathCheck from '@/components/layout/ChatbotWithPathCheck'
 import ClientLayout from './clientLayout'
