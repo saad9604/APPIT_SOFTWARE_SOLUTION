@@ -172,7 +172,7 @@ const AboveFooterSection = ({socialMediaLink=true}) => {
         )}
         
         {/* Quick Links Container */}
-        <div className={`w-full mb-6 sm:mb-8 md:mb-10 h-[250px] ${socialMediaLink ? '' : 'mt-10'}`}>
+<div className={`w-full h-[350px] mb-6 sm:mb-8 md:mb-10 max-[479px]:mb-[420px] ${socialMediaLink ? '' : 'mt-10'}`}>
           <h2 className="text-[#252525] font-jost text-xl sm:text-2xl md:text-3xl font-bold leading-[120%] mb-4 sm:mb-6 md:mb-8 h-[70]">
             Quick links
           </h2>
