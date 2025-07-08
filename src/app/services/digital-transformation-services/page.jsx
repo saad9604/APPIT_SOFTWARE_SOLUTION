@@ -12,7 +12,7 @@ import Footer from "@/components/home/Footer";
 import Script from "next/script";
 
 export const metadata = {
-  title: 'Digital Transformation Services | Empowering Future-Ready Enterprises 2025',
+  title: 'Appit Digital Transformation Services | Empowering Future-Ready Enterprises 2025',
   description: 'Unlock innovation and efficiency with Appit\'s Digital Transformation Services. We help businesses modernize operations, enhance customer experience, and drive growth with cutting-edge technology solutions.',
   keywords: [
     'Digital transformation services',

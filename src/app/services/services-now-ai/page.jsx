@@ -18,7 +18,7 @@ import Footer from "@/components/home/Footer";
 import Script from "next/script";
 
 export const metadata = {
-  title: 'ServiceNow AI Solutions.',
+  title: 'ServiceNow AI Solutions | APPIT Software Solutions Inc.',
   description: 'APPIT Software Solutions Inc. leverages ServiceNow AI Solutions to transform enterprise operations with intelligent automation and streamlined workflows.',
   keywords: [
     'ServiceNow AI Solutions',

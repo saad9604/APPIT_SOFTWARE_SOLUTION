@@ -16,7 +16,7 @@ import React from "react";
 import Script from "next/script";
 
 export const metadata = {
-  title: 'All-in-One CRM Solution',
+  title: 'All-in-One CRM Solution | Appit Software Customer Management',
   description: 'Manage sales, marketing, and customer service in one place with Appit Software\'s All-in-One CRM Solution. Boost customer relationships, and streamline workflows.',
   keywords: [
     'All-in-One CRM Solution',

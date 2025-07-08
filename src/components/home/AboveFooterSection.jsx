@@ -96,9 +96,16 @@ const AboveFooterSection = ({socialMediaLink=true}) => {
                   </p>
                 </div>
               </a>
-              
-              {/* YouTube Container */}
-              <a href='https://www.youtube.com/@appitsoftwaresolutions346'  target="_blank" className="flex items-center gap-3 sm:gap-4">
+             
+              {/* YouTube Container */}  
+               <a
+                href="https://www.youtube.com/@appitsoftwaresolutions346/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 sm:gap-4"
+                aria-label="YouTube"
+              >
+              <div className="flex items-center gap-3 sm:gap-4">
                 <div className="w-8 h-8 sm:w-10 sm:h-10 aspect-square">
                   <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 41 40" fill="none">
                     <path d="M17.1666 25.0002L25.8166 20.0002L17.1666 15.0002V25.0002ZM36.4333 11.9502C36.6499 12.7335 36.7999 13.7835 36.8999 15.1168C37.0166 16.4502 37.0666 17.6002 37.0666 18.6002L37.1666 20.0002C37.1666 23.6502 36.8999 26.3335 36.4333 28.0502C36.0166 29.5502 35.0499 30.5168 33.5499 30.9335C32.7666 31.1502 31.3333 31.3002 29.1333 31.4002C26.9666 31.5168 24.9833 31.5668 23.1499 31.5668L20.4999 31.6668C13.5166 31.6668 9.16659 31.4002 7.44992 30.9335C5.94992 30.5168 4.98325 29.5502 4.56659 28.0502C4.34992 27.2668 4.19992 26.2168 4.09992 24.8835C3.98325 23.5502 3.93325 22.4002 3.93325 21.4002L3.83325 20.0002C3.83325 16.3502 4.09992 13.6668 4.56659 11.9502C4.98325 10.4502 5.94992 9.4835 7.44992 9.06683C8.23325 8.85016 9.66659 8.70016 11.8666 8.60016C14.0333 8.4835 16.0166 8.4335 17.8499 8.4335L20.4999 8.3335C27.4833 8.3335 31.8333 8.60016 33.5499 9.06683C35.0499 9.4835 36.0166 10.4502 36.4333 11.9502Z" fill="black"/>
@@ -112,6 +119,7 @@ const AboveFooterSection = ({socialMediaLink=true}) => {
                     Appit Solutions
                   </p>
                 </div>
+              </div>
               </a>
               
               {/* Instagram Container */}
@@ -164,7 +172,7 @@ const AboveFooterSection = ({socialMediaLink=true}) => {
         )}
         
         {/* Quick Links Container */}
-        <div className={`w-full mb-6 sm:mb-8 md:mb-10 h-[250px] ${socialMediaLink ? '' : 'mt-10'}`}>
+<div className={`w-full h-[350px] mb-6 sm:mb-8 md:mb-10 max-[479px]:mb-[420px] ${socialMediaLink ? '' : 'mt-10'}`}>
           <h2 className="text-[#252525] font-jost text-xl sm:text-2xl md:text-3xl font-bold leading-[120%] mb-4 sm:mb-6 md:mb-8 h-[70]">
             Quick links
           </h2>
@@ -310,7 +318,7 @@ const AboveFooterSection = ({socialMediaLink=true}) => {
         </div>
         
         {/* Countries Container */}
-        <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 w-full">
+<div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-4 xs:gap-6 sm:gap-8 md:gap-12 w-full px-0 sm:px-4 md:px-[60px] lg:px-[120px] mb-4 mt-0">
           {/* India Container */}
           <div className="flex items-start sm:items-center gap-3 sm:gap-4">
             <div className="w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0">

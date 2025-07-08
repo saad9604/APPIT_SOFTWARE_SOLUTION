@@ -14,7 +14,7 @@ import Footer from "@/components/home/Footer";
 import Script from "next/script";
 
 export const metadata = {
-  title: 'Offshore Development Center And Managed Services',
+  title: 'Offshore Development Center And Managed Services | APPIT Software - 2025',
   description: 'Explore APPIT Software Solutions Inc. Offshore Development Center And Managed Services to optimize your IT operations.',
   keywords: [
     'Offshore Development Center And Managed Services',

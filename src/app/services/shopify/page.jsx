@@ -12,7 +12,7 @@ import Footer from "@/components/home/Footer";
 import Script from "next/script";
 
 export const metadata = {
-  title: 'Shopify Solutions',
+  title: 'Shopify Solutions | APPIT Software Solutions Inc.',
   description: 'APPIT Software\'s expertise in Shopify Solutions develops intuitive and robust eCommerce platforms that ensure a seamless shopping experience for your customers.',
   keywords: [
     'Shopify Solutions',

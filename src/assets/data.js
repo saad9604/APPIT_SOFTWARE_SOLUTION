@@ -75,7 +75,7 @@ export const BenefitData = [
   },
   {
     iconSrc: "/images/svgs/benefit_4.svg",
-    title: "Personalized customer Experience",
+    title: "Personalized customer Experience", 
     para: "Deliver personalized experiences with AI-driven customer insights",
   },
   {

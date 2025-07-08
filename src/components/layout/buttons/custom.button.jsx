@@ -4,38 +4,32 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
-// Outline style button
 export const OutlineButton = ({ children, className, href = "/contact" }) => {
-  return (
-    <a href={href} passHref className={cn("group ", className)}>
-      <Button variant="outline" size="xl" className="w-full">
-        <span className="group-hover:-translate-x-1 um_transition">
-          {children}
-        </span>
-        <ArrowRight
-          className="!w-8 !h-8 group-hover:-rotate-12 transition-all ease-in-out duration-300"
-          strokeWidth={1}
-        />
-      </Button>
-    </a>
-  );
-};
+  const isExternal = href?.startsWith("mailto:") || href?.startsWith("http");
 
-export const FilledButton = ({
-  children,
-  className,
-  href = "/contact",
-  asChild,
-}) => {
-  return (
-    <Link href={href} passHref className={cn("group ", className)}>
-      <Button
-        size="lg"
-        asChild={asChild} // ✅ Forward it here
-      >
+  const content = (
+    <Button variant="outline" size="xl" className="w-full">
+      <span className="group-hover:-translate-x-1 um_transition">
         {children}
-        <ArrowRight className="!w-6 !h-6 bg-white text-primary rounded-full group-hover:text-secondary group-hover:-rotate-12 transition-all ease-in-out duration-300 group-hover:translate-x-1" />
-      </Button>
+      </span>
+      <ArrowRight
+        className="!w-8 !h-8 group-hover:-rotate-12 transition-all ease-in-out duration-300"
+        strokeWidth={1}
+      />
+    </Button>
+  );
+
+  if (isExternal) {
+    return (
+      <a href={href} className={cn("group", className)}>
+        {content}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={href} className={cn("group", className)}>
+      {content}
     </Link>
   );
 };

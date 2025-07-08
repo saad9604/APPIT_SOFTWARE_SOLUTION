@@ -81,12 +81,12 @@ export default function Hero() {
             className="flex flex-col justify-center items-start gap-2 sm:gap-3 md:gap-4 lg:gap-5 w-full max-w-[260px] xs:max-w-[300px] sm:max-w-[340px] md:max-w-[400px] lg:max-w-[450px]"
           >
             {/* Heading with responsive specifications */}
-            <h1 
+         <h1 
               className="font-jost text-white text-lg sm:text-xl md:text-xl lg:text-[27px] font-semibold leading-[120%] w-full"
-            >
-              Revolutionize your business with AI-driven solutions from APPIT Software Solutions
-            </h1>
-            
+>
+  Revolutionize Your Business With AI-Driven Solutions From APPIT Software Solutions
+</h1>
+
             {/* Subheading/paragraph with responsive specifications */}
             <p 
               className="font-jost text-[#f2f2f2] text-sm sm:text-base md:text-base lg:text-[21px] font-normal leading-[120%] w-full"

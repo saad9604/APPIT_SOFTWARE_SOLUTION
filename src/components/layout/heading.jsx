@@ -81,7 +81,7 @@ const HeadingPara = ({
 
   return (
     <div className={cn("flex flex-col text-black gap-3 sm:gap-5", className)}>
-      <h2
+      <h1
         className={cn(
           "capitalize font-semibold font-jost text-[40px] leading-[120%] text-[#252525]",
           defaultHeading,
@@ -89,7 +89,7 @@ const HeadingPara = ({
         )}
       >
         {getHighlightedTitle()}
-      </h2>
+      </h1>
       {lineByLine.length > 0 ? (
         <div className="flex flex-col gap-1">
           {lineByLine.map((line, index) => (

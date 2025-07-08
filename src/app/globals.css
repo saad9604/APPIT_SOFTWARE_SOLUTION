@@ -271,3 +271,15 @@ input[type="number"] {
 .hide-scrollbar::-webkit-scrollbar {
   display: none; /* Chrome, Safari */
 }
+@media only screen and (max-width: 1023px) {
+  .responsive-margin {
+    margin-top: 250px;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .responsive-margin {
+    margin-top: 400px;
+    margin-top: -100px;
+  }
+}

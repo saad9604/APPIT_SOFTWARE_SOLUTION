@@ -345,7 +345,7 @@ export default function WhoWeAreDropdown({ isOpen, onClose, isMobile = false }) 
       className={`fixed inset-0 top-[96px] z-40 w-full overflow-hidden transition-all duration-200 ease-out ${getAnimationClasses()}`} 
       style={{ background: 'transparent' }}>
       {/* Main Dropdown Container */}
-      <div className="w-full mx-auto py-2.5 flex-col justify-center items-center">
+      <div className="w-full mx-auto py-2.5 flex-col justify-center items-center mt-[10px]">
         <div className={`flex flex-col w-full bg-white shadow-lg transition-all duration-200 ease-out ${getAnimationClasses()}`}>
           {/* Blue vertical bar & Who We Are heading */}
           <div className="flex px-10 py-2.5 items-center gap-6 self-stretch border-b border-gray-100">

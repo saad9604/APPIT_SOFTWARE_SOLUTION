@@ -9,9 +9,10 @@ import MapComponent from "../../components/pages/contact/map-component";
 import AboveFooterSection from "../../components/home/AboveFooterSection";
 import Footer from "../../components/home/Footer";
 import Script from "next/script";
+import ScrollToTopButton from '@/components/home/ScrollToTopButton'
 
 export const metadata = {
-  title: 'Global IT Services & Support – 2025',
+  title: 'Contact APPIT Software | Global IT Services & Support – 2025',
   description: 'Contact APPIT Software for Global IT Services & Support. Our offices are in India, the USA, Saudi Arabia, and the UAE.',
   keywords: [
     'Contact APPIT Software', 
@@ -58,7 +59,7 @@ const Page = () => {  return (
             "@type": "FAQPage",
             "mainEntity": [{
               "@type": "Question",
-              "name": "1. How can I get in touch with Appit Software?",
+              "name": "How can I get in touch with Appit Software?",
               "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "You can contact Appit Software using the contact form on the website, by email, or by reaching out to one of their global offices."
@@ -101,10 +102,12 @@ const Page = () => {  return (
       />
       <ContactHero />
       <ContactForm />
-      <ContactCTA />      <ImageWithTextSection sectionsData={sectionsData} />
+      <ContactCTA /> 
+      <ImageWithTextSection sectionsData={sectionsData} />
       <Locations />
       <MapComponent />
       <ContactFAQ />
+      <ScrollToTopButton /> 
       
       {/* Spacer div for adding margin between MapComponent and AboveFooterSection */}
       <div className="my-16 md:my-24"></div>

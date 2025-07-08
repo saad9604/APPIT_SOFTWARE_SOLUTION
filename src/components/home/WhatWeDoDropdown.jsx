@@ -411,7 +411,7 @@ export default function WhatWeDoDropdown({
       style={{ background: "transparent" }}
     >
       {/* Main Dropdown Container */}
-      <div className="w-full mx-auto py-2.5 flex-col justify-center items-center">
+      <div className="w-full mx-auto py-2.5 flex-col justify-center items-center mt-[10px]">
         <div
           className={`flex flex-col w-full bg-white shadow-lg transition-all duration-200 ease-out ${getAnimationClasses()}`}
         >

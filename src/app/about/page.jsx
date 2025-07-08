@@ -19,7 +19,7 @@ import Script from 'next/script'
 
 
 export const metadata = {
-  title: 'IT Services & Business Solutions – 2025',
+  title: 'About APPIT Software - IT Services & Business Solutions – 2025',
   description: 'Discover APPIT Software Solutions Inc., a leading IT services & business solutions specializing in software technologies.',
   keywords: [
     'APPIT Software', 
