@@ -137,7 +137,7 @@ const TeamAboveFooterSection = () => {
         </div>
         
         {/* Quick Links Container */}
-        <div className="w-full mb-6 sm:mb-8 md:mb-10 h-[250px]">
+        <div className="w-full mb-6 sm:mb-8 md:mb-10">
           <h2 className="text-[#252525] font-jost text-xl sm:text-2xl md:text-3xl font-bold leading-[120%] mb-4 sm:mb-6 md:mb-8 h-[70px]">
             Quick links
           </h2>

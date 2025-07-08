@@ -172,13 +172,13 @@ const AboveFooterSection = ({socialMediaLink=true}) => {
         )}
         
         {/* Quick Links Container */}
-<div className={`w-full h-[350px] mb-6 sm:mb-8 md:mb-10 max-[479px]:mb-[420px] ${socialMediaLink ? '' : 'mt-10'}`}>
+<div className={`w-full mb-6 sm:mb-8 md:mb-10 ${socialMediaLink ? '' : 'mt-10'}`}>
           <h2 className="text-[#252525] font-jost text-xl sm:text-2xl md:text-3xl font-bold leading-[120%] mb-4 sm:mb-6 md:mb-8 h-[70]">
             Quick links
           </h2>
           
           {/* Actual Links Container */}
-          <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-4 xs:gap-6 sm:gap-8 md:gap-12 w-full px-0 sm:px-4 md:px-[50px] lg:px-[0px] mb-4">
+          <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-4 xs:gap-6 sm:gap-8 md:gap-12 w-full px-0 sm:px-4 md:px-[60px] lg:px-[120px] mb-4">
             {/* Container 1 */}
             <div className="flex">
               <div className="w-1 h-[129px] bg-[#0066B3]"></div>
