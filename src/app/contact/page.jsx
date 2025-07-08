@@ -102,7 +102,8 @@ const Page = () => {  return (
       />
       <ContactHero />
       <ContactForm />
-      <ContactCTA />      <ImageWithTextSection sectionsData={sectionsData} />
+      <ContactCTA /> 
+      <ImageWithTextSection sectionsData={sectionsData} />
       <Locations />
       <MapComponent />
       <ContactFAQ />
