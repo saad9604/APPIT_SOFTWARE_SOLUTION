@@ -130,81 +130,80 @@ export default function WhatWeDoDropdown({
   );
 
   // Service items for the grid with mapped SVG paths
- const serviceItems = [
-  {
-    icon: 'first',
-    title: 'Oracle AI',
-    subtitle: 'Oracle AI Solutions',
-    href: '/services/oracle-ai'
-  },
-  {
-    icon: 'first',
-    title: 'Service Now AI',
-    subtitle: 'ServiceNow AI Solutions',
-    href: '/services/services-now-ai'
-  },
-  {
-    icon: 'second',
-    title: 'Managed Services',
-    subtitle: 'Outsourced IT Support',
-    href: '/services/manage-services'
-  },
-  {
-    icon: 'third',
-    title: 'Cyber Security GRC Solutions',
-    subtitle: 'Outsourced IT Support',
-    href: '/services/cybersecurity'
-  },
-  {
-    icon: 'fourth',
-    title: 'Offshore Development Center',
-    subtitle: 'Cost-effective, Scalable, Reliable',
-    href: '/services/odc'
-  },
-  {
-    icon: 'fifth',
-    title: 'E-Commerce Services',
-    subtitle: 'AI-Powered Solutions for Smarter Shopping',
-    href: '/services/ecommerce-services'
-  },
-  {
-    icon: 'sixth',
-    title: 'Digital Transformation Services',
-    subtitle: 'Innovate. Automate. Grow',
-    href: '/services/digital-transformation-services'
-  },
-  {
-    icon: 'seventh',
-    title: 'Adobe Commerce (Magento)',
-    subtitle: 'Powering E-Commerce with Adobe Commerce Expertise',
-    href: '/services/adobe-commerce-solution'
-  },
-  {
-    icon: 'eighth',
-    title: 'Magento Open Source',
-    subtitle: 'Flexible E-Commerce Solutions with Magento Open Source',
-    href: '/services/magento-open-source'
-  },
-  {
-    icon: 'nineth',
-    title: 'GenMind Consulting',
-    subtitle: 'From Strategy to Execution',
-    href: '/services/generative-ai'
-  },
-  {
-    icon: 'tenth',
-    title: 'BigCommerce',
-    subtitle: 'Scalable Solutions with BigCommerce Expertise',
-    href: '/services/big-commerce'
-  },
-  {
-    icon: 'eleventh',
-    title: 'Shopify',
-    subtitle: 'Seamless E-Commerce with Shopify Solutions',
-    href: '/services/shopify'
-  }
-];
-
+  const serviceItems = [
+    {
+      icon: "first",
+      title: "Oracle AI",
+      subtitle: "Oracle AI Solutions",
+      href: "/services/oracle-ai",
+    },
+    {
+      icon: "first",
+      title: "Service Now AI",
+      subtitle: "ServiceNow AI Solutions",
+      href: "/services/services-now-ai",
+    },
+    {
+      icon: "second",
+      title: "Managed Services",
+      subtitle: "Outsourced IT Support",
+      href: "/services/manage-services",
+    },
+    {
+      icon: "third",
+      title: "Cyber Security GRC Solutions",
+      subtitle: "Outsourced IT Support",
+      href: "/services/cybersecurity",
+    },
+    {
+      icon: "fourth",
+      title: "Offshore Development Center",
+      subtitle: "Cost-effective, Scalable, Reliable",
+      href: "/services/odc",
+    },
+    {
+      icon: "fifth",
+      title: "E-Commerce Services",
+      subtitle: "AI-Powered Solutions for Smarter Shopping",
+      href: "/services/ecommerce-services",
+    },
+    {
+      icon: "sixth",
+      title: "Digital Transformation Services",
+      subtitle: "Innovate. Automate. Grow",
+      href: "/services/digital-transformation-services",
+    },
+    {
+      icon: "seventh",
+      title: "Adobe Commerce (Magento)",
+      subtitle: "Powering E-Commerce with Adobe Commerce Expertise",
+      href: "/services/adobe-commerce-solution",
+    },
+    {
+      icon: "eighth",
+      title: "Magento Open Source",
+      subtitle: "Flexible E-Commerce Solutions with Magento Open Source",
+      href: "/services/magento-open-source",
+    },
+    {
+      icon: "nineth",
+      title: "GenMind Consulting",
+      subtitle: "From Strategy to Execution",
+      href: "/services/generative-ai",
+    },
+    {
+      icon: "tenth",
+      title: "BigCommerce",
+      subtitle: "Scalable Solutions with BigCommerce Expertise",
+      href: "/services/big-commerce",
+    },
+    {
+      icon: "eleventh",
+      title: "Shopify",
+      subtitle: "Seamless E-Commerce with Shopify Solutions",
+      href: "/services/shopify",
+    },
+  ];
 
   // Products items with new content
   const productItems = [
@@ -278,7 +277,7 @@ export default function WhatWeDoDropdown({
       subtitle: "Assist. Organize. Respond",
       href: "/products/outlook-ai-copilot",
     },
-     {
+    {
       icon: "ats",
       title: "Track Nexus",
       subtitle: "User-friendly Time TrackNexus",
@@ -324,19 +323,23 @@ export default function WhatWeDoDropdown({
       >
         <div className="bg-white shadow rounded-lg overflow-hidden">
           <div className="p-4 border-b">
-            <h3 className="text-lg font-semibold">What We Do</h3>
+            <h3 className="text-lg font-semibold text-[#055087]">What We Do</h3>
           </div>
-          <div className="py-2">
+          <div className="py-2 bg-[#055087]">
             {sidebarTabs.map((tab) => (
               <div
                 key={tab}
-                className="py-2 px-4 hover:bg-gray-50 cursor-pointer flex justify-between items-center group"
+                className={`py-2 px-4 hover:bg-gray-50 cursor-pointer flex justify-between items-center group ${
+                  activeTab === tab ? "text-[#055087] bg-white" : ""
+                }`}
                 onClick={(e) => handleTabClick(tab, e)}
               >
                 <span>{tab}</span>
                 <div
-                  className={`w-[32px] h-[32px] text-[#055087] group-hover:text-[#8B0000] transition-all duration-300 ${
-                    activeTab === tab ? "rotate-90" : ""
+                  className={`w-[32px] h-[32px]  group-hover:text-[#8B0000] transition-all duration-300 ${
+                    activeTab === tab
+                      ? "rotate-90 text-[#055087]"
+                      : "text-white"
                   }`}
                 >
                   {rightArrow}
@@ -424,7 +427,7 @@ export default function WhatWeDoDropdown({
           {/* Main content area with bottom padding only */}
           <div className="flex px-[10px] items-center gap-[24px] self-stretch pb-[20px]">
             {/* Left Sidebar with bottom padding only */}
-            <div className="flex w-[300px] py-[16px] pb-[20px] flex-col items-center self-stretch bg-[#DFF0FF]">
+            <div className="flex w-[300px] py-[16px] pb-[20px] flex-col items-center self-stretch bg-[#055087]">
               {sidebarTabs.map((tab) => (
                 <div
                   key={tab}
@@ -433,14 +436,16 @@ export default function WhatWeDoDropdown({
                   onMouseLeave={handleTabLeave}
                   className={`flex py-1.5 px-6 justify-between items-center self-stretch cursor-pointer transition-all duration-300 group ${
                     activeTab === tab
-                      ? "bg-white"
+                      ? "bg-white text-[#055087]"
                       : "hover:bg-blue-100 hover:pl-8"
                   }`}
                 >
                   <span className="font-semibold">{tab}</span>
                   <div
-                    className={`w-[32px] h-[32px] text-[#055087] group-hover:text-[#8B0000] transition-all duration-300 ${
-                      activeTab === tab ? "rotate-90" : ""
+                    className={`w-[32px] h-[32px]  group-hover:text-[#8B0000] transition-all duration-300 ${
+                      activeTab === tab
+                        ? "rotate-90 text-[#055087]"
+                        : "text-white"
                     }`}
                   >
                     {rightArrow}
@@ -460,10 +465,10 @@ export default function WhatWeDoDropdown({
               }}
             >
               {activeItems.map((item, index) => {
-                 const ItemComponent = item.href ? Link : "div";
-              const itemProps = item.href
-                ? { href: item.href, prefetch: true }
-                : {};
+                const ItemComponent = item.href ? Link : "div";
+                const itemProps = item.href
+                  ? { href: item.href, prefetch: true }
+                  : {};
 
                 return (
                   <ItemComponent
