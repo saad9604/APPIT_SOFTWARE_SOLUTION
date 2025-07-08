@@ -143,7 +143,7 @@ const TeamAboveFooterSection = () => {
           </h2>
           
           {/* Actual Links Container */}
-<div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-4 xs:gap-6 sm:gap-8 md:gap-12 w-full px-0 mb-4">
+<div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-4 xs:gap-6 sm:gap-8 md:gap-12 w-full px-0">
             {/* Container 1 */}
             <div className="flex">
               <div className="w-1 h-[129px] bg-[#0066B3]"></div>
@@ -295,7 +295,7 @@ const TeamAboveFooterSection = () => {
         </div>
         
         {/* Countries Container */}
-<div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 w-full">
+<div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 w-full responsive-margin">
           {/* India Container */}
           <div className="flex items-start sm:items-center gap-3 sm:gap-4">
             <div className="w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0">
