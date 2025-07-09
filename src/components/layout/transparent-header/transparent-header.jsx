@@ -8,7 +8,7 @@ import WhoWeAreDropdown from "@/components/home/WhoWeAreDropdown";
 
 export default function TransparentHeader() {
   const pathname = usePathname();
-   const isOracleAIPage = pathname.includes('/services');
+  const isOracleAIPage = pathname.includes("/services");
 
   const isHelixAiPage = pathname === "/products/helix-ai-pharma";
   const isTrackNexus = pathname === "/products/track-nexus";
@@ -19,10 +19,14 @@ export default function TransparentHeader() {
   const prevPathRef = useRef(pathname);
 
   const textColor =
-    isOracleAIPage || isHelixAiPage || isTrackNexus || isAllInOneCrmPage || isATS || isOutlookAICopilot
+    isOracleAIPage ||
+    isHelixAiPage ||
+    isTrackNexus ||
+    isAllInOneCrmPage ||
+    isATS ||
+    isOutlookAICopilot
       ? "text-white"
       : "text-[#000]";
-
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isWhatWeDoOpen, setIsWhatWeDoOpen] = useState(false);
@@ -211,7 +215,13 @@ export default function TransparentHeader() {
 
   // Hamburger menu color
   const hamburgerColor =
-    (isOracleAIPage || isHelixAiPage || isTrackNexus || isAllInOneCrmPage || isATS || isOutlookAICopilot) && !scrolled
+    (isOracleAIPage ||
+      isHelixAiPage ||
+      isTrackNexus ||
+      isAllInOneCrmPage ||
+      isATS ||
+      isOutlookAICopilot) &&
+    !scrolled
       ? "bg-white"
       : "bg-[#003366]";
 
@@ -329,8 +339,9 @@ export default function TransparentHeader() {
               isInitialRender ? "no-transition" : ""
             }`}
           >
-            <Link href="/contact"
-              className={`group flex ${getButtonSize()} items-center rounded-[32px] bg-[#0066B3] text-white font-semibold leading-[120%] font-jost border-none cursor-pointer transition-all duration-300 hover:bg-[#A50F15]`}
+            <Link
+              href="/contact"
+              className={`group flex ${getButtonSize()} items-center rounded-[32px] bg-blue-600 text-white font-semibold leading-[120%] font-jost border-none cursor-pointer transition-all duration-300 hover:bg-[#A50F15]`}
             >
               <span>Get in touch</span>
               <div className="relative flex items-center justify-center w-[30px] h-[30px] lg:w-[34px] lg:h-[34px]">
