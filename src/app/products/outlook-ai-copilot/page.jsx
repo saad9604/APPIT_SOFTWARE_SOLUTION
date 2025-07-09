@@ -25,11 +25,7 @@ export const metadata = {
     'Outlook AI Copilot',
     'Outlook AI Copilot Product Services',
     'Outlook AI Copilot Software Services',
-    'Outlook 365 AI Write Email Software Services',
-    'email automation',
-    'intelligent meeting scheduling',
-    'AI email assistant',
-    'productivity tools'
+    'Outlook 365 AI Write Email Software Services'
   ]
 };
 

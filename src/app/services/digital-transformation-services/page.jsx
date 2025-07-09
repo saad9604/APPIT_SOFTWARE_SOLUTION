@@ -18,11 +18,9 @@ export const metadata = {
     'Digital transformation services',
     'Digital transformation consulting',
     'Digital transformation strategy',
-    'Digital transformation companies',
+    'Digital transformation company\'s',
     'Digital transformation solutions',
-    'AI in digital transformation',
-    'business process modernization',
-    'enterprise digital innovation'
+    'AI in digital transformation'
   ]
 };
 

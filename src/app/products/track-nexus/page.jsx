@@ -27,9 +27,7 @@ export const metadata = {
     'Productivity software pricing',
     'Time tracking tool pricing comparison',
     'Time tracking pricing plans',
-    'Cost of the time tracking app',
-    'team performance tracking',
-    'productivity monitoring'
+    'Cost of the time tracking app'
   ]
 };
 

@@ -18,17 +18,14 @@ import React from "react";
 import Script from "next/script";
 
 export const metadata = {
-  title: 'AI-Driven Talent Acquisition',
+  title: 'AI-Driven Talent Acquisition | Appit Software Recruitment Solutions',
   description: 'Appit Software\'s AI-driven talent acquisition solutions. With intelligent automation, you can discover top talent faster, reduce hiring time, and make smarter recruitment decisions.',
   keywords: [
     'AI-Driven Talent Acquisition',
     'AI Recruitment Software Services',
     'AI Hiring Software Services',
     'AI Recruitment Management System Services',
-    'AI-Driven Talent Acquisition Product Services',
-    'automated hiring process',
-    'intelligent candidate screening',
-    'recruitment AI'
+    'AI-Driven Talent Acquisition Product Services'
   ]
 };
 

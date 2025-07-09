@@ -25,10 +25,7 @@ export const metadata = {
     'pharmaceutical AI solutions', 
     'AI for clinical trials',
     'AI-powered drug development',
-    'predictive modeling in pharma',
-    'pharmaceutical research AI',
-    'patient care AI solutions',
-    'healthcare AI technology'
+    'predictive modeling in pharma'
   ]
 };
 

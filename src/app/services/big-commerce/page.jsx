@@ -14,17 +14,13 @@ import Footer from "@/components/home/Footer";
 import Script from "next/script";
 
 export const metadata = {
-  title: 'BigCommerce Solutions,BigCommerce Store,BigCommerce Service,BigCommerce Migration Services',
+  title: 'BigCommerce Solutions | APPIT Software Solutions Inc',
   description: 'APPIT Software expertise in BigCommerce Solutions to develop robust, adaptable, and scalable eCommerce platforms, ensuring seamless shopping.',
   keywords: [
     'BigCommerce Solutions',
     'BigCommerce Store',
     'BigCommerce Service',
-    'BigCommerce Migration Services',
-    'custom BigCommerce development',
-    'enterprise eCommerce solutions',
-    'headless commerce implementation',
-    'omnichannel retail platform'
+    'BigCommerce Migration Services'
   ]
 };
 

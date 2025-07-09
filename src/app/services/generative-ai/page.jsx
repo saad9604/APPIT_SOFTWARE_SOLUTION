@@ -14,17 +14,14 @@ import AccrelerateSection from "@/components/pages/generative-ai/AccrelerateSect
 import Script from "next/script";
 
 export const metadata = {
-  title: 'AskGenie AI | Intelligent Self-Service By APPIT Software',
+  title: 'GenMind Consulting -Generative AI Advisory By APPIT Software',
   description: 'APPIT Software GenMind Consulting services, we expert guidance in strategizing, and responsible Generative AI solutions to transform your business processes.',
   keywords: [
     'GenMind Consulting',
     'GenMind Consulting And Services',
     'Gen AI Software Services',
     'Legal AI Software Services',
-    'GenAI Application Development Services',
-    'generative artificial intelligence',
-    'AI implementation strategy',
-    'business process automation'
+    'GenAI Application Development Services'
   ]
 };
 

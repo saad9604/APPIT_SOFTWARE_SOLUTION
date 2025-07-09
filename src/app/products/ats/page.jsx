@@ -20,17 +20,14 @@ import React from "react";
 import Script from "next/script";
 
 export const metadata = {
-  title: 'Application Tracking System | ATS by APPIT Software',
-  description: 'Streamline your recruitment process with APPIT Software\'s advanced Application Tracking System (ATS). Manage candidates, automate screening, and make better hiring decisions.',
+  title: 'AI-Driven Talent Acquisition | Appit Software Recruitment Solutions',
+  description: 'Appit Software\'s AI-driven talent acquisition solutions. With intelligent automation, you can discover top talent faster, reduce hiring time, and make smarter recruitment decisions.',
   keywords: [
-    'Application Tracking System',
-    'ATS software',
-    'recruitment automation',
-    'candidate management system',
-    'hiring software solution',
-    'resume screening technology',
-    'talent acquisition platform',
-    'recruitment management system'
+    'AI-Driven Talent Acquisition',
+    'AI Recruitment Software Services',
+    'AI Hiring Software Services',
+    'AI Recruitment Management System Services',
+    'AI-Driven Talent Acquisition Product Services'
   ]
 };
 
