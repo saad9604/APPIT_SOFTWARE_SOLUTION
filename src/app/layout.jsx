@@ -38,7 +38,7 @@ export const metadata = {
   ),
   title: {
     default: "Leading Software Development Company",
-    template: "%s | AppitSoftware",
+ 
   },
   description:
     "Transform your digital vision with AppitSoftware. We create innovative web applications, mobile apps, and enterprise solutions that drive business growth and deliver exceptional user experiences.",
