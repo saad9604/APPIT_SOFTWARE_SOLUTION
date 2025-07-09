@@ -1,4 +1,5 @@
 "use client";
+import GetInTouchButton from "@/app/components2/GetInTouchButton";
 import Link from "next/link";
 // import { useState, useEffect, useRef, useCallback } from "react";
 
@@ -93,16 +94,17 @@ export default function Hero() {
             </p>
 
             {/* Button with responsive specifications */}
-            <Link
+            <GetInTouchButton />
+            {/* <Link
               href="/contact"
               className="font-jost group flex items-center gap-3 sm:gap-4 md:gap-[15px] lg:gap-[20px] rounded-[32px] bg-blue-600 px-4 py-2 sm:px-5 sm:py-3 md:px-4 md:py-2 lg:px-5 lg:py-3 transition-all duration-300 hover:bg-[#A50F15]"
             >
               <span className="text-white text-sm sm:text-base md:text-base lg:text-[18px] font-medium">
                 Get in touch
               </span>
-              <div className="relative flex items-center justify-center w-[28px] h-[28px] sm:w-[32px] sm:h-[32px] md:w-[30px] md:h-[30px] lg:w-[36px] lg:h-[36px]">
-                {/* Default state - original logo */}
-                <svg
+              <div className="relative flex items-center justify-center w-[28px] h-[28px] sm:w-[32px] sm:h-[32px] md:w-[30px] md:h-[30px] lg:w-[36px] lg:h-[36px]"> */}
+            {/* Default state - original logo */}
+            {/* <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="100%"
                   height="100%"
@@ -114,10 +116,10 @@ export default function Hero() {
                     d="M16.0001 2.66665C19.5363 2.66665 22.9277 4.07141 25.4282 6.57189C27.9287 9.07238 29.3334 12.4638 29.3334 16C29.3334 19.5362 27.9287 22.9276 25.4282 25.4281C22.9277 27.9286 19.5363 29.3333 16.0001 29.3333C12.4639 29.3333 9.07248 27.9286 6.57199 25.4281C4.07151 22.9276 2.66675 19.5362 2.66675 16C2.66675 12.4638 4.07151 9.07238 6.57199 6.57189C9.07248 4.07141 12.4639 2.66665 16.0001 2.66665ZM16.2614 9.72265C16.1372 9.8465 16.0387 9.99364 15.9715 10.1556C15.9043 10.3176 15.8697 10.4913 15.8697 10.6666C15.8697 10.842 15.9043 11.0157 15.9715 11.1777C16.0387 11.3397 16.1372 11.4868 16.2614 11.6106L19.3174 14.6666H9.33341C8.97979 14.6666 8.64065 14.8071 8.39061 15.0572C8.14056 15.3072 8.00008 15.6464 8.00008 16C8.00008 16.3536 8.14056 16.6927 8.39061 16.9428C8.64065 17.1928 8.97979 17.3333 9.33341 17.3333H19.3174L16.2614 20.3893C16.1374 20.5131 16.0391 20.6601 15.9719 20.8219C15.9048 20.9837 15.8701 21.1572 15.87 21.3324C15.8699 21.5076 15.9043 21.6811 15.9712 21.843C16.0381 22.0049 16.1363 22.152 16.2601 22.276C16.3839 22.3999 16.5309 22.4983 16.6927 22.5655C16.8545 22.6326 17.0279 22.6673 17.2031 22.6674C17.3783 22.6675 17.5518 22.6331 17.7137 22.5662C17.8756 22.4993 18.0228 22.4011 18.1467 22.2773L23.4801 16.944C23.6042 16.8201 23.7028 16.673 23.77 16.511C23.8372 16.349 23.8718 16.1754 23.8718 16C23.8718 15.8246 23.8372 15.6509 23.77 15.489C23.7028 15.327 23.6042 15.1798 23.4801 15.056L18.1467 9.72265C17.8967 9.47269 17.5576 9.33227 17.2041 9.33227C16.8505 9.33227 16.5115 9.47269 16.2614 9.72265Z"
                     fill="white"
                   />
-                </svg>
+                </svg> */}
 
-                {/* Hover state - circle with arrow */}
-                <div className="absolute inset-0 flex items-center justify-center rounded-full bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            {/* Hover state - circle with arrow */}
+            {/* <div className="absolute inset-0 flex items-center justify-center rounded-full bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <svg
                     width="60%"
                     height="60%"
@@ -136,7 +138,7 @@ export default function Hero() {
                   </svg>
                 </div>
               </div>
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>

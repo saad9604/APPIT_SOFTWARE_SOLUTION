@@ -3,6 +3,9 @@
 import React, { useState } from "react";
 import { Card, CardContent } from "../ui/card";
 import HeadingPara from "../layout/heading";
+import PhoneInput from "react-phone-input-2";
+
+import { FaPhone } from "react-icons/fa";
 
 // ✅ CustomInput moved outside to prevent remounting on each keystroke
 const CustomInput = ({
@@ -38,13 +41,14 @@ const CustomInput = ({
   </div>
 );
 
-export default function UMForm() {
+export default function UMForm({ onClose, isHeadPara }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
+    countryCode: "",
     company: "",
     message: "",
   });
@@ -85,9 +89,11 @@ export default function UMForm() {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
+  console.log(errors);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(`${formData.countryCode} ${formData.phone}`);
 
     if (!validateForm()) return;
 
@@ -107,7 +113,7 @@ export default function UMForm() {
         fields: [
           { name: "firstname", value: formData.name },
           { name: "email", value: formData.email },
-          { name: "phone", value: formData.phone },
+          { name: "phone", value: `${formData.countryCode} ${formData.phone}` },
           { name: "name", value: formData.company },
           { name: "message", value: formData.message },
         ],
@@ -264,12 +270,40 @@ export default function UMForm() {
   }
 
   return (
-    <Card className="bg-white/80 backdrop-blur-sm border-0 !p-0 rounded-[32px] shadow-[0_0_10px_5px_rgba(0,0,0,0.25)]">
+    <Card className="bg-white/80 backdrop-blur-sm border-0 !p-0 rounded-[32px] shadow-[0_0_10px_5px_rgba(0,0,0,0.25)] relative">
       <CardContent className="p-6 md:p-8">
-        <HeadingPara
-          title="We'd love to hear from you! Just fill in the form and we'll be in touch shortly."
-          className="text-start"
-        />
+        {!isHeadPara && (
+          <HeadingPara
+            title="We'd love to hear from you! Just fill in the form and we'll be in touch shortly."
+            className="text-start"
+          />
+        )}
+        {onClose && (
+          <div className="absolute top-4 right-4">
+            <button
+              type="button"
+              onClick={onClose}
+              className="bg-white p-2 rounded-full shadow-[0_0_10px_5px_rgba(0,0,0,0.25)] transition-colors "
+              aria-label="Close"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 text-red-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+        )}
+
         <form onSubmit={handleSubmit} className="mt-6">
           <CustomInput
             name="name"
@@ -280,8 +314,8 @@ export default function UMForm() {
             error={errors.name}
           />
           <div className="flex w-full flex-col md:flex-row items-center gap-0 md:gap-4 justify-between">
-            <div className="w-full">
-              <CustomInput
+            <div className="w-full pb-6 relative">
+              {/* <CustomInput
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
@@ -289,7 +323,52 @@ export default function UMForm() {
                 placeholder="Enter Your Phone Number"
                 icon={phoneIcon}
                 error={errors.phone}
-              />
+              /> */}
+
+              <div className="flex flex-row items-center relative h-12 w-full min-w-0 bg-white px-3  py-1 border border-[rgba(0,0,0,0.1)] rounded-full text-sm xl:text-base 3xl:text-lg transition-[color,box-shadow] shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)] outline-none placeholder-black placeholder:text-[12px] placeholder:leading-[1.2] placeholder:font-normal placeholder:font-jost focus-visible:border-ring focus-visible:rounded-full focus-visible:ring-ring/50 focus-visible:ring-[3px]">
+                <div>
+                  <FaPhone className="text-black rotate-[103deg]" />
+                </div>
+                <PhoneInput
+                  country={"in"}
+                  value={formData.phone}
+                  onChange={(value, data) => {
+                    console.log(data);
+                    const dialCode = "+" + data.dialCode;
+                    setFormData((prev) => ({
+                      ...prev,
+                      phone: value,
+                      countryCode: dialCode,
+                    }));
+                  }}
+                  inputProps={{
+                    name: "phone",
+                  }}
+                  enableSearch
+                  disableCountryCode
+                  inputStyle={{
+                    border: "none",
+                    background: "transparent",
+                    width: "100%",
+                    fontSize: "1rem",
+                    color: "black",
+                    paddingLeft: "40px",
+                  }}
+                  placeholder="Enter Your Phone Number"
+                  containerStyle={{ width: "100%" }}
+                  inputClass="text-sm placeholder-black placeholder:text-[12px]"
+                  buttonStyle={{
+                    border: "none",
+                    background: "transparent",
+                  }}
+                  dropdownStyle={{ zIndex: 9999, color: "black" }}
+                />
+              </div>
+              {errors.phone && (
+                <p className="absolute left-4 bottom-1 text-red-500 text-xs">
+                  {errors.phone}
+                </p>
+              )}
             </div>
             <div className="w-full">
               <CustomInput

@@ -13,7 +13,7 @@ const GetInTouchButton = () => {
       >
         <button
           onClick={() => setShowModal(true)}
-          className={`group flex  items-center px-5 py-2 rounded-[32px] bg-blue-600 text-white font-semibold leading-[120%] font-jost border-none cursor-pointer transition-all duration-300 hover:bg-[#A50F15]`}
+          className={`group flex  items-center px-5 py-2 rounded-[32px] bg-[#0066B3] text-white font-semibold leading-[120%] font-jost border-none cursor-pointer transition-all duration-300 hover:bg-[#A50F15]`}
         >
           <span>Get In Touch</span>
           <div className="ml-2 relative flex items-center justify-center w-[30px] h-[30px] lg:w-[34px] lg:h-[34px]">

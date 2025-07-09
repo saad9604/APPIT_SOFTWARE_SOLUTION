@@ -1,5 +1,6 @@
 "use client";
 
+import GetInTouchButton from "@/app/components2/GetInTouchButton";
 import Container from "../../../layout/container";
 import HeadingPara from "../../../layout/heading";
 import Section from "../../../layout/section-box";
@@ -22,18 +23,19 @@ Outlook AI Copilot Automate email writing, summarize threads, schedule smarter, 
           />
 
           {/* Header-style button with appropriate sizing */}
-          <button className="group flex items-center rounded-[32px] bg-[#0066B3] text-white font-semibold leading-[120%] font-jost border-none cursor-pointer transition-all duration-300 hover:bg-[#A50F15] p-[10px_18px] gap-[12px] text-[17px]">
+          <GetInTouchButton />
+          {/* <button className="group flex items-center rounded-[32px] bg-[#0066B3] text-white font-semibold leading-[120%] font-jost border-none cursor-pointer transition-all duration-300 hover:bg-[#A50F15] p-[10px_18px] gap-[12px] text-[17px]">
             <span>Get a Free Demo</span>
-            <div className="relative flex items-center justify-center w-[30px] h-[30px]">
-              {/* Default state - original logo */}
-              <img
+            <div className="relative flex items-center justify-center w-[30px] h-[30px]"> */}
+          {/* Default state - original logo */}
+          {/* <img
                 src="/images/navbar_icon.svg"
                 alt="Arrow icon"
                 className="w-[28px] h-[28px] group-hover:opacity-0 transition-opacity duration-300"
-              />
+              /> */}
 
-              {/* Hover state - circle with arrow */}
-              <div className="absolute inset-0 flex items-center justify-center rounded-full bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          {/* Hover state - circle with arrow */}
+          {/* <div className="absolute inset-0 flex items-center justify-center rounded-full bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <svg
                   width="20"
                   height="20"
@@ -52,7 +54,7 @@ Outlook AI Copilot Automate email writing, summarize threads, schedule smarter, 
                 </svg>
               </div>
             </div>
-          </button>
+          </button> */}
         </Container>
       </div>
     </Section>

@@ -1,5 +1,6 @@
 "use client";
 
+import GetInTouchButton from "@/app/components2/GetInTouchButton";
 import Container from "../../../layout/container";
 import HeadingPara from "../../../layout/heading";
 import Section from "../../../layout/section-box";
@@ -20,20 +21,19 @@ Hire Smarter & Faster."
             classNamePara="font-medium text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-white/90 leading-relaxed"
             className="max-w-[600px] text-white mt-4 sm:mt-4 mb-6 3xl:mb-10"
           />
-
           {/* Header-style button with appropriate sizing */}
-          <button className="group flex items-center rounded-[32px] bg-[#0066B3] text-white font-semibold leading-[120%] font-jost border-none cursor-pointer transition-all duration-300 hover:bg-[#A50F15] p-[10px_18px] gap-[12px] text-[17px]">
+          <GetInTouchButton />
+          {/* <button className="group flex items-center rounded-[32px] bg-[#0066B3] text-white font-semibold leading-[120%] font-jost border-none cursor-pointer transition-all duration-300 hover:bg-[#A50F15] p-[10px_18px] gap-[12px] text-[17px]">
             <span>Try For Free</span>
-            <div className="relative flex items-center justify-center w-[30px] h-[30px]">
-              {/* Default state - original logo */}
-              <img
-                src="/images/navbar_icon.svg"
-                alt="Arrow icon"
-                className="w-[28px] h-[28px] group-hover:opacity-0 transition-opacity duration-300"
-              />
-
-              {/* Hover state - circle with arrow */}
-              <div className="absolute inset-0 flex items-center justify-center rounded-full bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <div className="relative flex items-center justify-center w-[30px] h-[30px]"> */}
+          {/* Default state - original logo */}
+          {/* <img
+                src="/images/navbar_icon.svg" */}
+          {/* alt="Arrow icon" className="w-[28px] h-[28px] group-hover:opacity-0
+          transition-opacity duration-300" */}
+          {/* /> */}
+          {/* Hover state - circle with arrow */}
+          {/* <div className="absolute inset-0 flex items-center justify-center rounded-full bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <svg
                   width="20"
                   height="20"
@@ -52,7 +52,7 @@ Hire Smarter & Faster."
                 </svg>
               </div>
             </div>
-          </button>
+          </button> */}
         </Container>
       </div>
     </Section>

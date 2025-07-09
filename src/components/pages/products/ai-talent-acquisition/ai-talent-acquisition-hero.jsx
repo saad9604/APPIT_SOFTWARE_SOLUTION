@@ -1,5 +1,6 @@
 "use client";
 
+import GetInTouchButton from "@/app/components2/GetInTouchButton";
 import Container from "../../../../components/layout/container";
 import HeadingPara from "../../../../components/layout/heading";
 import Section from "../../../../components/layout/section-box";
@@ -26,8 +27,10 @@ const AITalentAcquisition = () => {
               classNamePara="text-sm sm:text-base md:text-lg xl:text-xl font-normal mt-2"
               className=""
             />
-
-            <button className="mt-6 group flex items-center rounded-[32px] bg-[#0066B3] text-white font-semibold font-jost transition-all duration-300 hover:bg-[#A50F15] px-6 py-3 gap-3 text-[16px]">
+            <div className="mt-4">
+              <GetInTouchButton />
+            </div>
+            {/* <button className="mt-6 group flex items-center rounded-[32px] bg-[#0066B3] text-white font-semibold font-jost transition-all duration-300 hover:bg-[#A50F15] px-6 py-3 gap-3 text-[16px]">
               <span>Explore Now</span>
               <div className="relative flex items-center justify-center w-[30px] h-[30px]">
                 <img
@@ -54,15 +57,15 @@ const AITalentAcquisition = () => {
                   </svg>
                 </div>
               </div>
-            </button>
+            </button> */}
           </div>
 
           {/* RIGHT SIDE – Contact Form */}
-          <div className="w-full max-w-[560px] bg-white p-6 sm:p-10 rounded-[32px] shadow-[0_0_10px_5px_rgba(0,0,0,0.15)] z-10">
+          {/* <div className="w-full max-w-[560px] bg-white p-6 sm:p-10 rounded-[32px] shadow-[0_0_10px_5px_rgba(0,0,0,0.15)] z-10">
             <div className="w-full px-4 flex justify-center items-center">
-              <div className="w-full max-w-[560px] flex flex-col items-center gap-4">
-                {/* Name Field */}
-                <div className="w-full h-14 px-6 flex items-center gap-4 rounded-[50px] border border-black/10 bg-white shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)]">
+              <div className="w-full max-w-[560px] flex flex-col items-center gap-4"> */}
+          {/* Name Field */}
+          {/* <div className="w-full h-14 px-6 flex items-center gap-4 rounded-[50px] border border-black/10 bg-white shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)]">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -80,10 +83,10 @@ const AITalentAcquisition = () => {
                     placeholder="Enter Your Name"
                     className="w-full text-xs font-jost font-normal leading-[120%] focus:outline-none placeholder:text-black placeholder:font-jost placeholder:text-xs placeholder:font-normal placeholder:leading-[120%]"
                   />
-                </div>
+                </div> */}
 
-                {/* Mobile and Email Fields */}
-                <div className="w-full flex flex-col sm:flex-row gap-4">
+          {/* Mobile and Email Fields */}
+          {/* <div className="w-full flex flex-col sm:flex-row gap-4">
                   <div className="w-full sm:w-1/2 h-14 px-6 flex items-center gap-2 rounded-[50px] border border-black/10 bg-white shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)]">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -123,33 +126,33 @@ const AITalentAcquisition = () => {
                       className="w-full text-xs font-jost font-normal leading-[120%] focus:outline-none placeholder:text-black placeholder:font-jost placeholder:text-xs placeholder:font-normal placeholder:leading-[120%]"
                     />
                   </div>
-                </div>
+                </div> */}
 
-                {/* Level of Experience Field */}
-                <div className="w-full h-14 px-6 flex items-center gap-4 rounded-[50px] border border-black/10 bg-white shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)]">
+          {/* Level of Experience Field */}
+          {/* <div className="w-full h-14 px-6 flex items-center gap-4 rounded-[50px] border border-black/10 bg-white shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)]">
                   <input
                     type="text"
                     placeholder="Level of experience do you need ?"
                     className="w-full text-xs font-jost font-normal leading-[120%] focus:outline-none placeholder:text-black placeholder:font-jost placeholder:text-xs placeholder:font-normal placeholder:leading-[120%]"
                   />
-                </div>
+                </div> */}
 
-                {/* Monthly budget Field */}
-                <div className="w-full h-14 px-6 flex items-center gap-4 rounded-[50px] border border-black/10 bg-white shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)]">
+          {/* Monthly budget Field */}
+          {/* <div className="w-full h-14 px-6 flex items-center gap-4 rounded-[50px] border border-black/10 bg-white shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)]">
                   <input
                     type="text"
                     placeholder="Your monthly budget for this role ?"
                     className="w-full text-xs font-jost font-normal leading-[120%] focus:outline-none placeholder:text-black placeholder:font-jost placeholder:text-xs placeholder:font-normal placeholder:leading-[120%]"
                   />
-                </div>
+                </div> */}
 
-                {/* Submit Button */}
-                <button className="w-full h-14 px-6 mt-4 flex justify-center items-center gap-4 rounded-[16px] bg-gradient-to-r from-[#002C4D] to-[#0066B3] shadow-[2px_4px_4px_2px_rgba(0,0,0,0.25)_inset] text-white font-jost font-semibold text-base leading-[120%]">
+          {/* Submit Button */}
+          {/* <button className="w-full h-14 px-6 mt-4 flex justify-center items-center gap-4 rounded-[16px] bg-gradient-to-r from-[#002C4D] to-[#0066B3] shadow-[2px_4px_4px_2px_rgba(0,0,0,0.25)_inset] text-white font-jost font-semibold text-base leading-[120%]">
                   SUBMIT
-                </button>
-              </div>
+                </button> */}
+          {/* </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </Container>
     </Section>

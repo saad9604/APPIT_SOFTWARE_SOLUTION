@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from "react";
 
 // Custom hook for intersection observer
 function useOnScreen(ref, threshold = 0.1) {
@@ -14,7 +14,7 @@ function useOnScreen(ref, threshold = 0.1) {
       },
       {
         threshold,
-        rootMargin: '0px 0px -100px 0px', // Trigger a bit earlier
+        rootMargin: "0px 0px -100px 0px", // Trigger a bit earlier
       }
     );
 
@@ -37,14 +37,14 @@ export default function ProcessSection() {
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
   const [cardsVisible, setCardsVisible] = useState(false);
-  
+
   // Use the intersection observer to trigger section visibility
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          
+
           // After section becomes visible, trigger card animations with a slight delay
           setTimeout(() => {
             setCardsVisible(true);
@@ -56,7 +56,7 @@ export default function ProcessSection() {
       },
       {
         threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px',
+        rootMargin: "0px 0px -100px 0px",
       }
     );
 
@@ -76,7 +76,7 @@ export default function ProcessSection() {
     // Different delays for different cards
     const baseDelay = 0.05;
     const increment = 0.05;
-    return baseDelay + (index * increment);
+    return baseDelay + index * increment;
   };
 
   const processItems = [
@@ -85,7 +85,7 @@ export default function ProcessSection() {
       title: "Planning",
       paragraph: `From the initial idea to final delivery, our planning phase focuses on setting clear goals and laying the foundation for your brand's success. We identify your business objectives, define a unique brand voice, and strategically pinpoint your target audience. Additionally, we conduct comprehensive competitor analysis to understand industry benchmarks and discover opportunities to differentiate and lead.`,
       icon: (
-          <svg
+        <svg
           xmlns="http://www.w3.org/2000/svg"
           width="60"
           height="60"
@@ -257,13 +257,17 @@ export default function ProcessSection() {
       ref={sectionRef}
       className={`inline-flex flex-col justify-center items-center font-jost
                  px-4 sm:px-8 md:px-16 lg:px-[97px] py-10 sm:py-12 md:py-16 lg:py-[80px] bg-[#F5F6FA] w-full transition-all duration-800 ease-out
-                 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+                 ${isVisible ? "opacity-100" : "opacity-0"}`}
     >
       <div className="flex flex-col items-center gap-6 sm:gap-8 md:gap-[40px] max-w-[1200px] w-full">
         {/* Text container */}
         <div
           className={`flex flex-col items-center gap-3 sm:gap-4 md:gap-[16px] w-full transition-all duration-700 ease-out delay-300
-                     ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+                     ${
+                       isVisible
+                         ? "opacity-100 translate-y-0"
+                         : "opacity-0 translate-y-10"
+                     }`}
           style={{ maxWidth: "1200px" }}
         >
           <h2 className="text-[#EC1C26] text-center font-jost font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-[50px] leading-tight">
@@ -278,14 +282,20 @@ export default function ProcessSection() {
         {processItems.map(({ video, title, paragraph, icon, reverse }, i) => (
           <div
             key={i}
-            className={`flex flex-col ${reverse ? "md:flex-row-reverse" : "md:flex-row"} items-center gap-4 sm:gap-6 md:gap-[30px]
+            className={`flex flex-col ${
+              reverse ? "md:flex-row-reverse" : "md:flex-row"
+            } items-center gap-4 sm:gap-6 md:gap-[30px]
                         p-4 sm:p-6 md:p-[24px] rounded-lg sm:rounded-xl md:rounded-[24px] bg-white w-full max-w-[1200px] group
                         hover:bg-[#0066B3] hover:shadow-[0_0_15px_2px_rgba(0,102,179,0.5)]
-                        transition-all duration-200 ease-out cursor-pointer hover:text-white
+                        transition-all duration-200 ease-out cursor-pointer hover:text-white text-[#0066B3]
                         transform transition-all
-                        ${cardsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'}`}
+                        ${
+                          cardsVisible
+                            ? "opacity-100 translate-y-0"
+                            : "opacity-0 translate-y-16"
+                        }`}
             style={{
-              transitionDuration: "0.35s"
+              transitionDuration: "0.35s",
             }}
           >
             {/* Video container */}
@@ -299,7 +309,7 @@ export default function ProcessSection() {
                 playsInline
               />
             </div>
-            
+
             {/* Content container */}
             <div className="flex flex-col items-start gap-2 sm:gap-3 md:gap-[16px] p-2 sm:p-3 md:p-[5px] w-full md:w-[55%] lg:w-[700px] h-auto md:h-[300px] mt-4 md:mt-0">
               <div className="flex items-center gap-3 sm:gap-4 md:gap-[24px]">
@@ -315,10 +325,10 @@ export default function ProcessSection() {
           </div>
         ))}
       </div>
-      
+
       {/* Import Jost font explicitly */}
       <style jsx>{`
-        @import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800;900&display=swap');
+        @import url("https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800;900&display=swap");
       `}</style>
     </section>
   );
