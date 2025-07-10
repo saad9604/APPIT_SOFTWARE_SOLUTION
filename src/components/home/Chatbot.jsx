@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { loadApiBaseUrl } from '../../utils/loadApiUrl';
 
-let API_BASE_URL = ''; // Declare a placeholder
+let API_BASE_URL = '';
 
 loadApiBaseUrl().then(url => {
   API_BASE_URL = url;
@@ -44,6 +44,25 @@ const renderMessageWithLinks = (text) => {
       </div>
     );
   });
+};
+
+// Phone number validation functions
+const validatePhoneNumber = (phone) => {
+  // Remove all spaces, hyphens, and parentheses for validation
+  const cleanPhone = phone.replace(/[\s\-\(\)]/g, '');
+  
+  // Check if it starts with + (international) or is just digits
+  const phoneRegex = /^(\+\d{1,3})?\d{7,15}$/;
+  return phoneRegex.test(cleanPhone);
+};
+
+const formatPhoneInput = (value) => {
+  // Only allow numbers, spaces, hyphens, parentheses, and plus sign
+  return value.replace(/[^0-9\s\-\(\)\+]/g, '');
+};
+
+const isValidPhoneCharacter = (char) => {
+  return /[0-9\s\-\(\)\+]/.test(char);
 };
 
 const Chatbot = () => {
@@ -352,13 +371,21 @@ const Chatbot = () => {
         }]);
       } else if (supportFormStage === 1) {
         // Collect phone
-        setSupportUserPhone(message);
-        setSupportFormStage(2);
-        setAwaitingEmailConfirmation(true);
-        setSupportMessages(prev => [...prev, { 
-          text: `Your current email is: ${userEmail}\n\nWould you like to use this email for your support query?`, 
-          sender: 'bot' 
-        }]);
+        const formattedPhone = formatPhoneInput(message);
+        if (validatePhoneNumber(formattedPhone)) {
+          setSupportUserPhone(formattedPhone);
+          setSupportFormStage(2);
+          setAwaitingEmailConfirmation(true);
+          setSupportMessages(prev => [...prev, { 
+            text: `Your current email is: ${userEmail}\n\nWould you like to use this email for your support query?`, 
+            sender: 'bot' 
+          }]);
+        } else {
+          setSupportMessages(prev => [...prev, { 
+            text: "Please enter a valid phone number (numbers, spaces, hyphens, parentheses, and + are allowed):", 
+            sender: 'bot' 
+          }]);
+        }
       } else if (supportFormStage === 2) {
         // Handle email change if user provided new email
         if (!awaitingEmailConfirmation) {
@@ -634,7 +661,7 @@ const Chatbot = () => {
         setMessages(prev => [...prev, { text: userName, sender: 'user' }]);
       }
     } else if (formStage === 2) {
-      if (userMobile.trim()) {
+      if (userMobile.trim() && validatePhoneNumber(userMobile)) {
         setFormStage(3);
         setMessages(prev => [...prev, { text: userMobile, sender: 'user' }]);
       }
@@ -763,44 +790,61 @@ return (
       `}
     >
       {/* Header */}
-      <div className="p-3 sm:p-4 border-b border-gray-200 flex justify-between items-center">
-        <h3 className="font-jost font-semibold text-[#4A00E0] text-sm md:text-base">
-          {isLoggedIn ? 
-            (isSupportMode ? `Support Mode - ${userEmail}` : `Chatting as ${userEmail}`) : 
-            "Chat with us"
-          }
-        </h3>
-        <div className="flex items-center">
+      <div className="p-3 sm:p-4 border-b border-gray-200 flex justify-between items-center bg-gradient-to-r from-[#f8f9ff] to-[#fff8ff] rounded-t-[24px]">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 bg-gradient-to-b from-[#8E2DE2] to-[#4A00E0] rounded-full flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012 2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+            </svg>
+          </div>
+          <div className="flex flex-col">
+            <h3 className="font-jost font-semibold text-[#4A00E0] text-sm leading-tight">
+              {isLoggedIn ? 
+                (isSupportMode ? 'Support Mode' : 'Chat Assistant') : 
+                "Chat with us"
+              }
+            </h3>
+            {isLoggedIn && (
+              <span className="font-jost text-xs text-gray-600 truncate max-w-[120px]">
+                {userEmail}
+              </span>
+            )}
+          </div>
+        </div>
+        
+        <div className="flex items-center gap-2">
           {isLoggedIn && (
-            <>
+            <div className="flex items-center gap-1">
               <button 
                 onClick={toggleSupportMode}
-                className="mr-2 text-xs text-gray-500 hover:text-gray-700"
+                className="px-2 py-1 bg-white border border-gray-200 rounded-lg text-xs font-medium text-gray-700 hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm"
               >
-                {isSupportMode ? 'Back to Chat' : 'Support'}
+                {isSupportMode ? 'Chat' : 'Support'}
               </button>
               
               <button 
                 onClick={handleClearHistory}
                 disabled={isClearingHistory}
-                className="mr-2 text-xs text-gray-500 hover:text-gray-700 disabled:opacity-50"
+                className="px-2 py-1 bg-white border border-gray-200 rounded-lg text-xs font-medium text-gray-700 hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {isClearingHistory ? 'Clearing...' : 'Clear History'}
+                {isClearingHistory ? 'Clearing...' : 'Clear'}
               </button>
+              
               <button 
                 onClick={handleLogout}
-                className="mr-2 text-xs text-gray-500 hover:text-gray-700"
+                className="px-2 py-1 bg-red-50 border border-red-200 rounded-lg text-xs font-medium text-red-700 hover:bg-red-100 hover:border-red-300 transition-all duration-200 shadow-sm"
               >
                 Logout
               </button>
-            </>
+            </div>
           )}
+          
           <button 
             onClick={toggleChatbot}
-            className="text-gray-500 hover:text-gray-700"
+            className="p-1 rounded-full hover:bg-gray-100 transition-colors duration-200"
             aria-label="Close chat"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
@@ -827,7 +871,6 @@ return (
               </div>
             </div>
           ))}
-
 
           {!isSupportMode && showSupportPrompt && isLoggedIn && (
             <div className="flex justify-start">
@@ -941,9 +984,18 @@ return (
                 <input
                   type="tel"
                   value={userMobile}
-                  onChange={(e) => setUserMobile(e.target.value)}
+                  onChange={(e) => setUserMobile(formatPhoneInput(e.target.value))}
+                  onKeyPress={(e) => {
+                    if (!isValidPhoneCharacter(e.key) && e.key !== 'Backspace' && e.key !== 'Delete') {
+                      e.preventDefault();
+                    }
+                  }}
+                  placeholder="e.g., +1 (555) 123-4567"
                   className="w-full p-2 border border-gray-300 rounded-md font-jost text-[14px]"
                 />
+                {userMobile && !validatePhoneNumber(userMobile) && (
+                  <div className="text-red-500 text-xs mt-1">Please enter a valid phone number</div>
+                )}
               </>
             )}
             {formStage === 3 && (
