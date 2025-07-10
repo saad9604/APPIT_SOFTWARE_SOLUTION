@@ -8,7 +8,7 @@ import ChatbotWithPathCheck from "@/components/layout/ChatbotWithPathCheck";
 import ClientLayout from "./clientLayout";
 import Footer from "@/components/home/Footer";
 import Script from "next/script";
-import ScrollDown from "./ScrollDown";
+import ScrollDown from "../components/ScrollDown";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -38,7 +38,6 @@ export const metadata = {
   ),
   title: {
     default: "Leading Software Development Company",
- 
   },
   description:
     "Transform your digital vision with AppitSoftware. We create innovative web applications, mobile apps, and enterprise solutions that drive business growth and deliver exceptional user experiences.",

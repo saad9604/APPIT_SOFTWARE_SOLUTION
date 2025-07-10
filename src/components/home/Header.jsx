@@ -166,7 +166,7 @@ export default function Header() {
   };
 
   return (
-    <header className="fixed w-full top-0 z-50 bg-white shadow-sm font-jost">
+    <header className="fixed w-full top-0 z-[50] bg-white shadow-sm font-jost">
       <div className="w-full flex justify-center">
         <div className="w-full max-w-[1440px] px-4 sm:px-[30px] md:px-[60px] py-[16px] flex justify-between items-center">
           {/* Logo - Responsive sizing */}

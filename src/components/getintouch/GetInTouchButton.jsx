@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import ContactModal from "./ContactModal";
-import Link from "next/link";
 
 const GetInTouchButton = () => {
   const [showModal, setShowModal] = useState(false);

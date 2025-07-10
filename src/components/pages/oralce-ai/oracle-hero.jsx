@@ -1,9 +1,9 @@
-'use client';
-import React from 'react';
-import Section from '../../layout/section-box';
-import Container from '../../layout/container';
-import HeadingPara from '../../layout/heading';
-import GetInTouchButton from '@/app/components2/GetInTouchButton';
+"use client";
+import React from "react";
+import Section from "../../layout/section-box";
+import Container from "../../layout/container";
+import HeadingPara from "../../layout/heading";
+import GetInTouchButton from "@/components/getintouch/GetInTouchButton";
 
 const OracleHero = ({ data, className }) => {
   const { title, para, videoSrc, imageSrc, btnTitle } = data || {};

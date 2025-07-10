@@ -48,7 +48,6 @@ export default function UMForm({ onClose, isHeadPara }) {
     name: "",
     email: "",
     phone: "",
-    countryCode: "",
     company: "",
     message: "",
   });
@@ -89,11 +88,10 @@ export default function UMForm({ onClose, isHeadPara }) {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
-  console.log(errors);
+  console.log(process.env.NEXT_PUBLIC_HUBSPOT_FORM_ENDPOINT);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(`${formData.countryCode} ${formData.phone}`);
 
     if (!validateForm()) return;
 
@@ -102,11 +100,15 @@ export default function UMForm({ onClose, isHeadPara }) {
     const pageUri = window.location.href;
     const url = new URL(pageUri);
     const pathSegments = url.pathname.split("/").filter(Boolean);
-    const pageName = pathSegments
-      .at(-1)
-      .split("-")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
+    console.log(pathSegments);
+    const pageName =
+      pathSegments.length > 0
+        ? pathSegments
+            .at(-1)
+            .split("-")
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(" ")
+        : "Dashboard";
 
     try {
       const payload = {
@@ -124,7 +126,7 @@ export default function UMForm({ onClose, isHeadPara }) {
       };
 
       const response = await fetch(
-        `https://api-na2.hsforms.com/submissions/v3/integration/submit/243215306/5177e9a1-4503-49ee-9f0c-4c3f2daebb16`,
+        process.env.NEXT_PUBLIC_HUBSPOT_FORM_ENDPOINT,
         {
           method: "POST",
           headers: {
@@ -234,8 +236,33 @@ export default function UMForm({ onClose, isHeadPara }) {
   if (isSubmitted) {
     return (
       // <Card className="bg-white/80 backdrop-blur-sm shadow-xl border-0">
-      <Card className="bg-white/80 backdrop-blur-sm border-0 !p-0 rounded-[32px] shadow-[0_0_10px_5px_rgba(0,0,0,0.25)]">
+      <Card className="bg-white/80 backdrop-blur-sm border-0 !p-0 rounded-[32px] shadow-[0_0_10px_5px_rgba(0,0,0,0.25)] relative">
         <CardContent className="p-8 text-center">
+          {onClose && (
+            <div className="absolute top-4 right-4">
+              <button
+                type="button"
+                onClick={onClose}
+                className="bg-white p-2 rounded-full shadow-[0_0_10px_5px_rgba(0,0,0,0.25)] transition-colors "
+                aria-label="Close"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5 text-red-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+          )}
           <div className="flex flex-col items-center space-y-4">
             <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
               <svg
@@ -332,20 +359,13 @@ export default function UMForm({ onClose, isHeadPara }) {
                 <PhoneInput
                   country={"in"}
                   value={formData.phone}
-                  onChange={(value, data) => {
-                    console.log(data);
-                    const dialCode = "+" + data.dialCode;
-                    setFormData((prev) => ({
-                      ...prev,
-                      phone: value,
-                      countryCode: dialCode,
-                    }));
-                  }}
+                  onChange={(value) =>
+                    handleChange({ target: { name: "phone", value: value } })
+                  }
                   inputProps={{
                     name: "phone",
                   }}
                   enableSearch
-                  disableCountryCode
                   inputStyle={{
                     border: "none",
                     background: "transparent",

@@ -1,6 +1,6 @@
 "use client";
 
-import GetInTouchButton from "@/app/components2/GetInTouchButton";
+import GetInTouchButton from "@/components/getintouch/GetInTouchButton";
 import Container from "../../../layout/container";
 import HeadingPara from "../../../layout/heading";
 import Section from "../../../layout/section-box";

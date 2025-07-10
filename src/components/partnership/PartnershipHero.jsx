@@ -1,7 +1,7 @@
 "use client";
 import { useRef, useEffect } from "react";
 import Link from "next/link";
-import GetInTouchButton from "@/app/components2/GetInTouchButton";
+import GetInTouchButton from "@/components/getintouch/GetInTouchButton";
 
 export default function PartnershipHero() {
   const videoRef = useRef(null);

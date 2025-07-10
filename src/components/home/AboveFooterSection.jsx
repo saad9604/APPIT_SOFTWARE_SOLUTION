@@ -357,6 +357,9 @@ const AboveFooterSection = ({ socialMediaLink = true }) => {
                   <Link
                     href="/products/all-in-one-crm"
                     className="group inline-block text-[#252525] hover:text-[#FF5555] font-jost text-sm sm:text-base font-bold leading-[120%] transition-all duration-300"
+                    onClick={() =>
+                      window.scrollTo({ top: 0, behavior: "smooth" })
+                    }
                   >
                     <div className="relative pl-0 group-hover:pl-5 sm:group-hover:pl-7 transition-all duration-300 ease-out">
                       <svg

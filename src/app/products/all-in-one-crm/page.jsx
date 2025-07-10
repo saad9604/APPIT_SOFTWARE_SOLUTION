@@ -10,24 +10,25 @@ import AllInOneCRMHero from "../../../components/pages/products/all-in-one-crm/a
 import TransparentHeader from "../../../components/layout/transparent-header/transparent-header";
 import HideDefaultHeader from "../../../components/layout/transparent-header/hide-default-header";
 import WhyChoose from "../../../components/pages/why-choose/why-choose";
-import AboveFooterSection from "../../../components/home/AboveFooter";
+import AboveFooterSection from "@/components/home/AboveFooterSection";
 import Footer from "../../../components/home/Footer";
 import React from "react";
 import Script from "next/script";
 
 export const metadata = {
-  title: 'All-in-One CRM Solution | Appit Software Customer Management',
-  description: 'Manage sales, marketing, and customer service in one place with Appit Software\'s All-in-One CRM Solution. Boost customer relationships, and streamline workflows.',
+  title: "All-in-One CRM Solution | Appit Software Customer Management",
+  description:
+    "Manage sales, marketing, and customer service in one place with Appit Software's All-in-One CRM Solution. Boost customer relationships, and streamline workflows.",
   keywords: [
-    'All-in-One CRM Solution',
-    'All-In-One CRM Product Services',
-    'All-In-One CRM Software Services',
-    'All-In-One CRM Tools Services',
-    'customer relationship management',
-    'sales automation',
-    'marketing automation',
-    'customer service platform'
-  ]
+    "All-in-One CRM Solution",
+    "All-In-One CRM Product Services",
+    "All-In-One CRM Software Services",
+    "All-In-One CRM Tools Services",
+    "customer relationship management",
+    "sales automation",
+    "marketing automation",
+    "customer service platform",
+  ],
 };
 
 const featuresImageSection1 = [
@@ -104,7 +105,9 @@ With built-in AI, businesses can automate follow-ups, nurture leads, and resolve
 
 const page = () => {
   return (
-    <>      <Script
+    <>
+      {" "}
+      <Script
         type="application/ld+json"
         className="schemantra"
         dangerouslySetInnerHTML={{
@@ -112,8 +115,9 @@ const page = () => {
             "@context": "https://schema.org",
             "@type": "WebPage",
             "@id": "WebPage",
-            "acquireLicensePage": "https://www.appitsoftware.com/products/all-in-one-crm/"
-          })
+            acquireLicensePage:
+              "https://www.appitsoftware.com/products/all-in-one-crm/",
+          }),
         }}
       />
       <Script
@@ -122,52 +126,55 @@ const page = () => {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "FAQPage",
-            "mainEntity": [{
-              "@type": "Question",
-              "name": "What is AppitSoftware's All-In-One CRM Solution?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "AppitSoftware's All-In-One CRM Solution is a unified platform that combines customer data management, sales tracking, marketing automation, and customer support tools into a single, AI-enhanced system."
-              }
-            },{
-              "@type": "Question",
-              "name": "What do your All-In-One CRM Product Services include?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Our All-In-One CRM Product Services cover implementation, configuration, AI integration, user training, and ongoing support to ensure the CRM aligns perfectly with your business processes."
-              }
-            },{
-              "@type": "Question",
-              "name": "How does your All-In-One CRM Software Services improve business efficiency?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "AppitSoftware's CRM Software Services utilize AI to automate repetitive tasks, provide predictive insights, and streamline customer interactions, helping businesses improve conversion rates and customer satisfaction."
-              }
-            },{
-              "@type": "Question",
-              "name": "Can your All-In-One CRM Tools Services be customized for specific industries?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes, we tailor our CRM tools for various industries, including retail, healthcare, real estate, and finance, ensuring the features and AI capabilities meet sector-specific needs."
-              }
-            },{
-              "@type": "Question",
-              "name": "Is AppitSoftware's CRM solution scalable for growing businesses?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Absolutely. Our All-In-One CRM is designed to scale with your business, offering modular features and cloud-based infrastructure that support expansion, multiple users, and advanced analytics."
-              }
-            }]
-          })
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "What is AppitSoftware's All-In-One CRM Solution?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "AppitSoftware's All-In-One CRM Solution is a unified platform that combines customer data management, sales tracking, marketing automation, and customer support tools into a single, AI-enhanced system.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "What do your All-In-One CRM Product Services include?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Our All-In-One CRM Product Services cover implementation, configuration, AI integration, user training, and ongoing support to ensure the CRM aligns perfectly with your business processes.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "How does your All-In-One CRM Software Services improve business efficiency?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "AppitSoftware's CRM Software Services utilize AI to automate repetitive tasks, provide predictive insights, and streamline customer interactions, helping businesses improve conversion rates and customer satisfaction.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Can your All-In-One CRM Tools Services be customized for specific industries?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes, we tailor our CRM tools for various industries, including retail, healthcare, real estate, and finance, ensuring the features and AI capabilities meet sector-specific needs.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Is AppitSoftware's CRM solution scalable for growing businesses?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Absolutely. Our All-In-One CRM is designed to scale with your business, offering modular features and cloud-based infrastructure that support expansion, multiple users, and advanced analytics.",
+                },
+              },
+            ],
+          }),
         }}
       />
-
-   
       <TransparentHeader />
       <HideDefaultHeader />
       <AllInOneCRMHero />
       <AICRMFeaturesSection />
-
       <ImageWithTextSection sectionsData={sectionsData} />
       <ImageTextBlack sectionsData={featuresImageSection1} />
       <WhyChoose
@@ -181,7 +188,7 @@ const page = () => {
       <CRMFeaturesGrid />
       <ImageTextBlack sectionsData={featuresImageSection2} />
       <ImageWithTextSection sectionsData={sectionsData2} />
-      <ContactUs />      <AllInOneCRMFAQ />
+      <ContactUs /> <AllInOneCRMFAQ />
       <CTA />
       <AboveFooterSection />
       <Footer />
