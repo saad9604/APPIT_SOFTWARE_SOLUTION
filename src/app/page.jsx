@@ -14,6 +14,7 @@ import AboveFooterSection from "@/components/home/AboveFooterSection";
 import Footer from "@/components/home/Footer";
 import Script from "next/script";
 
+
 export const metadata = {
   title: "APPIT Software Solutions | AI-Driven IT & Cloud Services",
   description:
@@ -121,8 +122,7 @@ export default function Home() {
         <HomeFAQ />
         <ContactSection />
       </main>
-      <AboveFooterSection />
-      <Footer />
+      
     </>
   );
 }

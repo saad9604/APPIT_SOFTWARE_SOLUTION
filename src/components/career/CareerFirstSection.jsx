@@ -8,38 +8,39 @@ const CareerFirstSection = () => {
   const [hasReachedBottom, setHasReachedBottom] = useState(false);
 
   // Card data
-  const cardsData = [
-    {
-      number: '01',
-      heading: 'Innovation-Driven Culture',
-      description: 'We encourage curiosity, experimentation, and bold thinking. Whether it\'s AI, automation, or cloud transformation, we work on cutting-edge technologies that push the boundaries of what\'s possible.'
-    },
-    {
-      number: '02',
-      heading: 'People-Centric Environment',
-      description: 'We believe our people are our biggest strength. We foster a supportive and inclusive workplace where every voice is valued, and collaboration drives success.'
-    },
-    {
-      number: '03',
-      heading: 'Innovation-Driven Culture',
-      description: 'We encourage curiosity, experimentation, and bold thinking. Whether it\'s AI, automation, or cloud transformation, we work on cutting-edge technologies that push the boundaries of what\'s possible.'
-    },
-    {
-      number: '04',
-      heading: 'People-Centric Environment',
-      description: 'We believe our people are our biggest strength. We foster a supportive and inclusive workplace where every voice is valued, and collaboration drives success.'
-    },
-    {
-      number: '05',
-      heading: 'Innovation-Driven Culture',
-      description: 'We encourage curiosity, experimentation, and bold thinking. Whether it\'s AI, automation, or cloud transformation, we work on cutting-edge technologies that push the boundaries of what\'s possible.'
-    },
-    {
-      number: '06',
-      heading: 'People-Centric Environment',
-      description: 'We believe our people are our biggest strength. We foster a supportive and inclusive workplace where every voice is valued, and collaboration drives success.'
-    },
-  ];
+const cardsData = [
+  {
+    number: '01',
+    heading: 'Innovation-Driven Culture',
+    description: 'We embrace experimentation and breakthrough thinking. Our teams tackle AI, automation, and next-gen solutions to redefine what’s possible.'
+  },
+  {
+    number: '02',
+    heading: 'People-First Approach',
+    description: 'Our culture is built around empathy, respect, and collaboration—ensuring everyone feels empowered and heard.'
+  },
+  {
+    number: '03',
+    heading: 'Agile and Adaptive',
+    description: 'We move fast and stay flexible, constantly evolving to meet the dynamic needs of clients and industries.'
+  },
+  {
+    number: '04',
+    heading: 'Commitment to Excellence',
+    description: 'Quality and performance drive us. We aim to exceed expectations and deliver impactful results every time.'
+  },
+  {
+    number: '05',
+    heading: 'Technology at Core',
+    description: 'From AI to cloud, our work revolves around leveraging tech to deliver scalable, sustainable, and smart solutions.'
+  },
+  {
+    number: '06',
+    heading: 'Growth Mindset',
+    description: 'We foster continuous learning, skill development, and leadership to help our people and clients grow together.'
+  },
+];
+
 
   // Set initial card position - first card fully visible, second card partially
   useEffect(() => {

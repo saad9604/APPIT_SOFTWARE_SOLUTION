@@ -3,7 +3,7 @@ import { FaFacebookF, FaXTwitter, FaYoutube, FaInstagram, FaLinkedinIn } from 'r
 
 const PrivacyPolicy = () => {
   return (
-    <main className="text-gray-800 min-h-screen px-4 sm:px-10 py-12 mt-14 bg-gray-50">
+    <main style={{marginBottom:'-50px'}} className="text-gray-800 min-h-screen px-4 sm:px-10 py-12 mt-14 bg-gray-50">
       <section className="w-full max-w-7xl mx-auto  p-10 sm:p-16 ">
         <h1 className="text-3xl font-bold text-center text-blue-800 mb-6">Privacy Policy</h1>
 
@@ -79,7 +79,7 @@ const PrivacyPolicy = () => {
           <li>Restrict or object to how your data is used</li>
         </ul>
         <p className="mb-4">
-          To exercise any of these rights, please contact us at <a href="mailto:info@appitsoft.com" className="text-blue-600 underline">info@appitsoft.com</a>.
+          To exercise any of these rights, please contact us at <a href="mailto:info@appitsoftware.com" className="text-blue-600 underline">info@appitsoftware.com</a>.
         </p>
 
         <h2 className="text-xl font-semibold mt-8 mb-2 text-blue-700">8. Children's Privacy</h2>
@@ -96,32 +96,10 @@ const PrivacyPolicy = () => {
         <p className="mb-4">
           If you have any questions about this Privacy Policy or our data practices, you may contact us at:
           <br />
-          <a href="mailto:info@appitsoft.com" className="text-blue-600 underline">info@appitsoft.com</a>
+          <a href="mailto:info@appitsoftware.com" className="text-blue-600 underline">info@appitsoftware.com</a>
         </p>
       </section>
 
-      {/* Social Footer */}
-      <footer className="mt-16 text-center">
-        <p className="text-lg font-semibold text-gray-600 mb-4">Follow Us</p>
-        <div className="flex justify-center space-x-6 text-blue-700 text-xl">
-          <a href="https://www.facebook.com/Appitsoftwaresolutionspvtltd" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-            <FaFacebookF />
-          </a>
-          <a href="https://x.com/Appitsoft" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-            <FaXTwitter />
-          </a>
-          <a href="https://www.youtube.com/@appitsoftwaresolutions346" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-            <FaYoutube />
-          </a>
-          <a href="https://www.instagram.com/appitsoftware/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-            <FaInstagram />
-          </a>
-          <a href="https://www.linkedin.com/company/appitsoftware/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-            <FaLinkedinIn />
-          </a>
-        </div>
-        <p className="text-sm text-gray-500 mt-4">© Appit Software Solutions. All rights reserved.</p>
-      </footer>
     </main>
   );
 };
