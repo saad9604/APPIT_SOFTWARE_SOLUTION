@@ -43,7 +43,7 @@ const Page = () => {
       highlightTextStyle: "text-xl md:text-2xl xl:text-[27px]",
       lineByLine: [
         "AI-Driven Shopping Suggestions : Deliver real-time product suggestions based on customer behavior and preferences.",
-        "Tailored eCommerce Experiences : Deliver personalized storefronts and offers based on customer preferences.",
+        "Tailored E-Commerce Experiences : Deliver personalized storefronts and offers based on customer preferences.",
         "Automated workflows : Streamline orders, inventory, and alerts to save time.",
         "Dynamic pricing and search : Adjust prices and search results in real time based on user behavior and demand.",
         "Smart Inventory Forecasting : Predict stock requirements based on historical trends, traffic, and seasonal demand.",

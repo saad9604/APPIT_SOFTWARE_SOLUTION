@@ -24,7 +24,7 @@ const WhyChooseSection = () => {
   ];
   const experienceData = [
     {
-      title: "25+",
+      title: "58+",
       para: "Number Of Projects",
     },
     {
@@ -32,7 +32,7 @@ const WhyChooseSection = () => {
       para: "Clients Worldwide",
     },
     {
-      title: "6+",
+      title: "9+",
       para: "Years In Business",
     },
     {
@@ -47,12 +47,12 @@ const WhyChooseSection = () => {
           {/* Left Column: Text */}
           <div className="max-w-[667px]">
             <h2 className="text-xl font-bold">
-              WHY CHOOSE APPIT <span className="block" /> ECommerce Services:
+              WHY CHOOSE APPIT <span className="block" /> E-Commerce Services:
             </h2>
             <p className="mt-2">
               At Appit Software Solutions, we’re your partner in digital
               transformation, not just e-commerce development.<span className="md:block hidden" /> With expertise in
-              Adobe Commerce, Magento, BigCommerce, and Shopify, we build
+              Adobe Commerce, Magento, Big Commerce, and Shopify, we build
               scalable, tailored solutions.
             </p>
           </div>

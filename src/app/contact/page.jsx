@@ -31,7 +31,7 @@ export const metadata = {
 const sectionsData = [
   {
     title: "Global Locations",
-    para: `Global IT Services & Support  You can connect with Appit Software to explore our office space solutions. Our team is ready to assist you with finding the perfect workspace to meet your business needs. Reach out for inquiries, appointments, or any questions. We look forward to helping you create your ideal office environment!`,
+    para: `Appit Software has a global presence with offices in USA, Saudi Arabia, UAE, and India. We are committed to providing top-notch IT services and support to our clients worldwide.`,
     image: "/images/map.png",
     reverse: true,
   },

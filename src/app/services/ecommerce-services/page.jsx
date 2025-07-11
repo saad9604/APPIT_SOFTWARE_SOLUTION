@@ -15,23 +15,23 @@ import WhyChooseSection from "@/components/pages/e-commerce/WhyChooseSection";
 import Script from "next/script";
 
 export const metadata = {
-  title: 'ECommerce Services | APPIT Software Solutions Inc.',
+  title: 'E-Commerce Services | APPIT Software Solutions Inc.',
   description: 'Explore APPIT Software Solutions Inc. comprehensive eCommerce services, including strategy, design, development, and marketing of online store effectively.',
   keywords: [
-    'eCommerce services',
+    'E-Commerce services',
     'E-commerce Software Development Services',
     'Open Source E-commerce Platform Services',
     'E-commerce Management Services',
     'AI E-commerce Software Services',
     'online store development',
     'digital retail solutions',
-    'eCommerce implementation'
+    'E-Commerce implementation'
   ]
 };
 
 const Page = () => {
   const oracleHeroData = {
-    title: "ECommerce Services",
+    title: "E-Commerce Services",
     para: "Empowering Your E-Commerce Journey with Cutting-Edge Solutions",
     imageSrc: "/images/ecImage1.png",
   };
