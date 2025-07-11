@@ -75,18 +75,17 @@ export default function Hero() {
       {/* Overlay to ensure text visibility */}
       <div className="absolute inset-0 bg-black bg-opacity-50"></div>
 
-      <div className="relative w-full h-full px-3 sm:px-4 md:px-6 lg:px-8 flex flex-col justify-center md:justify-start lg:justify-start lg:pt-[calc(50vh-100px)] xl:pt-[calc(50vh-90px)]">
+      <div className="relative w-full h-full px-3 sm:px-4 md:px-6 lg:px-8 flex flex-col justify-center md:justify-start lg:justify-start lg:pt-[calc(50vh-100px)] xl:pt-[calc(50vh-160px)]">
         <div className="hero-text-container pl-2 sm:pl-4 md:pl-6 lg:pl-16 transform translate-y-[10%] sm:translate-y-[15%] md:translate-y-[60%] lg:translate-y-[25px] lg:transform-none">
           {/* Text Container with original responsive specifications */}
           <div className="flex flex-col justify-center items-start gap-2 sm:gap-3 md:gap-4 lg:gap-5 w-full max-w-[260px] xs:max-w-[300px] sm:max-w-[340px] md:max-w-[400px] lg:max-w-[450px]">
             {/* Heading with responsive specifications */}
-            <h1 className="font-jost text-white text-lg sm:text-xl md:text-xl lg:text-[27px] font-semibold leading-[120%] w-full">
-              Revolutionize your business with AI-driven solutions from APPIT
-              Software Solutions
+            <h1 style={{lineHeight:'2.5rem'}} className="font-jost text-white text-lg sm:text-xl md:text-xl lg:text-[34px] font-semibold  leading-[120%] w-full">
+              Revolutionize your business with AI driven solutions from APPIT Software Solutions
             </h1>
 
             {/* Subheading/paragraph with responsive specifications */}
-            <p className="font-jost text-[#f2f2f2] text-sm sm:text-base md:text-base lg:text-[21px] font-normal leading-[120%] w-full">
+            <p className="font-jost text-[#f2f2f2] text-sm sm:text-base md:text-base lg:text-[18px] font-normal leading-[120%] w-full">
               Unlock smarter operations and better decision-making with
               AI-driven tools. APPIT Software Solutions helps businesses enhance
               efficiency, drive innovation, and stay competitive with

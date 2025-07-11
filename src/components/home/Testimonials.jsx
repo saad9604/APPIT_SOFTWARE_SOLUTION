@@ -6,7 +6,7 @@ import Image from 'next/image';
 const testimonials = [
   {
     id: 1,
-    quote: "APPIT was able to add value to my existing business with intelligent technology solutions. We were able to scale our service offerings and differentiate our business from the competition. We're very pleased with the result",
+    quote: "APPIT was able to add value to my existing business with intelligent technology solutions. We were able to scale our service offerings and differentiate our business from the competition. We're very pleased with the result.",
     name: "Jason",
     position: "Director, Arrow Solutions",
     image: "/images/test1.png"
@@ -15,7 +15,7 @@ const testimonials = [
     id: 2,
     quote: "Working with APPIT has been a real pleasure. They really understood my needs as a client and were fantastic in understanding the needs of our customers. I recommend them highly enough.",
     name: "Jonathan Roper",
-    position: "Product Manager, Nexas pvt lmt",
+    position: "Product Manager, Nexus Pvt Ltd",
     image: "/images/test2.png"
   },
   {
@@ -123,7 +123,7 @@ export default function Testimonials() {
       } transition-all duration-1000 ease-out delay-300`}>
         {/* Heading */}
         <h2 className="text-white text-center text-3xl md:text-4xl lg:text-[50px] font-semibold leading-[120%]">
-          What <span className="text-[#EC1C26]">Client</span> Say About Us 
+          What <span className="text-[#EC1C26]">Client's</span> Say About Us 
         </h2>
         
         {/* Subheading */}
