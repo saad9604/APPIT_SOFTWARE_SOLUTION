@@ -6,9 +6,10 @@ import "react-phone-input-2/lib/style.css";
 // import EmailJSInitializer from '@/components/email/EmailJSInitializer'
 import ChatbotWithPathCheck from "@/components/layout/ChatbotWithPathCheck";
 import ClientLayout from "./clientLayout";
-import Footer from "@/components/home/Footer";
 import Script from "next/script";
 import ScrollDown from "../components/ScrollDown";
+import AboveFooterSection from "@/components/home/AboveFooterSection";
+import Footer from "@/components/home/Footer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -32,10 +33,11 @@ const jost = Jost({
 
 export const metadata = {
   metadataBase: new URL(
-    process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : "http://localhost:3000"
+    process.env.Website_Url
+      ? process.env.Website_Url
+      : "https://www.appitsoftware.com/"
   ),
+
   title: {
     default: "Leading Software Development Company",
   },
@@ -172,7 +174,11 @@ export default function RootLayout({ children }) {
       </head>
       <body className={`${inter.className} font-jost antialiased`}>
         {/* <EmailJSInitializer /> */}
-        <ClientLayout>{children}</ClientLayout>
+        <ClientLayout>
+          {children}
+          <AboveFooterSection />
+          <Footer />
+        </ClientLayout>
         <ChatbotWithPathCheck />
         <ScrollDown />
       </body>
