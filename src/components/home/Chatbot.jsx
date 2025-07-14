@@ -159,6 +159,16 @@ const Chatbot = () => {
     setIsClient(true);
   }, []);
 
+  // Add this new useEffect to auto-open chatbot
+  useEffect(() => {
+    // Auto-open chatbot when component mounts
+    const timer = setTimeout(() => {
+      setIsOpen(true);
+    }, 1000); // 1 second delay for better UX
+
+    return () => clearTimeout(timer);
+  }, []);
+
   useEffect(() => {
     if (API_BASE_URL && userEmail && isLoggedIn) {
       fetchChatHistory(userEmail);
@@ -759,7 +769,7 @@ const Chatbot = () => {
   const currentMessages = isSupportMode ? supportMessages : messages;
 
 return (
-  <div className="fixed bottom-20 right-4 sm:right-8 md:right-12 z-50">
+  <div className="fixed bottom-4 right-4 sm:right-20 md:right-28 z-50">
     {/* Chatbot toggle button */}
     <button 
       onClick={toggleChatbot}
@@ -782,8 +792,8 @@ return (
       className={`
         ${isOpen ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-4 pointer-events-none'} 
         transform transition-all duration-300 ease-in-out origin-bottom-right
-        absolute bottom-[calc(100%+12px)] sm:bottom-[calc(100%+12px)] right-0 sm:right-0 md:right-0
-        w-[calc(100vw-4rem)] sm:w-[453px] max-w-[90vw] sm:max-w-none h-auto sm:h-[540px] md:h-[540px] max-h-[70vh] sm:max-h-[540px]
+        absolute bottom-[calc(100%+12px)] right-0 sm:right-0
+        w-[85vw] sm:w-[453px] max-w-[85vw] sm:max-w-[453px] min-w-[280px] overflow-hidden h-[calc(100vh-120px)] max-h-[calc(100vh-120px)] overflow-y-auto sm:max-h-[540px]
         flex flex-col
         rounded-[24px] border-[1px] sm:border-2 border-[#0066B3] sm:border-[#4A00E0] bg-white
         shadow-[0px_0px_4px_2px_rgba(0,0,0,0.25)]
@@ -805,7 +815,7 @@ return (
               }
             </h3>
             {isLoggedIn && (
-              <span className="font-jost text-xs text-gray-600 truncate max-w-[120px]">
+              <span className="font-jost text-xs text-gray-600 truncate max-w-[60vw] sm:max-w-[120px]">
                 {userEmail}
               </span>
             )}
@@ -814,7 +824,7 @@ return (
         
         <div className="flex items-center gap-2">
           {isLoggedIn && (
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1 flex-wrap justify-end max-w-full">
               <button 
                 onClick={toggleSupportMode}
                 className="px-2 py-1 bg-white border border-gray-200 rounded-lg text-xs font-medium text-gray-700 hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm"
@@ -1030,8 +1040,8 @@ return (
           </div>
         ) : (
           <div className="inline-flex items-center gap-[8px] sm:gap-[10px] w-full justify-center">
-            <div className={`flex ${isMobile ? 'w-[85%]' : 'w-[336px]'} h-[48px] ${isMobile ? 'px-[10px]' : 'px-[24px]'} py-[10px] items-center justify-center gap-[10px] rounded-[16px] bg-white shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)]`}>
-          
+            <div className="flex w-full max-w-[400px] px-4 py-2 items-center gap-2 rounded-2xl bg-white shadow">
+
             <input 
               type="text" 
               value={inputValue}
