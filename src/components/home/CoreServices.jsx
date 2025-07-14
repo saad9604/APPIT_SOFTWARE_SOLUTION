@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from "react";
 
 export default function CoreServices() {
   const [hoveredCard, setHoveredCard] = useState(null);
@@ -20,11 +20,16 @@ export default function CoreServices() {
 
   const handleCardTouch = (id, event) => {
     event.stopPropagation();
+
+    // If the card is already hovered, unhover it
     if (hoveredCard === id) {
       setHoveredCard(null);
     } else {
       setHoveredCard(id);
-      setTimeout(() => setHoveredCard(prevId => prevId === id ? null : prevId), 1000);
+      setTimeout(
+        () => setHoveredCard((prevId) => (prevId === id ? null : prevId)),
+        1000
+      );
     }
   };
 
@@ -40,7 +45,7 @@ export default function CoreServices() {
       image: "/images/oracle.png",
     },
     {
-      id: 3, 
+      id: 3,
       title: "Data Analytics & Insights",
       image: "/images/data.png",
     },
@@ -48,7 +53,7 @@ export default function CoreServices() {
       id: 4,
       title: "Cloud Integration Services",
       image: "/images/cloud.png",
-    }
+    },
   ];
 
   useEffect(() => {
@@ -60,6 +65,8 @@ export default function CoreServices() {
 
       if (isVisible && !isInView) {
         setIsInView(true);
+
+        // Only animate once
         if (!hasAnimated) {
           setHasAnimated(true);
         }
@@ -68,49 +75,68 @@ export default function CoreServices() {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+
+    // Check initial position
     handleScroll();
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, [isInView, hasAnimated]);
 
   return (
-    <section 
+    <section
       ref={sectionRef}
       className="flex w-screen px-2 xs:px-4 sm:px-8 md:px-16 lg:px-[120px] py-8 xs:py-12 sm:py-16 md:py-[80px] flex-col justify-center items-center gap-4 xs:gap-6 sm:gap-8 md:gap-[40px] lg:gap-[30px] bg-white relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] font-jost"
     >
-      <h2 
+      <h2
         className={`text-center text-[#252525] text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-[50px] font-semibold leading-[120%] transition-all duration-800 ease-out font-jost max-w-[95%] xs:max-w-[90%] md:max-w-[80%]
-                   ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+                   ${
+                     isInView
+                       ? "opacity-100 translate-y-0"
+                       : "opacity-0 translate-y-8"
+                   }`}
       >
-        Transform your business with{' '}
-        <span style={{lineHeight:'3.5rem'}} className="text-[#EC1C26] text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-[50px] font-semibold leading-[180%] font-jost">
+        Transform your business with{" "}
+        <span
+          style={{ lineHeight: "3.5rem" }}
+          className="text-[#EC1C26] text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-[50px] font-semibold leading-[180%] font-jost"
+        >
           advanced technologies
         </span>
       </h2>
 
-      <p 
+      <p
         className={` text-center text-[#252525] text-xs xs:text-sm sm:text-base md:text-lg lg:text-[21px] font-normal leading-[120%] transition-all duration-800 ease-out font-jost max-w-[98%] xs:max-w-[95%] md:max-w-[90%] lg:max-w-[80%] lg:mt-6
-                  ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
-        style={{ transitionDelay: '0.2s' }}
+                  ${
+                    isInView
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-5"
+                  }`}
+        style={{ transitionDelay: "0.2s" }}
       >
-        At APPIT Software, our aim is to connect businesses by integrating emerging IT solutions and cloud services in a dynamic environment, APPIT Software's extensive experience in the administration of complex IT solutions.
+        At APPIT Software, our aim is to connect businesses by integrating
+        emerging IT solutions and cloud services in a dynamic environment, APPIT
+        Software's extensive experience in the administration of complex IT
+        solutions.
       </p>
 
-      <div 
-        className="flex flex-wrap justify-center items-start w-full max-w-[1200px] gap-4 sm:gap-6 md:gap-[15px] lg:gap-[20px] py-4 xs:py-6 sm:py-8 md:py-[40px] lg:py-[20px] lg:mt-0 mt-2 xs:mt-4 sm:mt-[20px]"
-      >
+      <div className="flex flex-wrap justify-center items-start w-full max-w-[1200px] gap-4 sm:gap-6 md:gap-[15px] lg:gap-[20px] py-4 xs:py-6 sm:py-8 md:py-[40px] lg:py-[20px] lg:mt-0 mt-2 xs:mt-4 sm:mt-[20px]">
         {services.map((service, index) => (
-          <div 
+          <div
             key={service.id}
             data-hovered={hoveredCard === service.id ? "true" : "false"}
             className={`service-card w-full xs:w-[calc(50%-8px)] sm:w-[calc(50%-12px)] md:w-[calc(50%-12px)] lg:w-[calc(25%-16px)] h-[200px] xs:h-[250px] sm:h-[300px] md:h-[350px] lg:h-[411px] relative mb-4 sm:mb-0
-                       ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[100px]'}`}
-            style={{ 
+                       ${
+                         isInView
+                           ? "opacity-100 translate-y-0"
+                           : "opacity-0 translate-y-[100px]"
+                       }`}
+            style={{
               transitionDelay: `${index * 0.1}s`,
-              transition: 'transform 0.5s ease-in-out, opacity 0.5s ease-in-out, translate 0.5s ease-in-out'
+              transition:
+                "transform 0.5s ease-in-out, opacity 0.5s ease-in-out, translate 0.5s ease-in-out",
             }}
             onMouseEnter={(e) => handleCardInteraction(service.id, e)}
             onMouseLeave={handleCardLeave}
@@ -132,29 +158,29 @@ export default function CoreServices() {
               style={{
                 background: `linear-gradient(180deg, rgba(0, 0, 0, 0.60) 16.69%, rgba(0, 0, 0, 0.00) 31.3%), 
                            linear-gradient(0deg, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%), 
-                           url(${service.image}) lightgray 50% / cover no-repeat`
+                           url(${service.image}) lightgray 50% / cover no-repeat`,
               }}
             >
-              <h3 
+              <h3
                 className="text-white text-sm xs:text-base sm:text-lg md:text-xl lg:text-[24px] font-semibold leading-[1.2] absolute top-2 xs:top-3 sm:top-4 md:top-[25px] w-[90%] text-center transition-all duration-250 ease-in-out font-jost"
                 style={{
                   opacity: hoveredCard === service.id ? 0 : 1,
-                  transform: 'translateY(0)',
-                  transition: 'opacity 0.25s ease-in-out',
-                  transitionDelay: hoveredCard === service.id ? '0s' : '0.2s'
+                  transform: "translateY(0)",
+                  transition: "opacity 0.25s ease-in-out",
+                  transitionDelay: hoveredCard === service.id ? "0s" : "0.2s",
                 }}
               >
                 {service.title}
               </h3>
-              
-              <h3 
+
+              <h3
                 className="text-white text-sm xs:text-base sm:text-lg md:text-xl lg:text-[24px] font-semibold leading-[1.2] absolute w-[90%] text-center transition-all duration-250 ease-in-out font-jost"
                 style={{
                   opacity: hoveredCard === service.id ? 1 : 0,
-                  top: hoveredCard === service.id ? '10px' : '25px',
-                  transform: 'translateY(0)',
-                  transition: 'opacity 0.25s ease-in-out, top 0.4s ease-in-out',
-                  transitionDelay: hoveredCard === service.id ? '0.2s' : '0s'
+                  top: hoveredCard === service.id ? "10px" : "25px",
+                  transform: "translateY(0)",
+                  transition: "opacity 0.25s ease-in-out, top 0.4s ease-in-out",
+                  transitionDelay: hoveredCard === service.id ? "0.2s" : "0s",
                 }}
               >
                 {service.title}
@@ -165,7 +191,7 @@ export default function CoreServices() {
       </div>
 
       <style jsx>{`
-        @import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800;900&display=swap');
+        @import url("https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800;900&display=swap");
 
         .service-card {
           transform-origin: center center;

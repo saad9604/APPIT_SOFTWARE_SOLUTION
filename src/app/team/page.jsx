@@ -133,12 +133,7 @@ export default function TeamPage() {
               <h1 className="text-white font-jost text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-[120%]">
                 The People Behind Appit
               </h1>
-              <p
-                className="text-white font-jost text-sm xs:text-base sm:text-lg md:text-xl lg:text-[21px] font-semibold leading-[120%]"
-                style={{
-                  WebkitTextStrokeColor: "#000",
-                }}
-              >
+              <p className="text-white font-jost text-sm xs:text-base sm:text-lg md:text-xl lg:text-[21px] font-semibold leading-[120%]">
                 Get to know the minds driving innovation at AppitSoftware.
               </p>
             </div>
