@@ -103,7 +103,8 @@ export default function CareerPage() {
       />
       <Header />
       <main>
-        <CareerHero /><CareerFirstSection />
+        {/* <CareerHero />
+        <CareerFirstSection /> */}
         <Search />
         <Cards />
         <Benefits />
