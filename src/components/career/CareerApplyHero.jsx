@@ -75,9 +75,9 @@ const CareerApplyHero = () => {
   }, []);
 
   return (
-    <section className="relative w-full h-[200px] 2xs:h-[230px] xs:h-[260px] sm:h-[320px] md:h-[380px] lg:h-[400px] overflow-hidden mt-[70px] sm:mt-[80px] md:mt-[95px]">
+    <section className="relative w-full overflow-hidden mt-[70px] sm:mt-[80px] md:mt-[95px]">
       {/* Video background */}
-      <div 
+      {/* <div 
         ref={containerRef}
         className="absolute inset-0 w-full h-full bg-[#001C30]"
       >
@@ -93,18 +93,17 @@ const CareerApplyHero = () => {
           <source src="/videos/career/waves.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-      </div>
+      </div> */}
       
       {/* Dark overlay for better text readability */}
-      <div className="absolute inset-0 bg-black opacity-30"></div>
+      {/* <div className="absolute inset-0 bg-black opacity-30"></div> */}
       
       {/* Content container */}
-      <div className="relative z-10 max-w-[1440px] mx-auto h-full flex flex-col justify-center items-center px-3 2xs:px-4 sm:px-6 md:px-8 lg:px-10">
-        {/* Main heading */}
+      {/* <div className="relative z-10 max-w-[1440px] mx-auto h-full flex flex-col justify-center items-center px-3 2xs:px-4 sm:px-6 md:px-8 lg:px-10">
         <h1 className="text-white font-jost text-3xl 2xs:text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-[100px] font-semibold leading-[110%] 2xs:leading-[120%] text-center mb-1 2xs:mb-2 xs:mb-3 sm:mb-4 transition-all duration-300 tracking-tight 2xs:tracking-normal sm:tracking-tight shadow-text">
           UI UX Designer
         </h1>
-      </div>
+      </div> */}
 
       {/* Styling for video fallback */}
       <style jsx>{`
